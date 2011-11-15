@@ -18,11 +18,13 @@ SRC_DOCS = \
 
 DST_FILES  = $(addsuffix .html,$(addprefix $(DESTDIR)/,$(SRC_DOCS)))
 
-all: prepare $(DESTDIR)/alog.css $(DST_FILES) $(DESTDIR)/alog-arch.png
+all: $(DESTDIR)/alog.css $(DESTDIR)/alog-arch.png $(DST_FILES)
 
-prepare:
-	cp ../../README .
-	cp ../../CHANGELOG .
+README: ../../README
+	cp $< $@
+
+CHANGELOG: ../../CHANGELOG
+	cp $< $@
 
 $(DESTDIR)/alog-arch.png: arch/alog-arch.png
 	cp $< $@
@@ -30,7 +32,7 @@ $(DESTDIR)/alog-arch.png: arch/alog-arch.png
 $(DESTDIR)/alog.css: alog.css
 	cp $< $@
 
-$(DESTDIR)/%.html:
+$(DESTDIR)/%.html: README CHANGELOG
 	asciidoc $(ASCIIDOC_OPTS) $* > $@
 
 clean:
@@ -38,5 +40,3 @@ clean:
 	rm -f $(DESTDIR)/*.html
 	rm -f $(DESTDIR)/alog.css
 	rm -f $(DESTDIR)/alog-arch.png
-
-PHONY: prepare $(DESTDIR)/%.html
