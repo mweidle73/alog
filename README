@@ -1,5 +1,5 @@
-Alog README File
-================
+Alog README
+===========
 
 Alog is a stackable logging framework for Ada. It aims to be straight forward to
 use and easily extendable. It provides support for various logger types, log
@@ -18,6 +18,34 @@ PostgreSQL. For the full version you need to have AWS (Ada Web Server) and APQ
 GNAT is available for most distributions. Since Alog uses pedantic compiler
 flags to check the code, make sure you have gnat version 4.3 or later installed
 on your system.
+
+
+Download
+--------
+
+Release version
+~~~~~~~~~~~~~~~
+The current release version of alog is available at
+http://www.codelabs.ch/alog/download. The API documentation of the current
+release can be found at http://www.codelabs.ch/alog/api.
+
+Verify a Release
+~~~~~~~~~~~~~~~~
+To verify the integrity and authenticity of the distribution tarball, import
+the key http://www.codelabs.ch/keys/0x3DC359DEpub.asc and type the following
+command:
+
+  $ gpg --verify libalog-{version}.tar.bz2.sig
+
+The key fingerprint of the public key ('0x3DC359DE') is:
+
+  Key fingerprint = 752C 4EBC 115D 5EAD 75F7  0F34 A0AE 8AD7 3DC3 59DE
+
+Development version
+~~~~~~~~~~~~~~~~~~~
+The current development version of alog is available through its git
+repository http://git.codelabs.ch/git/alog.git. A browsable version of the
+repository is also available here: http://git.codelabs.ch/?p=alog.git
 
 
 Installation
@@ -40,16 +68,14 @@ installed on your system:
 The building and installation process of Alog is simple. Just type in the
 following commands. You must be root to install the library system wide.
 
-  $ tar -xzf libalog-{revision}.tar.bz2
-  $ cd libalog-{revision}
+  $ tar -xzf libalog-{version}.tar.bz2
+  $ cd libalog-{version}
   $ make
   $ make PREFIX=/usr/local install
 
 This will compile and install the base build (default). To do a full build, you
 need to set and export the environment variable `TARGET` to "full" like so:
 
-  $ tar -xzf libalog-{revision}.tar.bz2
-  $ cd libalog-{revision}
   $ export TARGET=full
   $ make
   $ make PREFIX=/usr/local install
@@ -73,17 +99,3 @@ Limitations
 The XMPP facility is considered experimental. To use this facility the AWS
 version from the AdaCore subversion repository must be installed. Older
 AWS versions are not fully XMPP/1.0 compliant.
-
-
-Obtaining Alog
---------------
-The latest Alog version and online documentation can be found at
-http://www.nongnu.org/alog/.
-
-
-COPYING
--------
----------------------------------------------------------------------------------
-Copyright (c) 2009 Reto Buerki, Adrian-Ken Rueegsegger. Free use of this software
-is granted under the terms of the GNU Lesser General Public License (LGPL).
----------------------------------------------------------------------------------
