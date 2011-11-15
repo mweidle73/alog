@@ -1,8 +1,6 @@
 DESTDIR ?= ..
 STYLE   ?= alog.css
 
-PREPARE := $(shell cp ../../README ../../CHANGELOG $(PWD))
-
 ASCIIDOC_OPTS = \
 	--backend=xhtml11 \
 	-a stylesheet=$(STYLE) \
@@ -20,7 +18,11 @@ SRC_DOCS = \
 
 DST_FILES  = $(addsuffix .html,$(addprefix $(DESTDIR)/,$(SRC_DOCS)))
 
-all: $(DESTDIR)/alog.css $(DST_FILES) $(DESTDIR)/alog-arch.png
+all: prepare $(DESTDIR)/alog.css $(DST_FILES) $(DESTDIR)/alog-arch.png
+
+prepare:
+	cp ../../README .
+	cp ../../CHANGELOG .
 
 $(DESTDIR)/alog-arch.png: arch/alog-arch.png
 	cp $< $@
@@ -37,4 +39,4 @@ clean:
 	rm -f $(DESTDIR)/alog.css
 	rm -f $(DESTDIR)/alog-arch.png
 
-PHONY: $(DESTDIR)/%.html
+PHONY: prepare $(DESTDIR)/%.html
