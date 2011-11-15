@@ -4,7 +4,6 @@ STYLE   ?= alog.css
 ASCIIDOC_OPTS = \
 	--backend=xhtml11 \
 	-a stylesheet=$(STYLE) \
-	-a max-width=1024px \
 	-a linkcss \
 	-a disable-javascript \
 	-a badges \
