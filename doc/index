@@ -83,7 +83,7 @@ to a file.
 
 [source,ada]
 ---------------------------------------------------------------------
-include::../../examples/logger_example1.adb[]
+include::../examples/logger_example1.adb[]
 ---------------------------------------------------------------------
 
 The logger will take care about cleaning up all the attached facilities when
@@ -97,7 +97,7 @@ a file. If the file already exists, it will be overwritten.
 
 [source,ada]
 ---------------------------------------------------------------------
-include::../../examples/facility_example1.adb[]
+include::../examples/facility_example1.adb[]
 ---------------------------------------------------------------------
 
 More features for the different facilities are work in progress, see the
@@ -111,7 +111,7 @@ log messages depending on their source.
 
 [source,ada]
 ---------------------------------------------------------------------
-include::../../examples/policy_example1.adb[]
+include::../examples/policy_example1.adb[]
 ---------------------------------------------------------------------
 
 The second policy example demonstrates the usage of destination filtering. Only
@@ -121,7 +121,7 @@ depending on the destination (facility name).
 
 [source,ada]
 ---------------------------------------------------------------------
-include::../../examples/policy_example2.adb[]
+include::../examples/policy_example2.adb[]
 ---------------------------------------------------------------------
 
 

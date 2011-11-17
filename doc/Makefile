@@ -1,4 +1,4 @@
-DESTDIR ?= ..
+DESTDIR ?= html
 STYLE   ?= alog.css
 
 ASCIIDOC_OPTS = \
@@ -15,14 +15,14 @@ SRC_DOCS = \
 	CHANGELOG \
 	README
 
-DST_FILES  = $(addsuffix .html,$(addprefix $(DESTDIR)/,$(SRC_DOCS)))
+DST_FILES = $(addsuffix .html,$(addprefix $(DESTDIR)/,$(SRC_DOCS)))
 
 all: $(DESTDIR)/alog.css $(DESTDIR)/alog-arch.png $(DST_FILES)
 
-README: ../../README
+README: ../README
 	cp $< $@
 
-CHANGELOG: ../../CHANGELOG
+CHANGELOG: ../CHANGELOG
 	cp $< $@
 
 $(DESTDIR)/alog-arch.png: arch/alog-arch.png

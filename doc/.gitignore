@@ -1,5 +1,5 @@
-*.html
-alog.css
-alog-arch.png
-src/CHANGELOG
-src/README
+html/*.html
+html/alog.css
+html/alog-arch.png
+CHANGELOG
+README
