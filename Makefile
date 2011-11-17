@@ -86,6 +86,7 @@ clean:
 	@rm -rf $(LIBDIR)/*
 	@rm -rf $(COVDIR)/*
 	@rm -rf $(PROFDIR)/*
+	$(MAKE) -C doc/src clean
 
 distclean: clean
 	@rm -rf obj
@@ -146,4 +147,7 @@ obj/lib/libglue.a: $(LIBGLUE_OBJECTS)
 	@mkdir -p obj/lib
 	$(AR) $(ARFLAGS) $@ $^
 
-.PHONY: cov dist prof tests build_all install_tests
+doc:
+	$(MAKE) -C doc/src
+
+.PHONY: cov dist doc prof tests build_all install_tests
