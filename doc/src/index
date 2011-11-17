@@ -1,9 +1,11 @@
 Alog
 ====
 
+link:README.html[README]
+
 link:CHANGELOG.html[CHANGELOG]
 
-link:README.html[README]
+http://www.codelabs.ch/download[Download]
 
 Overview
 --------
@@ -125,7 +127,6 @@ include::../../examples/policy_example2.adb[]
 
 API documentation
 -----------------
-
 - You can find the API documentation of Alog link:api/index.html[here].
 
 
