@@ -1,7 +1,6 @@
 --
 --  Copyright (c) 2008-2009,
 --  Reto Buerki, Adrian-Ken Rueegsegger
---  secunet SwissIT AG
 --
 --  This file is part of Alog.
 --
