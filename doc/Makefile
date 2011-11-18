@@ -7,7 +7,6 @@ ASCIIDOC_OPTS = \
 	-a linkcss \
 	-a disable-javascript \
 	-a badges \
-	-a icons \
 	-o -
 
 SRC_DOCS = \
