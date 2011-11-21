@@ -1,9 +1,9 @@
-DESTDIR ?= html
-STYLE   ?= alog.css
+DESTDIR   ?= html
+STYLEPATH ?= .
 
 ASCIIDOC_OPTS = \
 	--backend=xhtml11 \
-	-a stylesheet=$(STYLE) \
+	-a stylesdir=$(STYLEPATH) \
 	-a linkcss \
 	-a disable-javascript \
 	-a badges \
@@ -16,7 +16,7 @@ SRC_DOCS = \
 
 DST_FILES = $(addsuffix .html,$(addprefix $(DESTDIR)/,$(SRC_DOCS)))
 
-all: $(DESTDIR)/alog.css $(DESTDIR)/alog-arch.png $(DST_FILES)
+all: $(DESTDIR)/asciidoc.css $(DESTDIR)/alog-arch.png $(DST_FILES)
 
 README: ../README
 	cp $< $@
@@ -27,7 +27,7 @@ CHANGELOG: ../CHANGELOG
 $(DESTDIR)/alog-arch.png: arch/alog-arch.png
 	cp $< $@
 
-$(DESTDIR)/alog.css: alog.css
+$(DESTDIR)/asciidoc.css: asciidoc.css
 	cp $< $@
 
 $(DESTDIR)/%.html: README CHANGELOG
@@ -36,5 +36,5 @@ $(DESTDIR)/%.html: README CHANGELOG
 clean:
 	rm -f CHANGELOG README
 	rm -f $(DESTDIR)/*.html
-	rm -f $(DESTDIR)/alog.css
+	rm -f $(DESTDIR)/*.css
 	rm -f $(DESTDIR)/alog-arch.png
