@@ -3,6 +3,7 @@ STYLEPATH ?= .
 
 ASCIIDOC_OPTS = \
 	--backend=xhtml11 \
+	--conf-file=page.conf \
 	-a stylesdir=$(STYLEPATH) \
 	-a linkcss \
 	-a disable-javascript \
