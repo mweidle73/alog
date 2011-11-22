@@ -175,9 +175,9 @@ div#leftSideInside a:hover .button2
    background: transparent url(../support/images/rightsidebottom.png) no-repeat bottom;
    font-size: 0.8em;
 }
-div#rightSide div#rightSideInside
+div#rightSideInside
 {
-   width: 205px;
+   width: 193px;
    padding-top: 10px;
    padding-left: 12px;
    margin: 0px;
@@ -270,6 +270,12 @@ div.subprograms .name
 {
    color: red;
 }
+div.subprograms .name_emphasis
+{
+   color: red;
+   font-weight: bold;
+}
+
 div.subprograms h3
 {
    background: #dae3fe;
@@ -302,7 +308,14 @@ div.subprograms div.details div
 }
 div.subprograms div.details table
 {
-   padding-left: 20px;
+   margin-left: 20px;
+   border-collapse: collapse;
+}
+div.subprograms div.details table td
+{
+   border:0px;
+   padding:0px;
+   vertical-align: top;
 }
 div.subprograms div.details span.keyword
 {
@@ -325,12 +338,14 @@ div.subprograms div.comment
    padding-left: 5px;
    padding-top: 0px;
    padding-bottom: 0px;
+   white-space: pre-wrap;
 }
 div.subprograms div.comment *
 {
    margin: 0px;
    padding-top: 3px;
    padding-bottom: 3px;
+   white-space: normal;
 }
 
 div.subprograms .type,

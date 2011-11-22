@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Script-Type" content="text/javascript"/>
 
   <title>
-    Package: Version
+    Package: Exceptions
   </title>
   <link rel='stylesheet' href='support/docgen.css' type='text/css'/>
   <link rel='stylesheet' href='support/tags.css' type='text/css'/>
@@ -26,7 +26,7 @@
   <div id='navigation'>
     <h2 class="button">Navigation</h2>
     <a href='#Description'><div class="button2">Description</div></a>
-    <a href='#Constants'><div class="button2">Constants &amp; Global variables</div></a>
+    <a href='#Types'><div class="button2">Types</div></a>
   </div><!-- navigation -->
   </div>
 </div> <!-- leftSide -->
@@ -37,13 +37,13 @@
   <h2>Index</h2>
   <script type="text/javascript">
     var names = new Array (
-new Array ('Version_<wbr/>Number', 'alog-version.ads:2:4', 'var-spec'),
+new Array ('Exception_<wbr/>Handler', 'alog-exceptions.ads:30:9', 'type-spec'),
       new Array ('dummy', '', ''));
     printIndexList (names);
   </script>
   <noscript>
     <ul>
-      <li class='var-spec'><a href="#alog-version.ads:2:4">Version_<wbr/>Number</a></li>
+      <li class='type-spec'><a href="#alog-exceptions.ads:30:9">Exception_<wbr/>Handler</a></li>
     </ul>
   </noscript>
  </div>
@@ -53,34 +53,41 @@ new Array ('Version_<wbr/>Number', 'alog-version.ads:2:4', 'var-spec'),
 <div class='default' id='documentation'>
   <div class='title'>
     Package:
-<span class="droplink"><i>Version</i><ul>
-  <li><a href="src_alog-version.ads.html">Goto spec source</a></li>
+<span class="droplink"><i>Exceptions</i><ul>
+  <li><a href="src_alog-exceptions.ads.html">Goto spec source</a></li>
 </ul></span>
   </div>
   <div class='subprograms'>
     <h1><a name='Description' id='Description'></a>Description</h1>
     <div class="class">
-    <div class='details'><pre><span class="keyword">package</span> <span class="name_emphasis">Alog.Version</span> <span class="keyword">is</span></pre></div>
+    <div class='details'><pre><span class="keyword">package</span> <span class="name_emphasis">Alog.Exceptions</span> <span class="keyword">is</span></pre></div>
+    <div class='comment'><a href="alog.ads.html#alog.ads:27:9" title="Alog">Alog</a> exception package. Contains type definitions for <a href="alog.ads.html#alog.ads:27:9" title="Alog">Alog</a> specific
+exception handling.
+</div>
     </div>
   </div>
-
 
 
 
 
   <div class='subprograms'>
-    <h1><a name='Constants' id='Constants'></a>Constants &amp; Global variables</h1>
+    <h1><a name='Types' id='Types'></a>Types</h1>
     <div class="class">
-      <h3><a name='alog-version.ads:2:4' id='alog-version.ads:2:4'></a>
-<span class="droplink">Version_Number<ul>
-  <li><a href="src_alog-version.ads.html#l2">Goto declaration in source</a></li>
+      <h3>
+        <a name='alog-exceptions.ads:30:9' id='alog-exceptions.ads:30:9'></a>
+<span class="droplink">Exception_Handler<ul>
+  <li><a href="src_alog-exceptions.ads.html#l30">Goto declaration in source</a></li>
 </ul></span>
-        <span class="type">(Float)</span>
       </h3>
-      <div class='details'><pre><span class="name_emphasis">Version_Number</span> : <span class="keyword">constant</span> Float :=
-      0.4;</pre></div>
+      <div class='details'><pre><span class="keyword">type</span> <span class="name_emphasis">Exception_Handler</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">access</span> <span class="keyword">procedure</span>
+     (Except : Ada.Exceptions.Exception_Occurrence;
+      Caller : Ada.Task_Identification.Task_Id);</pre></div>
+      <div class='comment'>Exception handler callback procedure. Used to register custom callback
+procedures in active and tasked loggers.
+</div>
     </div>
   </div>
+
 
 </div> <!-- documentation -->
 

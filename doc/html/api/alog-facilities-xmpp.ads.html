@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Script-Type" content="text/javascript"/>
 
   <title>
-    Package: Alog.Facilities.XMPP
+    Package: XMPP
   </title>
   <link rel='stylesheet' href='support/docgen.css' type='text/css'/>
   <link rel='stylesheet' href='support/tags.css' type='text/css'/>
@@ -17,7 +17,7 @@
   <div id='leftSideInside'>
   <div id='header'>
     <h2 class="button">Documentation</h2>
-    <a href='index.html'><div class="button2">Table of Contents</div></a>
+    <a href='toc.html'><div class="button2">Table of Contents</div></a>
 
     <a href='tree.html'><div class="button2">Class Inheritance Tree</div></a>
 
@@ -40,31 +40,31 @@
   <h2>Index</h2>
   <script type="text/javascript">
     var names = new Array (
-new Array ('Instance', 'alog-facilities-xmpp.ads:28:9', 'class-spec'),
-new Array ('Handle', 'alog-facilities-xmpp.ads:31:9', 'type-spec'),
-new Array ('No_<wbr/>Sender', 'alog-facilities-xmpp.ads:52:4', 'var-spec'),
-new Array ('No_<wbr/>Recipient', 'alog-facilities-xmpp.ads:55:4', 'var-spec'),
-new Array ('No_<wbr/>Server', 'alog-facilities-xmpp.ads:58:4', 'var-spec'),
-new Array ('Recipient_<wbr/>Not_<wbr/>Present', 'alog-facilities-xmpp.ads:61:4', 'var-spec'),
-new Array ('Delivery_<wbr/>Failed', 'alog-facilities-xmpp.ads:64:4', 'var-spec'),
-new Array ('Set_<wbr/>Sender', 'alog-facilities-xmpp.ads:33:14', 'subp-spec'),
-new Array ('Set_<wbr/>Recipient', 'alog-facilities-xmpp.ads:40:14', 'subp-spec'),
-new Array ('Set_<wbr/>Server', 'alog-facilities-xmpp.ads:46:14', 'subp-spec'),
+new Array ('Instance', 'alog-facilities-xmpp.ads:27:9', 'class-spec'),
+new Array ('Handle', 'alog-facilities-xmpp.ads:30:9', 'type-spec'),
+new Array ('No_<wbr/>Sender', 'alog-facilities-xmpp.ads:51:4', 'var-spec'),
+new Array ('No_<wbr/>Recipient', 'alog-facilities-xmpp.ads:54:4', 'var-spec'),
+new Array ('No_<wbr/>Server', 'alog-facilities-xmpp.ads:57:4', 'var-spec'),
+new Array ('Recipient_<wbr/>Not_<wbr/>Present', 'alog-facilities-xmpp.ads:60:4', 'var-spec'),
+new Array ('Delivery_<wbr/>Failed', 'alog-facilities-xmpp.ads:63:4', 'var-spec'),
+new Array ('Set_<wbr/>Sender', 'alog-facilities-xmpp.ads:32:14', 'subp-spec'),
+new Array ('Set_<wbr/>Recipient', 'alog-facilities-xmpp.ads:39:14', 'subp-spec'),
+new Array ('Set_<wbr/>Server', 'alog-facilities-xmpp.ads:45:14', 'subp-spec'),
       new Array ('dummy', '', ''));
     printIndexList (names);
   </script>
   <noscript>
     <ul>
-      <li class='class-spec'><a href="#alog-facilities-xmpp.ads:28:9">Instance</a></li>
-      <li class='type-spec'><a href="#alog-facilities-xmpp.ads:31:9">Handle</a></li>
-      <li class='var-spec'><a href="#alog-facilities-xmpp.ads:52:4">No_<wbr/>Sender</a></li>
-      <li class='var-spec'><a href="#alog-facilities-xmpp.ads:55:4">No_<wbr/>Recipient</a></li>
-      <li class='var-spec'><a href="#alog-facilities-xmpp.ads:58:4">No_<wbr/>Server</a></li>
-      <li class='var-spec'><a href="#alog-facilities-xmpp.ads:61:4">Recipient_<wbr/>Not_<wbr/>Present</a></li>
-      <li class='var-spec'><a href="#alog-facilities-xmpp.ads:64:4">Delivery_<wbr/>Failed</a></li>
-      <li class='subp-spec'><a href="#alog-facilities-xmpp.ads:33:14">Set_<wbr/>Sender</a></li>
-      <li class='subp-spec'><a href="#alog-facilities-xmpp.ads:40:14">Set_<wbr/>Recipient</a></li>
-      <li class='subp-spec'><a href="#alog-facilities-xmpp.ads:46:14">Set_<wbr/>Server</a></li>
+      <li class='class-spec'><a href="#alog-facilities-xmpp.ads:27:9">Instance</a></li>
+      <li class='type-spec'><a href="#alog-facilities-xmpp.ads:30:9">Handle</a></li>
+      <li class='var-spec'><a href="#alog-facilities-xmpp.ads:51:4">No_<wbr/>Sender</a></li>
+      <li class='var-spec'><a href="#alog-facilities-xmpp.ads:54:4">No_<wbr/>Recipient</a></li>
+      <li class='var-spec'><a href="#alog-facilities-xmpp.ads:57:4">No_<wbr/>Server</a></li>
+      <li class='var-spec'><a href="#alog-facilities-xmpp.ads:60:4">Recipient_<wbr/>Not_<wbr/>Present</a></li>
+      <li class='var-spec'><a href="#alog-facilities-xmpp.ads:63:4">Delivery_<wbr/>Failed</a></li>
+      <li class='subp-spec'><a href="#alog-facilities-xmpp.ads:32:14">Set_<wbr/>Sender</a></li>
+      <li class='subp-spec'><a href="#alog-facilities-xmpp.ads:39:14">Set_<wbr/>Recipient</a></li>
+      <li class='subp-spec'><a href="#alog-facilities-xmpp.ads:45:14">Set_<wbr/>Server</a></li>
     </ul>
   </noscript>
  </div>
@@ -74,15 +74,18 @@ new Array ('Set_<wbr/>Server', 'alog-facilities-xmpp.ads:46:14', 'subp-spec'),
 <div class='default' id='documentation'>
   <div class='title'>
     Package:
-<span class="droplink"><i>Alog.Facilities.XMPP</i><ul>
+<span class="droplink"><i>XMPP</i><ul>
   <li><a href="src_alog-facilities-xmpp.ads.html">Goto spec source</a></li>
 </ul></span>
   </div>
   <div class='subprograms'>
     <h1><a name='Description' id='Description'></a>Description</h1>
     <div class="class">
-    <div class='details'><pre><span class="keyword">package</span> <span class="name"><b>Alog.Facilities.XMPP</b></span> <span class="keyword">is</span></pre></div>
-    <div class='comment'>XMPP-Logging (jabber) facility.&#10;Send log-messages to a configured Jabber ID via a given jabber server.&#10;AWS must be installed for this facility to work.&#10;</div>
+    <div class='details'><pre><span class="keyword">package</span> <span class="name_emphasis">Alog.Facilities.XMPP</span> <span class="keyword">is</span></pre></div>
+    <div class='comment'><a href="alog-facilities-xmpp.ads.html#alog-facilities-xmpp.ads:25:25" title="XMPP">XMPP</a>-Logging (jabber) facility.
+Send log-messages to a configured Jabber ID via a given jabber server.
+AWS must be installed for this facility to work.
+</div>
     </div>
   </div>
 
@@ -90,43 +93,30 @@ new Array ('Set_<wbr/>Server', 'alog-facilities-xmpp.ads:46:14', 'subp-spec'),
   <div class='subprograms'>
     <h1><a name='Classes' id='Classes'></a>Classes</h1>
     <div class="class">
-      <h3><a name='alog-facilities-xmpp.ads:28:9' id='alog-facilities-xmpp.ads:28:9'></a>
+      <h3><a name='alog-facilities-xmpp.ads:27:9' id='alog-facilities-xmpp.ads:27:9'></a>
 <span class="droplink">Instance<ul>
-  <li><a href="src_alog-facilities-xmpp.ads.html#l28">Goto declaration in source</a></li>
-  <li><a href="src_alog-facilities-xmpp.ads.html#l83">Goto full declaration in source</a></li>
+  <li><a href="src_alog-facilities-xmpp.ads.html#l27">Goto declaration in source</a></li>
+  <li><a href="src_alog-facilities-xmpp.ads.html#l82">Goto full declaration in source</a></li>
 </ul></span>
       </h3>
-      <div class='details'><pre><span class="keyword">type</span> <span class="name"><b>Instance</b></span> <span class="keyword">is</span> <span class="keyword">new</span> <a href="alog-facilities.ads.html#alog-facilities.ads:38:9" title="defined at alog-facilities.ads:38:9">Alog.Facilities.Instance</a> <span class="keyword">with</span> <span class="keyword">private</span>;</pre></div>
+      <div class='details'><pre><span class="keyword">type</span> <span class="name_emphasis">Instance</span> <span class="keyword">is</span> <span class="keyword">new</span> <a href="alog-facilities.ads.html#alog-facilities.ads:37:9" title="defined at alog-facilities.ads:37:9">Alog.Facilities.Instance</a> <span class="keyword">with</span> <span class="keyword">private</span>;</pre></div>
       <div class='profile'>
         <div>
           <h4>Ancestors:</h4>
-            <div><a href="alog-facilities.ads.html#alog-facilities.ads:38:9" title="defined at alog-facilities.ads:38:9">Alog.Facilities.Instance</a></div>
+            <div><a href="alog-facilities.ads.html#alog-facilities.ads:37:9" title="defined at alog-facilities.ads:37:9">Alog.Facilities.Instance</a></div>
         </div>
         <div>
           <h4>Primitive operations:</h4>
-              <div><i><span class="droplink">Alog.Facilities.Setup<ul><li><a href="alog-facilities.ads.html#alog-facilities.ads:110:14" title="To API doc">To API doc</a></li><li><a href="src_alog-facilities.ads.html#l110" title="To spec">To spec</a></li></ul></span> (Inherited)</i></div>
-              <div><i><span class="droplink">Alog.Facilities.Teardown<ul><li><a href="alog-facilities.ads.html#alog-facilities.ads:115:14" title="To API doc">To API doc</a></li><li><a href="src_alog-facilities.ads.html#l115" title="To spec">To spec</a></li></ul></span> (Inherited)</i></div>
-              <div><span class="droplink">Set_Recipient<ul><li><a href="alog-facilities-xmpp.ads.html#alog-facilities-xmpp.ads:40:14" title="To API doc">To API doc</a></li><li><a href="src_alog-facilities-xmpp.ads.html#l40" title="To spec">To spec</a></li></ul></span></div>
-              <div><span class="droplink">Set_Sender<ul><li><a href="alog-facilities-xmpp.ads.html#alog-facilities-xmpp.ads:33:14" title="To API doc">To API doc</a></li><li><a href="src_alog-facilities-xmpp.ads.html#l33" title="To spec">To spec</a></li></ul></span></div>
-              <div><span class="droplink">Set_Server<ul><li><a href="alog-facilities-xmpp.ads.html#alog-facilities-xmpp.ads:46:14" title="To API doc">To API doc</a></li><li><a href="src_alog-facilities-xmpp.ads.html#l46" title="To spec">To spec</a></li></ul></span></div>
-              <div>Write <i>(overriding <a href="alog-facilities.ads.html#alog-facilities.ads:71:14" title="defined at alog-facilities.ads:71:14">Alog.Facilities.Write</a>)</i></div>
+              <div><i><span class="droplink">Alog.Facilities.Setup<ul><li><a href="alog-facilities.ads.html#alog-facilities.ads:109:14" title="To API doc">To API doc</a></li><li><a href="src_alog-facilities.ads.html#l109" title="To spec">To spec</a></li></ul></span> (Inherited)</i></div>
+              <div><i><span class="droplink">Alog.Facilities.Teardown<ul><li><a href="alog-facilities.ads.html#alog-facilities.ads:114:14" title="To API doc">To API doc</a></li><li><a href="src_alog-facilities.ads.html#l114" title="To spec">To spec</a></li></ul></span> (Inherited)</i></div>
+              <div><span class="droplink">Set_Recipient<ul><li><a href="alog-facilities-xmpp.ads.html#alog-facilities-xmpp.ads:39:14" title="To API doc">To API doc</a></li><li><a href="src_alog-facilities-xmpp.ads.html#l39" title="To spec">To spec</a></li></ul></span></div>
+              <div><span class="droplink">Set_Sender<ul><li><a href="alog-facilities-xmpp.ads.html#alog-facilities-xmpp.ads:32:14" title="To API doc">To API doc</a></li><li><a href="src_alog-facilities-xmpp.ads.html#l32" title="To spec">To spec</a></li></ul></span></div>
+              <div><span class="droplink">Set_Server<ul><li><a href="alog-facilities-xmpp.ads.html#alog-facilities-xmpp.ads:45:14" title="To API doc">To API doc</a></li><li><a href="src_alog-facilities-xmpp.ads.html#l45" title="To spec">To spec</a></li></ul></span></div>
+              <div>Write <i>(overriding <a href="alog-facilities.ads.html#alog-facilities.ads:70:14" title="defined at alog-facilities.ads:70:14">Alog.Facilities.Write</a>)</i></div>
         </div>
       </div>
-      <div class='profile'>
-          <h4>References:</h4>
-            <div><i><a href="src_alog-facilities-xmpp.ads.html#l28" title="alog-facilities-xmpp.ads:28:9">alog-facilities-xmpp.ads:28:9</a> (declaration)</i></div>
-            <div><i>alog-facilities-xmpp.adb:32:25 (reference)</i></div>
-            <div><i>alog-facilities-xmpp.adb:43:25 (reference)</i></div>
-            <div><i>alog-facilities-xmpp.adb:56:25 (reference)</i></div>
-            <div><i>alog-facilities-xmpp.adb:67:18 (reference)</i></div>
-            <div><i><a href="src_alog-facilities-xmpp.ads.html#l31" title="alog-facilities-xmpp.ads:31:30">alog-facilities-xmpp.ads:31:30</a> (reference)</i></div>
-            <div><i><a href="src_alog-facilities-xmpp.ads.html#l34" title="alog-facilities-xmpp.ads:34:25">alog-facilities-xmpp.ads:34:25</a> (reference)</i></div>
-            <div><i><a href="src_alog-facilities-xmpp.ads.html#l41" title="alog-facilities-xmpp.ads:41:25">alog-facilities-xmpp.ads:41:25</a> (reference)</i></div>
-            <div><i><a href="src_alog-facilities-xmpp.ads.html#l47" title="alog-facilities-xmpp.ads:47:25">alog-facilities-xmpp.ads:47:25</a> (reference)</i></div>
-            <div><i><a href="src_alog-facilities-xmpp.ads.html#l71" title="alog-facilities-xmpp.ads:71:18">alog-facilities-xmpp.ads:71:18</a> (reference)</i></div>
-            <div><i><a href="src_alog-facilities-xmpp.ads.html#l83" title="alog-facilities-xmpp.ads:83:9">alog-facilities-xmpp.ads:83:9</a> (full declaration)</i></div>
-      </div>
-      <div class='comment'>XMPP based logging facility.&#10;</div>
+      <div class='comment'><a href="alog-facilities-xmpp.ads.html#alog-facilities-xmpp.ads:25:25" title="XMPP">XMPP</a> based logging facility.
+</div>
     </div>
   </div>
 
@@ -135,90 +125,66 @@ new Array ('Set_<wbr/>Server', 'alog-facilities-xmpp.ads:46:14', 'subp-spec'),
     <h1><a name='Types' id='Types'></a>Types</h1>
     <div class="class">
       <h3>
-        <a name='alog-facilities-xmpp.ads:31:9' id='alog-facilities-xmpp.ads:31:9'></a>
+        <a name='alog-facilities-xmpp.ads:30:9' id='alog-facilities-xmpp.ads:30:9'></a>
 <span class="droplink">Handle<ul>
-  <li><a href="src_alog-facilities-xmpp.ads.html#l31">Goto declaration in source</a></li>
+  <li><a href="src_alog-facilities-xmpp.ads.html#l30">Goto declaration in source</a></li>
 </ul></span>
       </h3>
-      <div class='details'><pre><span class="keyword">type</span> <span class="name"><b>Handle</b></span> <span class="keyword">is</span> <span class="keyword">access</span> <span class="keyword">all</span> <a href="alog-facilities-xmpp.ads.html#alog-facilities-xmpp.ads:28:9" title="defined at alog-facilities-xmpp.ads:28:9">Instance</a>;</pre></div>
-      <div class='profile'>
-          <h4>References:</h4>
-          <div><i><a href="src_alog-facilities-xmpp.ads.html#l31" title="alog-facilities-xmpp.ads:31:9">alog-facilities-xmpp.ads:31:9</a> (declaration)</i></div>
-      </div>
+      <div class='details'><pre><span class="keyword">type</span> <span class="name_emphasis">Handle</span> <span class="keyword">is</span> <span class="keyword">access</span> <span class="keyword">all</span> <a href="alog-facilities-xmpp.ads.html#alog-facilities-xmpp.ads:27:9" title="defined at alog-facilities-xmpp.ads:27:9">Instance</a>;</pre></div>
     </div>
   </div>
 
   <div class='subprograms'>
     <h1><a name='Constants' id='Constants'></a>Constants &amp; Global variables</h1>
     <div class="class">
-      <h3><a name='alog-facilities-xmpp.ads:52:4' id='alog-facilities-xmpp.ads:52:4'></a>
+      <h3><a name='alog-facilities-xmpp.ads:51:4' id='alog-facilities-xmpp.ads:51:4'></a>
 <span class="droplink">No_Sender<ul>
-  <li><a href="src_alog-facilities-xmpp.ads.html#l52">Goto declaration in source</a></li>
+  <li><a href="src_alog-facilities-xmpp.ads.html#l51">Goto declaration in source</a></li>
 </ul></span>
       </h3>
-      <div class='details'><pre><span class="name"><b>No_Sender</b></span>             : <span class="keyword">exception</span>;</pre></div>
-      <div class='profile'>
-        <h4>References:</h4>
-          <div><i><a href="src_alog-facilities-xmpp.ads.html#l52" title="alog-facilities-xmpp.ads:52:4">alog-facilities-xmpp.ads:52:4</a> (declaration)</i></div>
-          <div><i>alog-facilities-xmpp.adb:76:16 (reference)</i></div>
-      </div>
-      <div class='comment'>No sender ID specified. Cannot send message.&#10;</div>
+      <div class='details'><pre><span class="name_emphasis">No_Sender</span>             : <span class="keyword">exception</span>;</pre></div>
+      <div class='comment'>No sender ID specified. Cannot send message.
+</div>
     </div>
     <div class="class">
-      <h3><a name='alog-facilities-xmpp.ads:55:4' id='alog-facilities-xmpp.ads:55:4'></a>
+      <h3><a name='alog-facilities-xmpp.ads:54:4' id='alog-facilities-xmpp.ads:54:4'></a>
 <span class="droplink">No_Recipient<ul>
-  <li><a href="src_alog-facilities-xmpp.ads.html#l55">Goto declaration in source</a></li>
+  <li><a href="src_alog-facilities-xmpp.ads.html#l54">Goto declaration in source</a></li>
 </ul></span>
       </h3>
-      <div class='details'><pre><span class="name"><b>No_Recipient</b></span>          : <span class="keyword">exception</span>;</pre></div>
-      <div class='profile'>
-        <h4>References:</h4>
-          <div><i><a href="src_alog-facilities-xmpp.ads.html#l55" title="alog-facilities-xmpp.ads:55:4">alog-facilities-xmpp.ads:55:4</a> (declaration)</i></div>
-          <div><i>alog-facilities-xmpp.adb:81:16 (reference)</i></div>
-      </div>
-      <div class='comment'>No recipient specified. Cannot send message.&#10;</div>
+      <div class='details'><pre><span class="name_emphasis">No_Recipient</span>          : <span class="keyword">exception</span>;</pre></div>
+      <div class='comment'>No recipient specified. Cannot send message.
+</div>
     </div>
     <div class="class">
-      <h3><a name='alog-facilities-xmpp.ads:58:4' id='alog-facilities-xmpp.ads:58:4'></a>
+      <h3><a name='alog-facilities-xmpp.ads:57:4' id='alog-facilities-xmpp.ads:57:4'></a>
 <span class="droplink">No_Server<ul>
-  <li><a href="src_alog-facilities-xmpp.ads.html#l58">Goto declaration in source</a></li>
+  <li><a href="src_alog-facilities-xmpp.ads.html#l57">Goto declaration in source</a></li>
 </ul></span>
       </h3>
-      <div class='details'><pre><span class="name"><b>No_Server</b></span>             : <span class="keyword">exception</span>;</pre></div>
-      <div class='profile'>
-        <h4>References:</h4>
-          <div><i><a href="src_alog-facilities-xmpp.ads.html#l58" title="alog-facilities-xmpp.ads:58:4">alog-facilities-xmpp.ads:58:4</a> (declaration)</i></div>
-          <div><i>alog-facilities-xmpp.adb:86:16 (reference)</i></div>
-      </div>
-      <div class='comment'>No server specified. Cannot send message.&#10;</div>
+      <div class='details'><pre><span class="name_emphasis">No_Server</span>             : <span class="keyword">exception</span>;</pre></div>
+      <div class='comment'>No server specified. Cannot send message.
+</div>
     </div>
     <div class="class">
-      <h3><a name='alog-facilities-xmpp.ads:61:4' id='alog-facilities-xmpp.ads:61:4'></a>
+      <h3><a name='alog-facilities-xmpp.ads:60:4' id='alog-facilities-xmpp.ads:60:4'></a>
 <span class="droplink">Recipient_Not_Present<ul>
-  <li><a href="src_alog-facilities-xmpp.ads.html#l61">Goto declaration in source</a></li>
+  <li><a href="src_alog-facilities-xmpp.ads.html#l60">Goto declaration in source</a></li>
 </ul></span>
       </h3>
-      <div class='details'><pre><span class="name"><b>Recipient_Not_Present</b></span> : <span class="keyword">exception</span>;</pre></div>
-      <div class='profile'>
-        <h4>References:</h4>
-          <div><i><a href="src_alog-facilities-xmpp.ads.html#l61" title="alog-facilities-xmpp.ads:61:4">alog-facilities-xmpp.ads:61:4</a> (declaration)</i></div>
-          <div><i>alog-facilities-xmpp.adb:106:19 (reference)</i></div>
-      </div>
-      <div class='comment'>Recipient can not be reached through specified server.&#10;</div>
+      <div class='details'><pre><span class="name_emphasis">Recipient_Not_Present</span> : <span class="keyword">exception</span>;</pre></div>
+      <div class='comment'>Recipient can not be reached through specified server.
+</div>
     </div>
     <div class="class">
-      <h3><a name='alog-facilities-xmpp.ads:64:4' id='alog-facilities-xmpp.ads:64:4'></a>
+      <h3><a name='alog-facilities-xmpp.ads:63:4' id='alog-facilities-xmpp.ads:63:4'></a>
 <span class="droplink">Delivery_Failed<ul>
-  <li><a href="src_alog-facilities-xmpp.ads.html#l64">Goto declaration in source</a></li>
+  <li><a href="src_alog-facilities-xmpp.ads.html#l63">Goto declaration in source</a></li>
 </ul></span>
       </h3>
-      <div class='details'><pre><span class="name"><b>Delivery_Failed</b></span>       : <span class="keyword">exception</span>;</pre></div>
-      <div class='profile'>
-        <h4>References:</h4>
-          <div><i><a href="src_alog-facilities-xmpp.ads.html#l64" title="alog-facilities-xmpp.ads:64:4">alog-facilities-xmpp.ads:64:4</a> (declaration)</i></div>
-          <div><i>alog-facilities-xmpp.adb:123:19 (reference)</i></div>
-      </div>
-      <div class='comment'>Message could not be delivered.&#10;</div>
+      <div class='details'><pre><span class="name_emphasis">Delivery_Failed</span>       : <span class="keyword">exception</span>;</pre></div>
+      <div class='comment'>Message could not be delivered.
+</div>
     </div>
   </div>
 
@@ -226,63 +192,39 @@ new Array ('Set_<wbr/>Server', 'alog-facilities-xmpp.ads:46:14', 'subp-spec'),
       <h1><a name='Methods' id='Methods'></a>Subprograms &amp; Entries</h1>
       <div class="class">
         <h3>
-          <a name='alog-facilities-xmpp.ads:33:14' id='alog-facilities-xmpp.ads:33:14'></a>
+          <a name='alog-facilities-xmpp.ads:32:14' id='alog-facilities-xmpp.ads:32:14'></a>
 <span class="droplink">Set_Sender<ul>
-  <li><a href="src_alog-facilities-xmpp.ads.html#l33">Goto spec in source</a></li>
+  <li><a href="src_alog-facilities-xmpp.ads.html#l32">Goto spec in source</a></li>
 </ul></span>
         </h3>
-        <div class='details'><pre><span class="keyword">procedure</span> <span class="name"><b>Set_Sender</b></span>     <table><tr><td>(</td><td><span class="name"><a name="alog-facilities-xmpp.ads:34:7"></a>Facility</span></td><td>: <span class="keyword">in</span> <span class="keyword">out</span> <a href="alog-facilities-xmpp.ads.html#alog-facilities-xmpp.ads:28:9" title="defined at alog-facilities-xmpp.ads:28:9">Instance</a>;</td></tr><tr><td></td><td><span class="name"><a name="alog-facilities-xmpp.ads:35:7"></a>JID</span></td><td>:        String;</td></tr><tr><td></td><td><span class="name"><a name="alog-facilities-xmpp.ads:36:7"></a>Password</span></td><td>:        String);</td></tr></table></pre></div>
-        <div class='profile'>
-          <h4>References:</h4>
-            <div><i><a href="src_alog-facilities-xmpp.ads.html#l33" title="alog-facilities-xmpp.ads:33:14">alog-facilities-xmpp.ads:33:14</a> (declaration)</i></div>
-            <div><i>alog-facilities-xmpp.adb:42:14 (body)</i></div>
-            <div><i>alog-facilities-xmpp.adb:51:8 (label)</i></div>
-        </div>
-        <div class='profile'>
-          <h4>Calls:</h4>
-            <div><i>To_Unbounded_String defined at a-strunb.ads:57:13</i></div>
-        </div>
-        <div class='comment'>Set sender for log messages. This procedure MUST be called before&#10;subsequent calls to Write_Message().&#10;</div>
+        <div class='details'><pre><span class="keyword">procedure</span> <span class="name_emphasis">Set_Sender</span> <table><tr><td>(</td><td><span class="name"><a name="alog-facilities-xmpp.ads:33:7"></a>Facility</span></td><td>: <span class="keyword">in</span> <span class="keyword">out</span> <a href="alog-facilities-xmpp.ads.html#alog-facilities-xmpp.ads:27:9" title="defined at alog-facilities-xmpp.ads:27:9">Instance</a>;</td></tr><tr><td></td><td><span class="name"><a name="alog-facilities-xmpp.ads:34:7"></a>JID</span></td><td>:        String;</td></tr><tr><td></td><td><span class="name"><a name="alog-facilities-xmpp.ads:35:7"></a>Password</span></td><td>:        String);</td></tr></table></pre></div>
+        <div class='comment'>Set sender for log messages. This procedure MUST be called before
+subsequent calls to Write_Message().
+</div>
       </div>
       <div class="class">
         <h3>
-          <a name='alog-facilities-xmpp.ads:40:14' id='alog-facilities-xmpp.ads:40:14'></a>
+          <a name='alog-facilities-xmpp.ads:39:14' id='alog-facilities-xmpp.ads:39:14'></a>
 <span class="droplink">Set_Recipient<ul>
-  <li><a href="src_alog-facilities-xmpp.ads.html#l40">Goto spec in source</a></li>
+  <li><a href="src_alog-facilities-xmpp.ads.html#l39">Goto spec in source</a></li>
 </ul></span>
         </h3>
-        <div class='details'><pre><span class="keyword">procedure</span> <span class="name"><b>Set_Recipient</b></span>     <table><tr><td>(</td><td><span class="name"><a name="alog-facilities-xmpp.ads:41:7"></a>Facility</span></td><td>: <span class="keyword">in</span> <span class="keyword">out</span> <a href="alog-facilities-xmpp.ads.html#alog-facilities-xmpp.ads:28:9" title="defined at alog-facilities-xmpp.ads:28:9">Instance</a>;</td></tr><tr><td></td><td><span class="name"><a name="alog-facilities-xmpp.ads:42:7"></a>JID</span></td><td>:        String);</td></tr></table></pre></div>
-        <div class='profile'>
-          <h4>References:</h4>
-            <div><i><a href="src_alog-facilities-xmpp.ads.html#l40" title="alog-facilities-xmpp.ads:40:14">alog-facilities-xmpp.ads:40:14</a> (declaration)</i></div>
-            <div><i>alog-facilities-xmpp.adb:31:14 (body)</i></div>
-            <div><i>alog-facilities-xmpp.adb:38:8 (label)</i></div>
-        </div>
-        <div class='profile'>
-          <h4>Calls:</h4>
-            <div><i>To_Unbounded_String defined at a-strunb.ads:57:13</i></div>
-        </div>
-        <div class='comment'>Set recipient for log-messages. This procedure MUST be called before&#10;subsequent calls to Write_Message().&#10;</div>
+        <div class='details'><pre><span class="keyword">procedure</span> <span class="name_emphasis">Set_Recipient</span> <table><tr><td>(</td><td><span class="name"><a name="alog-facilities-xmpp.ads:40:7"></a>Facility</span></td><td>: <span class="keyword">in</span> <span class="keyword">out</span> <a href="alog-facilities-xmpp.ads.html#alog-facilities-xmpp.ads:27:9" title="defined at alog-facilities-xmpp.ads:27:9">Instance</a>;</td></tr><tr><td></td><td><span class="name"><a name="alog-facilities-xmpp.ads:41:7"></a>JID</span></td><td>:        String);</td></tr></table></pre></div>
+        <div class='comment'>Set recipient for log-messages. This procedure MUST be called before
+subsequent calls to Write_Message().
+</div>
       </div>
       <div class="class">
         <h3>
-          <a name='alog-facilities-xmpp.ads:46:14' id='alog-facilities-xmpp.ads:46:14'></a>
+          <a name='alog-facilities-xmpp.ads:45:14' id='alog-facilities-xmpp.ads:45:14'></a>
 <span class="droplink">Set_Server<ul>
-  <li><a href="src_alog-facilities-xmpp.ads.html#l46">Goto spec in source</a></li>
+  <li><a href="src_alog-facilities-xmpp.ads.html#l45">Goto spec in source</a></li>
 </ul></span>
         </h3>
-        <div class='details'><pre><span class="keyword">procedure</span> <span class="name"><b>Set_Server</b></span>     <table><tr><td>(</td><td><span class="name"><a name="alog-facilities-xmpp.ads:47:7"></a>Facility</span></td><td>: <span class="keyword">in</span> <span class="keyword">out</span> <a href="alog-facilities-xmpp.ads.html#alog-facilities-xmpp.ads:28:9" title="defined at alog-facilities-xmpp.ads:28:9">Instance</a>;</td></tr><tr><td></td><td><span class="name"><a name="alog-facilities-xmpp.ads:48:7"></a>Name</span></td><td>:        String);</td></tr></table></pre></div>
-        <div class='profile'>
-          <h4>References:</h4>
-            <div><i><a href="src_alog-facilities-xmpp.ads.html#l46" title="alog-facilities-xmpp.ads:46:14">alog-facilities-xmpp.ads:46:14</a> (declaration)</i></div>
-            <div><i>alog-facilities-xmpp.adb:55:14 (body)</i></div>
-            <div><i>alog-facilities-xmpp.adb:62:8 (label)</i></div>
-        </div>
-        <div class='profile'>
-          <h4>Calls:</h4>
-            <div><i>To_Unbounded_String defined at a-strunb.ads:57:13</i></div>
-        </div>
-        <div class='comment'>Set server for log-messages. This procedure MUST be called before&#10;subsequent calls to Write_Message().&#10;</div>
+        <div class='details'><pre><span class="keyword">procedure</span> <span class="name_emphasis">Set_Server</span> <table><tr><td>(</td><td><span class="name"><a name="alog-facilities-xmpp.ads:46:7"></a>Facility</span></td><td>: <span class="keyword">in</span> <span class="keyword">out</span> <a href="alog-facilities-xmpp.ads.html#alog-facilities-xmpp.ads:27:9" title="defined at alog-facilities-xmpp.ads:27:9">Instance</a>;</td></tr><tr><td></td><td><span class="name"><a name="alog-facilities-xmpp.ads:47:7"></a>Name</span></td><td>:        String);</td></tr></table></pre></div>
+        <div class='comment'>Set server for log-messages. This procedure MUST be called before
+subsequent calls to Write_Message().
+</div>
       </div>
     </div>
 </div> <!-- documentation -->

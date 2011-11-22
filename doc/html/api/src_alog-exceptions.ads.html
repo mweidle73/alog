@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Script-Type" content="text/javascript"/>
 
   <title>
-    File: alog.ads
+    File: alog-exceptions.ads
   </title>
   <link rel='stylesheet' href='support/docgen.css' type='text/css'/>
   <link rel='stylesheet' href='support/tags.css' type='text/css'/>
@@ -27,7 +27,7 @@
 
 <div class='subprograms'>
   <div class='details'><ol><li id="l1"><pre><span class="comment">--</span> </pre></li>
-<li id="l2"><pre><span class="comment">--  Copyright (c) 2008,</span> </pre></li>
+<li id="l2"><pre><span class="comment">--  Copyright (c) 2011,</span> </pre></li>
 <li id="l3"><pre><span class="comment">--  Reto Buerki, Adrian-Ken Rueegsegger</span> </pre></li>
 <li id="l4"><pre><span class="comment">--</span> </pre></li>
 <li id="l5"><pre><span class="comment">--  This file is part of Alog.</span> </pre></li>
@@ -48,34 +48,20 @@
 <li id="l20"><pre><span class="comment">--  MA  02110-1301  USA</span> </pre></li>
 <li id="l21"><pre><span class="comment">--</span> </pre></li>
 <li id="l22"><pre> </pre></li>
-<li id="l23"><pre><span class="keyword">pragma</span> Detect_Blocking; </pre></li>
-<li id="l24"><pre> </pre></li>
-<li id="l25"><pre><span class="comment">--  Alog: Ada Logging Components. Provides easy to use API for different</span> </pre></li>
-<li id="l26"><pre><span class="comment">--  logging facilities and log message transforms.</span> </pre></li>
-<li id="l27"><pre><span class="keyword">package</span> <a href="alog.ads.html#alog.ads:27:9" title="defined at alog.ads:27:9">Alog</a> <span class="keyword">is</span> </pre></li>
-<li id="l28"><pre> </pre></li>
-<li id="l29"><pre>   <span class="keyword">pragma</span> Preelaborate; </pre></li>
-<li id="l30"><pre> </pre></li>
-<li id="l31"><pre>   <span class="keyword">type</span> <a href="alog.ads.html#alog.ads:31:9" title="defined at alog.ads:31:9">Log_Level</a> <span class="keyword">is</span> </pre></li>
-<li id="l32"><pre>     (Debug, </pre></li>
-<li id="l33"><pre>      Info, </pre></li>
-<li id="l34"><pre>      Notice, </pre></li>
-<li id="l35"><pre>      Warning, </pre></li>
-<li id="l36"><pre>      Error, </pre></li>
-<li id="l37"><pre>      Critical, </pre></li>
-<li id="l38"><pre>      Alert, </pre></li>
-<li id="l39"><pre>      Emergency); </pre></li>
-<li id="l40"><pre>   <span class="comment">--  Provided log levels. These log levels can be used to categorize log</span> </pre></li>
-<li id="l41"><pre>   <span class="comment">--  messages.</span> </pre></li>
-<li id="l42"><pre> </pre></li>
-<li id="l43"><pre>   <a href="alog.ads.html#alog.ads:43:4" title="defined at alog.ads:43:4">Max_Path_Length</a> : <span class="keyword">constant</span> Natural := 128; </pre></li>
-<li id="l44"><pre>   <span class="comment">--  Maximal length of path names.</span> </pre></li>
-<li id="l45"><pre> </pre></li>
-<li id="l46"><pre>   <a href="alog.ads.html#alog.ads:46:4" title="defined at alog.ads:46:4">Max_Facilities</a> : <span class="keyword">constant</span> Natural := 15; </pre></li>
-<li id="l47"><pre>   <span class="comment">--  Maximum number of facilities a single logger instance</span> </pre></li>
-<li id="l48"><pre>   <span class="comment">--  can manage.</span> </pre></li>
-<li id="l49"><pre> </pre></li>
-<li id="l50"><pre><span class="keyword">end</span> <span class="droplink">Alog<ul><li><a href="alog.ads.html#alog.ads:27:9" title="To API doc">To API doc</a></li><li><a href="src_alog.ads.html#l27" title="To spec">To spec</a></li></ul></span>; </pre></li>
+<li id="l23"><pre><span class="keyword">with</span> Ada.Exceptions; </pre></li>
+<li id="l24"><pre><span class="keyword">with</span> Ada.Task_Identification; </pre></li>
+<li id="l25"><pre> </pre></li>
+<li id="l26"><pre><span class="comment">--  Alog exception package. Contains type definitions for Alog specific</span> </pre></li>
+<li id="l27"><pre><span class="comment">--  exception handling.</span> </pre></li>
+<li id="l28"><pre><span class="keyword">package</span> <span class="droplink">Alog.Exceptions<ul><li><a href="alog-exceptions.ads.html#alog-exceptions.ads:28:14" title="To API doc">To API doc</a></li><li><a href="src_alog-exceptions.ads.html#l28" title="To spec">To spec</a></li></ul></span> <span class="keyword">is</span> </pre></li>
+<li id="l29"><pre> </pre></li>
+<li id="l30"><pre>   <span class="keyword">type</span> <a href="alog-exceptions.ads.html#alog-exceptions.ads:30:9" title="defined at alog-exceptions.ads:30:9">Exception_Handler</a> <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">access</span> <span class="keyword">procedure</span> </pre></li>
+<li id="l31"><pre>     (Except : Ada.Exceptions.Exception_Occurrence; </pre></li>
+<li id="l32"><pre>      Caller : Ada.Task_Identification.Task_Id); </pre></li>
+<li id="l33"><pre>   <span class="comment">--  Exception handler callback procedure. Used to register custom callback</span> </pre></li>
+<li id="l34"><pre>   <span class="comment">--  procedures in active and tasked loggers.</span> </pre></li>
+<li id="l35"><pre> </pre></li>
+<li id="l36"><pre><span class="keyword">end</span> <span class="droplink">Alog.Exceptions<ul><li><a href="alog-exceptions.ads.html#alog-exceptions.ads:28:14" title="To API doc">To API doc</a></li><li><a href="src_alog-exceptions.ads.html#l28" title="To spec">To spec</a></li></ul></span>; </pre></li>
 </ol></div>
 </div>
 

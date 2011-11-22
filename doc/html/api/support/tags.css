@@ -41,3 +41,12 @@ div.seealso
 {
    font-style: italic;
 }
+div.subprograms div.comment div.code
+{
+   font-family: monospace;
+   white-space: pre-wrap;
+}
+div.subprograms div.comment div.code p
+{
+   padding: 0;
+}
