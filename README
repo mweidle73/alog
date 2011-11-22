@@ -2,14 +2,14 @@ Alog README
 ===========
 
 Alog is a stackable logging framework for Ada. It aims to be straight forward to
-use and easily extendable. It provides support for various logger types, log
+use and is easily extendable. It provides support for various logger types, log
 facilities, loglevel policies and message transformations.
 
 
 Prerequisites
 -------------
-Alog is written in Ada so you need to have GNAT (the GNU Ada Translator)
-installed to compile Alog. The library comes in two flavours: base and full.
+Alog is written in Ada so you need to have GNAT installed to compile Alog. The
+library comes in two flavours: base and full.
 The base build includes facilities to log to files and syslog while the full
 version provides more advanced log facilities like SMTP, Jabber/XMPP or
 PostgreSQL. For the full version you need to have AWS (Ada Web Server) and APQ
@@ -92,10 +92,3 @@ expected by typing the following command:
   $ make tests
 
 You should then see `PASS` behind each of the tests.
-
-
-Limitations
------------
-The XMPP facility is considered experimental. To use this facility the AWS
-version from the AdaCore subversion repository must be installed. Older
-AWS versions are not fully XMPP/1.0 compliant.
