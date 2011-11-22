@@ -12,7 +12,7 @@ thead, p.table.header,
 }
 
 body {
-  background-color: #eaeaea;
+  background-color: #f1f1f1;
 }
 
 table.main {
@@ -109,7 +109,7 @@ pre {
   margin-top: 4.0em;
 }
 #footer-text {
-  float: left;
+  float: right;
   padding-bottom: 0.5em;
 }
 #footer-badges {
