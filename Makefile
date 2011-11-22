@@ -25,7 +25,7 @@ INSTALL = install
 TARGET ?= "base"
 
 MAJOR = 0
-MINOR = 3
+MINOR = 4
 VERSION = $(MAJOR).$(MINOR)
 ALOG = libalog-$(VERSION)
 SO_LIBRARY = libalog.so.$(VERSION)
