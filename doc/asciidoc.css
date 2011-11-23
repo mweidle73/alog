@@ -19,14 +19,24 @@ table.main {
   width: 80%;
   margin: 1em 10% 1em 10%;
   background: none repeat scroll 0 0 #ffffff;
-  border-radius: 10px 10px 10px 10px;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  -webkit-border-radius: 10px;
+  -webkit-box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+  -moz-border-radius: 10px;
+  -moz-box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
 }
 
 td.header {
   background-color: #666262;
   padding: 1px 15px 1px;
   border-bottom: 5px solid #4183c4;
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 td.content {
@@ -36,6 +46,12 @@ td.content {
 td.footer {
   background-color: #666262;
   border-top: 8px solid #4183c4;
+  -webkit-border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -moz-border-radius-bottomright: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
 a { outline: none; }
@@ -125,7 +141,7 @@ pre {
   margin-bottom: 4.0em;
 }
 #footer-text {
-  color: white;
+  color: #f1f1f1;
   float: right;
   padding-bottom: 0.5em;
   margin-right: 4px;
