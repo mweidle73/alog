@@ -43,9 +43,12 @@ The key fingerprint of the public key ('0x3DC359DE') is:
 
 Development version
 ~~~~~~~~~~~~~~~~~~~
-The current development version of alog is available through its git
-repository http://git.codelabs.ch/git/alog.git. A browsable version of the
-repository is also available here: http://git.codelabs.ch/?p=alog.git
+The current development version of alog is available through its git repository:
+
+  $ git clone http://git.codelabs.ch/git/alog.git
+
+A browsable version of the repository is also available here:
+http://git.codelabs.ch/?p=alog.git
 
 
 Installation
