@@ -9,20 +9,12 @@ ASCIIDOC_OPTS = \
 	-a disable-javascript \
 	-o -
 
-SRC_DOCS = \
-	index \
-	CHANGELOG \
-	README
+DST_HTML = \
+	$(DESTDIR)/index.html \
+	$(DESTDIR)/README.html \
+	$(DESTDIR)/CHANGELOG.html
 
-DST_FILES = $(addsuffix .html,$(addprefix $(DESTDIR)/,$(SRC_DOCS)))
-
-all: $(DESTDIR)/asciidoc.css $(DESTDIR)/alog-arch.png $(DST_FILES)
-
-README: ../README
-	cp $< $@
-
-CHANGELOG: ../CHANGELOG
-	cp $< $@
+all: $(DESTDIR)/asciidoc.css $(DESTDIR)/alog-arch.png $(DST_HTML)
 
 $(DESTDIR)/alog-arch.png: arch/alog-arch.png
 	cp $< $@
@@ -30,11 +22,16 @@ $(DESTDIR)/alog-arch.png: arch/alog-arch.png
 $(DESTDIR)/asciidoc.css: asciidoc.css
 	cp $< $@
 
-$(DESTDIR)/%.html: README CHANGELOG
-	asciidoc $(ASCIIDOC_OPTS) $* > $@
+$(DESTDIR)/index.html: index
+	asciidoc $(ASCIIDOC_OPTS) $< > $@
+
+$(DESTDIR)/README.html: ../README
+	asciidoc $(ASCIIDOC_OPTS) $< > $@
+
+$(DESTDIR)/CHANGELOG.html: ../CHANGELOG
+	asciidoc $(ASCIIDOC_OPTS) $< > $@
 
 clean:
-	rm -f CHANGELOG README
 	rm -f $(DESTDIR)/*.html
 	rm -f $(DESTDIR)/*.css
 	rm -f $(DESTDIR)/alog-arch.png
