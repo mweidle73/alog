@@ -134,3 +134,16 @@ Browse the source
 -----------------
 - You can browse the Alog source code with gitweb
 http://git.codelabs.ch/?p=alog.git[here].
+
+
+Licence
+-------
+--------------------------------------------------------------------------------
+Copyright (C) 2009-2011 Reto Buerki
+Copyright (C) 2009-2011 Adrian-Ken Rueegsegger
+
+Alog is free software; you can redistribute it and/or modify it under the terms
+of the GNU Lesser General Public License as published by the Free Software
+Foundation; either version 2.1 of the License, or (at your option) any later
+version.
+--------------------------------------------------------------------------------
