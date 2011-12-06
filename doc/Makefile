@@ -22,7 +22,7 @@ $(DESTDIR)/alog-arch.png: arch/alog-arch.png
 $(DESTDIR)/asciidoc.css: asciidoc.css
 	cp $< $@
 
-$(DESTDIR)/index.html: index
+$(DESTDIR)/index.html: index page.conf
 	asciidoc $(ASCIIDOC_OPTS) $< > $@
 
 $(DESTDIR)/README.html: ../README
