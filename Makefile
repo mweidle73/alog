@@ -118,9 +118,7 @@ install_static:
 
 install_dynamic:
 	$(INSTALL) -m 444 $(LIBDIR)/$(SO_LIBRARY) $(PREFIX)/lib/alog
-	@cd $(PREFIX)/lib/alog && \
-	ln -sf $(SO_LIBRARY) libalog.so && \
-	ln -sf $(SO_LIBRARY) libalog.so.$(MAJOR)
+	@cd $(PREFIX)/lib/alog && ln -sf $(SO_LIBRARY) libalog.so
 
 install_tests:
 	$(INSTALL) -v -d $(PREFIX)/tests
