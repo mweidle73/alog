@@ -26,7 +26,8 @@ TARGET ?= "base"
 
 MAJOR = 0
 MINOR = 4
-VERSION = $(MAJOR).$(MINOR)
+REVISION = 1
+VERSION = $(MAJOR).$(MINOR).$(REVISION)
 ALOG = libalog-$(VERSION)
 SO_LIBRARY = libalog.so.$(VERSION)
 A_LIBRARY = libalog.a
@@ -73,10 +74,10 @@ prepare: $(SOURCEDIR)/alog-version.ads $(LIBGLUE_OBJECTS)
 	@mkdir -p $(COVDIR) $(PROFDIR)
 
 $(SOURCEDIR)/alog-version.ads:
-	@echo "package Alog.Version is"                > $@
-	@echo "   Version_Number : constant Float :=" >> $@
-	@echo "      $(VERSION);"                     >> $@
-	@echo "end Alog.Version;"                     >> $@
+	@echo "package Alog.Version is"                 > $@
+	@echo "   Version_Number : constant String :=" >> $@
+	@echo "      \"$(VERSION)\";"                  >> $@
+	@echo "end Alog.Version;"                      >> $@
 
 clean:
 	@rm -f alog.specs
