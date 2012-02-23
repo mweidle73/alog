@@ -1,6 +1,13 @@
 Alog Changelog
 ==============
 
+Version 0.4.1
+-------------
+.Additions and changes
+- Minor corrections to README.
+- Drop major version symlink.
+- Add revision number to library version.
+
 Version 0.4
 -----------
 .Additions and changes
