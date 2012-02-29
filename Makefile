@@ -115,11 +115,11 @@ install_lib: build_lib
 	$(INSTALL) -m 644 $(GPR_FILE) $(PREFIX)/lib/gnat
 
 install_static:
-	$(INSTALL) -m 444 $(LIBDIR)/$(A_LIBRARY) $(PREFIX)/lib/alog
+	$(INSTALL) -m 444 $(LIBDIR)/$(A_LIBRARY) $(PREFIX)/lib
 
 install_dynamic:
-	$(INSTALL) -m 444 $(LIBDIR)/$(SO_LIBRARY) $(PREFIX)/lib/alog
-	@cd $(PREFIX)/lib/alog && ln -sf $(SO_LIBRARY) libalog.so
+	$(INSTALL) -m 444 $(LIBDIR)/$(SO_LIBRARY) $(PREFIX)/lib
+	@cd $(PREFIX)/lib && ln -sf $(SO_LIBRARY) libalog.so
 
 install_tests:
 	$(INSTALL) -v -d $(PREFIX)/tests
