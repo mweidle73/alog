@@ -1,5 +1,5 @@
 #
-#  Copyright (c) 2008-2011,
+#  Copyright (c) 2008-2012,
 #  Reto Buerki, Adrian-Ken Rueegsegger
 #
 #  This file is part of Alog.
@@ -38,7 +38,7 @@ OBJECTDIR = obj/$(TARGET)
 LIBDIR = lib/$(TARGET)
 COVDIR = cov/$(TARGET)
 PROFDIR = prof/$(TARGET)
-ALI_FILES = lib/$(TARGET)/*.ali
+ALI_FILES = lib/$(TARGET)/$(LIBRARY_KIND)/*.ali
 GPR_FILE = gnat/alog.gpr
 
 TMPDIR = /tmp
@@ -50,10 +50,12 @@ NUM_CPUS := $(shell getconf _NPROCESSORS_ONLN)
 
 GMAKE_OPTS = -p -R -j$(NUM_CPUS)
 
-CFLAGS = -fPIC -W -Wall -Werror -O3
+CFLAGS = -W -Wall -Werror -O3
+ifeq ($(LIBRARY_KIND),dynamic)
+	CFLAGS += -fPIC
+endif
 
-LIBGLUE_SOURCES = $(wildcard libglue/*.c)
-LIBGLUE_OBJECTS = $(LIBGLUE_SOURCES:.c=.o)
+LIBGLUE_OBJECT = $(OBJECTDIR)/lib/$(LIBRARY_KIND)/glue_syslog.o
 
 all: build_lib
 
@@ -61,16 +63,19 @@ tests: build_tests
 	@$(OBJECTDIR)/runner_$(TARGET)
 
 build_lib: prepare
-	@gnatmake $(GMAKE_OPTS) -Palog_$(TARGET) -XALOG_VERSION="$(VERSION)" -XLIBRARY_KIND="$(LIBRARY_KIND)"
+	@gnatmake $(GMAKE_OPTS) -Palog_$(TARGET) -XALOG_VERSION="$(VERSION)" \
+		-XLIBRARY_KIND="$(LIBRARY_KIND)"
 
 build_tests: prepare obj/lib/libglue.a
 	@gnatmake $(GMAKE_OPTS) -Palog_$(TARGET)_tests -XALOG_BUILD="tests"
 
 build_all: build_lib build_tests
 
-prepare: $(SOURCEDIR)/alog-version.ads $(LIBGLUE_OBJECTS)
-	@mkdir -p $(OBJECTDIR)/lib
-	@cp $(LIBGLUE_OBJECTS) $(OBJECTDIR)/lib
+$(LIBGLUE_OBJECT): libglue/glue_syslog.c
+	@mkdir -p $(OBJECTDIR)/lib/$(LIBRARY_KIND)
+	$(CC) -c $(CFLAGS) $^ -o $@
+
+prepare: $(SOURCEDIR)/alog-version.ads $(LIBGLUE_OBJECT)
 	@mkdir -p $(COVDIR) $(PROFDIR)
 
 $(SOURCEDIR)/alog-version.ads:
@@ -81,7 +86,7 @@ $(SOURCEDIR)/alog-version.ads:
 
 clean:
 	@rm -f alog.specs
-	@rm -f $(LIBGLUE_OBJECTS)
+	@rm -f $(LIBGLUE_OBJECT)
 	@rm -rf $(OBJECTDIR)/lib/*
 	@rm -rf $(OBJECTDIR)/*
 	@rm -rf $(LIBDIR)/*
@@ -115,10 +120,10 @@ install_lib: build_lib
 	$(INSTALL) -m 644 $(GPR_FILE) $(PREFIX)/lib/gnat
 
 install_static:
-	$(INSTALL) -m 444 $(LIBDIR)/$(A_LIBRARY) $(PREFIX)/lib
+	$(INSTALL) -m 444 $(LIBDIR)/$(LIBRARY_KIND)/$(A_LIBRARY) $(PREFIX)/lib
 
 install_dynamic:
-	$(INSTALL) -m 444 $(LIBDIR)/$(SO_LIBRARY) $(PREFIX)/lib
+	$(INSTALL) -m 444 $(LIBDIR)/$(LIBRARY_KIND)/$(SO_LIBRARY) $(PREFIX)/lib
 	@cd $(PREFIX)/lib && ln -sf $(SO_LIBRARY) libalog.so
 
 install_tests:
@@ -131,7 +136,8 @@ cov: prepare
 	@gnatmake $(GMAKE_OPTS) -Palog_$(TARGET)_tests -XALOG_BUILD="coverage"
 	@$(OBJECTDIR)/cov/runner_$(TARGET) || true
 	@lcov -c -d $(OBJECTDIR)/cov/ -o $(OBJECTDIR)/cov/alog_tmp.info
-	@lcov -e $(OBJECTDIR)/cov/alog_tmp.info "$(PWD)/src/*.adb" -o $(OBJECTDIR)/cov/alog.info
+	@lcov -e $(OBJECTDIR)/cov/alog_tmp.info "$(PWD)/src/*.adb" \
+		-o $(OBJECTDIR)/cov/alog.info
 	@genhtml --no-branch-coverage $(OBJECTDIR)/cov/alog.info -o $(COVDIR)
 
 prof: prepare
@@ -142,7 +148,7 @@ prof: prepare
 	@cp $(OBJECTDIR)/callgrind.* $(PROFDIR)
 	@callgrind_annotate $(PROFDIR)/callgrind.* > $(PROFDIR)/profiler_$(TARGET).txt
 
-obj/lib/libglue.a: $(LIBGLUE_OBJECTS)
+obj/lib/libglue.a: $(LIBGLUE_OBJECT)
 	@mkdir -p obj/lib
 	$(AR) $(ARFLAGS) $@ $^
 

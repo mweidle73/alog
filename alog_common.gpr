@@ -1,5 +1,5 @@
 --
---  Copyright (c) 2009,
+--  Copyright (c) 2009-2012,
 --  Reto Buerki, Adrian-Ken Rueegsegger
 --
 --  This file is part of Alog.
@@ -25,6 +25,9 @@ project Alog_Common is
    for Source_Dirs use ();
 
    Version := external ("ALOG_VERSION", "0.1");
+
+   type Lib_Type is ("static", "dynamic");
+   Libtype : Lib_Type := external ("LIBRARY_KIND", "static");
 
    Languages := ("Ada", "C");
 
