@@ -87,7 +87,6 @@ $(SOURCEDIR)/alog-version.ads:
 clean:
 	@rm -f alog.specs
 	@rm -f $(LIBGLUE_OBJECT)
-	@rm -rf $(OBJECTDIR)/lib/*
 	@rm -rf $(OBJECTDIR)/*
 	@rm -rf $(LIBDIR)/*
 	@rm -rf $(COVDIR)/*
