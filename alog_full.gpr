@@ -42,9 +42,5 @@ project Alog_Full is
       for Default_Switches ("ada") use ("-g");
    end Builder;
 
-   package Binder is
-      for Default_Switches ("ada") use ("-E");
-   end Binder;
-
 end Alog_Full;
 
