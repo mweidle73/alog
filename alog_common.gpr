@@ -43,6 +43,8 @@ project Alog_Common is
                        "-Lobj/lib",
                        "-lglue");
 
+   Builder_Switches := ("-g");
+
    Binder_Switches := ("-E");
 
 end Alog_Common;

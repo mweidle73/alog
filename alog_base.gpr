@@ -38,7 +38,7 @@ project Alog_Base is
    end Compiler;
 
    package Builder is
-      for Default_Switches ("ada") use ("-g");
+      for Default_Switches ("ada") use Alog_Common.Builder_Switches;
    end Builder;
 
 end Alog_Base;
