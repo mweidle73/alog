@@ -125,7 +125,7 @@ install_dynamic:
 	$(INSTALL) -m 444 $(LIBDIR)/$(LIBRARY_KIND)/$(SO_LIBRARY) $(PREFIX)/lib
 	@cd $(PREFIX)/lib && ln -sf $(SO_LIBRARY) libalog.so
 
-install_tests:
+install_tests: build_tests
 	$(INSTALL) -v -d $(PREFIX)/tests
 	$(INSTALL) -m 755 $(OBJECTDIR)/runner_$(TARGET) $(PREFIX)/tests/test_runner
 	@cp -vr data $(PREFIX)/tests
