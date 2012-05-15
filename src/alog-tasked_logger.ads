@@ -71,9 +71,9 @@ package Alog.Tasked_Logger is
       --  Return number of attached transforms.
 
       entry Log_Message
-        (Source : String := "";
-         Level  : Log_Level;
+        (Level  : Log_Level;
          Msg    : String;
+         Source : String := "";
          Caller : Ada.Task_Identification.Task_Id :=
            Ada.Task_Identification.Null_Task_Id);
       --  Log a message. The Write_Message() procedure of all attached

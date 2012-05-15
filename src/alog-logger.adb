@@ -204,9 +204,9 @@ package body Alog.Logger is
 
    procedure Log_Message
      (Logger : Instance;
-      Source : String := "";
       Level  : Log_Level;
-      Msg    : String)
+      Msg    : String;
+      Source : String := "")
    is
       Out_Msg : String := Msg;
       Prefix  : Unbounded_String;

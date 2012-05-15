@@ -112,9 +112,9 @@ package Alog.Logger is
 
    procedure Log_Message
      (Logger : Instance;
-      Source : String := "";
       Level  : Log_Level;
-      Msg    : String);
+      Msg    : String;
+      Source : String := "");
    --  Log a message. The Write_Message() procedure of all attached facilities
    --  is called. Depending on the Log-Threshold set, the message is logged to
    --  different targets (depending on the facilites) automatically.

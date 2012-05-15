@@ -141,9 +141,9 @@ package body Alog.Active_Logger is
 
    procedure Log_Message
      (Logger : in out Instance;
-      Source :        String := "";
       Level  :        Log_Level;
-      Msg    :        String)
+      Msg    :        String;
+      Source :        String := "")
    is
    begin
       Logger.Message_Queue.Put
