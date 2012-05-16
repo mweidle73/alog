@@ -48,4 +48,7 @@ package Facility_Tests is
    procedure Timestamp_Creation;
    --  Test timestamp string creation.
 
+   procedure Timestamp_Format_Setter;
+   --  Test setting of timestamp formats.
+
 end Facility_Tests;

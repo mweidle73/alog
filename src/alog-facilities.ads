@@ -1,5 +1,5 @@
 --
---  Copyright (c) 2008-2009,
+--  Copyright (c) 2008-2012,
 --  Reto Buerki, Adrian-Ken Rueegsegger
 --
 --  This file is part of Alog.
@@ -90,6 +90,15 @@ package Alog.Facilities is
    function Is_UTC_Timestamp (Facility : Class) return Boolean;
    --  Returns True if the timestamp of the facility is written in UTC time.
 
+   procedure Set_Timestamp_Format
+     (Facility : in out Class;
+      Format   :        String);
+   --  Set timestamp format. The format follows the GNU Date specification with
+   --  some GNAT specific extensions. See the GNAT.Calendar.Time_IO specs for
+   --  details about the accepted directives. The procedure raises an
+   --  Invalid_Timestamp_Format exception if the given format is incorrect.
+   --  If no specific format is set, '%b %d %Y %T' is used as default.
+
    procedure Toggle_Write_Loglevel
      (Facility : in out Class;
       State    :        Boolean);
@@ -121,15 +130,18 @@ package Alog.Facilities is
    --  Bounded string with length Max_Path_Length. Used in methods which
    --  involve filesystem operations.
 
+   Invalid_Timestamp_Format : exception;
+
 private
 
    type Instance is abstract tagged limited record
-      Name             : Unbounded_String :=
-        To_Unbounded_String (Ada.Command_Line.Command_Name);
+      Name             : Unbounded_String
+        := To_Unbounded_String (Ada.Command_Line.Command_Name);
       --  Facility Name. Defaults to command-name (first argument). If multiple
       --  facilities are used, names must be set differently.
 
-      Timestamp_Format : String (1 .. 11) := "%b %d %Y %T";
+      Timestamp_Format : Unbounded_String
+        := To_Unbounded_String ("%b %d %Y %T");
       --  Default timestamp format to use in this facility.
 
       Write_Timestamp  : Boolean := True;

@@ -1,5 +1,5 @@
 --
---  Copyright (c) 2008-2009,
+--  Copyright (c) 2008-2012,
 --  Reto Buerki, Adrian-Ken Rueegsegger
 --
 --  This file is part of Alog.
@@ -63,7 +63,8 @@ package body Alog.Facilities is
               UTC_Time_Offset (Time);
             UTC_Timestamp : constant String      :=
               Image (Date    => Time - Duration (UTC_Offset) * 60,
-                     Picture => Picture_String (Facility.Timestamp_Format));
+                     Picture => Picture_String
+                       (To_String (Facility.Timestamp_Format)));
          begin
             return UTC_Timestamp;
          end;
@@ -71,7 +72,8 @@ package body Alog.Facilities is
          declare
             Timestamp : constant String :=
               Image (Date    => Time,
-                     Picture => Picture_String (Facility.Timestamp_Format));
+                     Picture => Picture_String
+                       (To_String (Facility.Timestamp_Format)));
          begin
             return Timestamp;
          end;
@@ -153,6 +155,30 @@ package body Alog.Facilities is
    begin
       Facility.Name := To_Unbounded_String (Name);
    end Set_Name;
+
+   -------------------------------------------------------------------------
+
+   procedure Set_Timestamp_Format
+     (Facility : in out Class;
+      Format   :        String)
+   is
+      Now : constant Ada.Calendar.Time := Ada.Calendar.Clock;
+   begin
+      Validate_Format :
+      declare
+         Image : constant String := GNAT.Calendar.Time_IO.Image
+           (Date    => Now,
+            Picture => GNAT.Calendar.Time_IO.Picture_String (Format));
+         pragma Unreferenced (Image);
+      begin
+         Facility.Timestamp_Format := To_Unbounded_String (Format);
+      end Validate_Format;
+
+   exception
+      when GNAT.Calendar.Time_IO.Picture_Error =>
+         raise Invalid_Timestamp_Format with "Given timestamp format '"
+           & Format & "' is invalid";
+   end Set_Timestamp_Format;
 
    -------------------------------------------------------------------------
 

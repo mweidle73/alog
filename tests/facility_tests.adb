@@ -54,6 +54,9 @@ package body Facility_Tests is
       T.Add_Test_Routine
         (Routine => Timestamp_Creation'Access,
          Name    => "timestamp creation");
+      T.Add_Test_Routine
+        (Routine => Timestamp_Format_Setter'Access,
+         Name    => "set timestamp format");
    end Initialize;
 
    -------------------------------------------------------------------------
@@ -96,6 +99,34 @@ package body Facility_Tests is
       Assert (Condition => F.Get_Timestamp (Time => Ref_UTC_Time) = Ref_Stamp,
               Message   => "UTC timestamp mismatch!");
    end Timestamp_Creation;
+
+   -------------------------------------------------------------------------
+
+   procedure Timestamp_Format_Setter
+   is
+      use Ada.Calendar;
+      use Ada.Calendar.Time_Zones;
+
+      F : File_Descriptor.Instance;
+
+      Ref_Time : constant Time := Time_Of
+        (Year    => 2009,
+         Month   => 10,
+         Day     => 10,
+         Seconds => 7255.0);
+   begin
+      F.Set_Timestamp_Format (Format => "%b %Y");
+      Assert (Condition => F.Get_Timestamp (Time => Ref_Time) = "Oct 2009",
+              Message   => "Timestamp mismatch");
+
+      begin
+         F.Set_Timestamp_Format (Format => "a b c %");
+         Fail (Message => "Exception expected");
+
+      exception
+         when Invalid_Timestamp_Format => null;
+      end;
+   end Timestamp_Format_Setter;
 
    -------------------------------------------------------------------------
 
