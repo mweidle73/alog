@@ -26,8 +26,7 @@ Download
 Release version
 ~~~~~~~~~~~~~~~
 The current release version of alog is available at
-http://www.codelabs.ch/download. The API documentation of the current release
-can be found at http://www.codelabs.ch/alog/api.
+http://www.codelabs.ch/download/.
 
 Verify a Release
 ~~~~~~~~~~~~~~~~
@@ -63,7 +62,7 @@ To compile the full build, you further need to have the following libraries
 installed on your system:
 
 * AWS (Ada Web Server):
-  http://libre.adacore.com/libre/tools/aws/
+  http://libre.adacore.com/tools/aws/
 
 * APQ (Ada95 database binding):
   http://framework.kow.com.br/projects/show/apq
