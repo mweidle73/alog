@@ -100,9 +100,6 @@ a file. If the file already exists, it will be overwritten.
 include::../examples/facility_example1.adb[]
 ---------------------------------------------------------------------
 
-More features for the different facilities are work in progress, see the
-API documentation link:api/index.html[here] for details of the possibilities.
-
 Policy
 ~~~~~~
 The first policy example uses the policy database of Alog to specify source
@@ -123,11 +120,6 @@ depending on the destination (facility name).
 ---------------------------------------------------------------------
 include::../examples/policy_example2.adb[]
 ---------------------------------------------------------------------
-
-
-API documentation
------------------
-- You can find the API documentation of Alog link:api/index.html[here].
 
 
 Browse the source
