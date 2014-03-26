@@ -26,7 +26,6 @@ project Alog_Base is
 
    for Languages use Alog_Common.Languages;
    for Source_Dirs use ("src");
-   for Source_List_File use "config/base-list";
    for Object_Dir use "obj/base/lib/" & Alog_Common.Libtype;
    for Library_Name use "alog";
    for Library_Dir use "lib/base/" & Alog_Common.Libtype;
