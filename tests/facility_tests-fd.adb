@@ -115,7 +115,7 @@ package body Facility_Tests.FD is
    procedure Set_Invalid_Logfile_Fd is
       F : File_Descriptor.Instance;
    begin
-      F.Set_Logfile (Path => "/not-allowed.log");
+      F.Set_Logfile (Path => "./");
       Fail (Message => "expected Name_Error");
 
    exception
