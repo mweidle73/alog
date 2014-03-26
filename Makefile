@@ -46,7 +46,7 @@ DISTDIR = $(TMPDIR)/$(ALOG)
 TARBALL = $(ALOG).tar.bz2
 PWD = `pwd`
 
-NUM_CPUS := $(shell getconf _NPROCESSORS_ONLN)
+NUM_CPUS ?= 1
 
 GMAKE_OPTS = -p -R -j$(NUM_CPUS)
 
