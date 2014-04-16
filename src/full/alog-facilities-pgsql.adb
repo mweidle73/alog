@@ -259,7 +259,7 @@ package body Alog.Facilities.Pgsql is
       Q.Append (SQL   => "now()",
                 After => ", ");
 
-      Q.Append (SQL   => "'" & Msg &"'",
+      Q.Append (SQL   => "'" & Msg & "'",
                 After => ");");
 
       Execute (Query      => Q,

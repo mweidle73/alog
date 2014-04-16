@@ -31,7 +31,8 @@ package body Alog.Logger is
    is
    begin
       if not Logger.Facilities.Contains
-        (Key => To_Unbounded_String (Default_Facility_Name)) then
+        (Key => To_Unbounded_String (Default_Facility_Name))
+      then
          declare
             Default_Handle : Facilities.File_Descriptor.Handle;
          begin
@@ -118,7 +119,8 @@ package body Alog.Logger is
    is
    begin
       if Logger.Facilities.Contains
-        (Key => To_Unbounded_String (Default_Facility_Name)) then
+        (Key => To_Unbounded_String (Default_Facility_Name))
+      then
          Logger.Detach_Facility (Name => Default_Facility_Name);
       end if;
    end Detach_Default_Facility;
