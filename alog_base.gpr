@@ -33,7 +33,7 @@ project Alog_Base is
    for Library_Version use "libalog.so." & Alog_Common.Version;
 
    package Compiler is
-      for Default_Switches ("ada") use Alog_Common.Compiler_Switches;
+      for Default_Switches ("ada") use Alog_Common.Compiler_Switches & "-gnatwe";
    end Compiler;
 
    package Builder is
