@@ -34,7 +34,8 @@ package body Alog.Facilities.File_Descriptor is
       use Ada.Text_IO;
    begin
       if Facility.Log_File_Ptr /= Standard_Output
-        and Is_Open (File => Facility.Log_File) then
+        and Is_Open (File => Facility.Log_File)
+      then
          if Remove then
             --  Close and delete.
             Delete (File => Facility.Log_File);
