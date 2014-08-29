@@ -31,6 +31,7 @@ project Alog_Base is
    for Library_Dir use "lib/base/" & Alog_Common.Libtype;
    for Library_Kind use Alog_Common.Libtype;
    for Library_Version use "libalog.so." & Alog_Common.Version;
+   for Library_Options use External_As_List ("LDFLAGS", " ");
 
    package Compiler is
       for Default_Switches ("ada") use Alog_Common.Compiler_Switches & "-gnatwe";
