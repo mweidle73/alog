@@ -8,16 +8,9 @@ facilities, loglevel policies and message transformations.
 
 Prerequisites
 -------------
-Alog is written in Ada so you need to have GNAT installed to compile Alog. The
-library comes in two flavours: base and full.
-The base build includes facilities to log to files and syslog while the full
-version provides more advanced log facilities like SMTP, Jabber/XMPP or
-PostgreSQL. For the full version you need to have AWS (Ada Web Server) and APQ
-(Ada95 database binding) installed (see the 'Installation' section).
-
-GNAT is available for most distributions. Since Alog uses pedantic compiler
-flags to check the code, make sure you have gnat version 4.3 or later installed
-on your system.
+Alog is written in Ada so you need to have an Ada Compiler such as GNAT
+installed to build Alog. The library includes facilities to log to files and
+syslog.
 
 
 Download
@@ -52,20 +45,11 @@ http://git.codelabs.ch/?p=alog.git
 
 Installation
 ------------
-The base build of Alog has no special library dependencies. To run the testcases
-(for both builds), you need to have the Ahven Unit Test-Framework installed:
+The Alog library has no special dependencies. To run the testcases, you need to
+have the Ahven Unit Test-Framework installed:
 
 * Ahven (Test-Framework):
   http://ahven.stronglytyped.org/
-
-To compile the full build, you further need to have the following libraries
-installed on your system:
-
-* AWS (Ada Web Server):
-  http://libre.adacore.com/tools/aws/
-
-* APQ (Ada95 database binding):
-  http://framework.kow.com.br/projects/show/apq
 
 The building and installation process of Alog is simple. Just type in the
 following commands. You must be root to install the library system wide.
@@ -75,15 +59,8 @@ following commands. You must be root to install the library system wide.
   $ make
   $ make PREFIX=/usr/local install
 
-This will compile and install the base build (default). To do a full build, you
-need to set and export the environment variable `TARGET` to "full" like so:
-
-  $ export TARGET=full
-  $ make
-  $ make PREFIX=/usr/local install
-
-If no `PREFIX` is specified, `$(HOME)/libraries` is used as installation
-directory.
+This will compile and install the Alog library. If no `PREFIX` is specified,
+`$(HOME)/libraries` is used as installation directory.
 
 
 Tests
