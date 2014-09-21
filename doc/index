@@ -47,15 +47,6 @@ File_Descriptor::
 Syslog::
   Writes log messages to syslog.
 
-SMTP::
-  Sends log messages by mail.
-
-PGSQL::
-  Writes log messages to a PostgreSQL database.
-
-XMPP (experimental)::
-  Sends log messages to a jabber account.
-
 Transformation
 ~~~~~~~~~~~~~~
 Transformations are used to modify a log message before it is passed on to a
