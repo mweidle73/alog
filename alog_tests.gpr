@@ -48,7 +48,7 @@ project Alog_Tests is
            & ("-fprofile-generate");
 
       when "profiling" =>
-         for Main use ("profiler_base.adb");
+         for Main use ("profiler.adb");
          for Object_Dir use "obj/base";
 
    end case;

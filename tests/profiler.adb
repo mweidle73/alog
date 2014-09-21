@@ -23,7 +23,7 @@
 with Alog.Logger;
 with Alog.Policy_DB;
 
-procedure Profiler_Base is
+procedure Profiler is
    use Alog;
 
    Log : Logger.Instance (Init => False);
@@ -36,4 +36,4 @@ begin
                        Level  => Notice,
                        Msg    => "Test message");
    end loop;
-end Profiler_Base;
+end Profiler;

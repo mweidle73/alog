@@ -142,10 +142,9 @@ cov: prepare
 prof: prepare
 	@rm -f $(OBJECTDIR)/callgrind.*
 	@gnatmake $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="profiling"
-	@cd $(OBJECTDIR) && \
-		valgrind -q --tool=callgrind ./profiler_$(TARGET)
+	@cd $(OBJECTDIR) && valgrind -q --tool=callgrind ./profiler
 	@cp $(OBJECTDIR)/callgrind.* $(PROFDIR)
-	@callgrind_annotate $(PROFDIR)/callgrind.* > $(PROFDIR)/profiler_$(TARGET).txt
+	@callgrind_annotate $(PROFDIR)/callgrind.* > $(PROFDIR)/profiler.txt
 
 obj/lib/libglue.a: $(LIBGLUE_OBJECT)
 	@mkdir -p obj/lib
