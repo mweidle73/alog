@@ -60,7 +60,7 @@ LIBGLUE_OBJECT = $(OBJECTDIR)/lib/$(LIBRARY_KIND)/glue_syslog.o
 all: build_lib
 
 tests: build_tests
-	@$(OBJECTDIR)/runner_$(TARGET)
+	@$(OBJECTDIR)/test_runner
 
 build_lib: prepare
 	@gnatmake $(GMAKE_OPTS) -Palog_$(TARGET) -XALOG_VERSION="$(VERSION)" \
@@ -127,13 +127,13 @@ install_dynamic:
 
 install_tests: build_tests
 	$(INSTALL) -v -d $(PREFIX)/tests
-	$(INSTALL) -m 755 $(OBJECTDIR)/runner_$(TARGET) $(PREFIX)/tests/test_runner
+	$(INSTALL) -m 755 $(OBJECTDIR)/test_runner $(PREFIX)/tests/
 	@cp -vr data $(PREFIX)/tests
 
 cov: prepare
 	@rm -f $(OBJECTDIR)/cov/*.gcda
 	@gnatmake $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="coverage"
-	@$(OBJECTDIR)/cov/runner_$(TARGET) || true
+	@$(OBJECTDIR)/cov/test_runner || true
 	@lcov -c -d $(OBJECTDIR)/cov/ -o $(OBJECTDIR)/cov/alog_tmp.info
 	@lcov -e $(OBJECTDIR)/cov/alog_tmp.info "$(PWD)/src/*.adb" \
 		-o $(OBJECTDIR)/cov/alog.info

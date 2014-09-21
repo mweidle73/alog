@@ -35,7 +35,7 @@ with Active_Logger_Tests;
 with Maps_Tests;
 with Policy_Tests;
 
-procedure Runner_Base is
+procedure Test_Runner is
    S : constant Ahven.Framework.Test_Suite_Access :=
      Ahven.Framework.Create_Suite (Suite_Name => "Alog base tests");
 begin
@@ -68,4 +68,4 @@ begin
 
    Ahven.Text_Runner.Run (Suite => S);
    Ahven.Framework.Release_Suite (T => S);
-end Runner_Base;
+end Test_Runner;
