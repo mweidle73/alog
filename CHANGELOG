@@ -1,6 +1,16 @@
 Alog Changelog
 ==============
 
+Version 0.5
+-----------
+.Additions and changes
+- Drop PostgreSQL, SMTP and XMPP facilities
+- Simplify build logic and switch to gprbuild
+- Remove Alog.Version package
+
+.Bug fixes
+- Make policy database safe for concurrent access
+
 Version 0.4.1
 -------------
 .Additions and changes
