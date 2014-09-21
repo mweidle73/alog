@@ -67,7 +67,7 @@ build_lib: prepare
 		-XLIBRARY_KIND="$(LIBRARY_KIND)" -XLDFLAGS="$(LDFLAGS)"
 
 build_tests: prepare obj/lib/libglue.a
-	@gnatmake $(GMAKE_OPTS) -Palog_$(TARGET)_tests -XALOG_BUILD="tests"
+	@gnatmake $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="tests"
 
 build_all: build_lib build_tests
 
@@ -132,7 +132,7 @@ install_tests: build_tests
 
 cov: prepare
 	@rm -f $(OBJECTDIR)/cov/*.gcda
-	@gnatmake $(GMAKE_OPTS) -Palog_$(TARGET)_tests -XALOG_BUILD="coverage"
+	@gnatmake $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="coverage"
 	@$(OBJECTDIR)/cov/runner_$(TARGET) || true
 	@lcov -c -d $(OBJECTDIR)/cov/ -o $(OBJECTDIR)/cov/alog_tmp.info
 	@lcov -e $(OBJECTDIR)/cov/alog_tmp.info "$(PWD)/src/*.adb" \
@@ -141,7 +141,7 @@ cov: prepare
 
 prof: prepare
 	@rm -f $(OBJECTDIR)/callgrind.*
-	@gnatmake $(GMAKE_OPTS) -Palog_$(TARGET)_tests -XALOG_BUILD="profiling"
+	@gnatmake $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="profiling"
 	@cd $(OBJECTDIR) && \
 		valgrind -q --tool=callgrind ./profiler_$(TARGET)
 	@cp $(OBJECTDIR)/callgrind.* $(PROFDIR)

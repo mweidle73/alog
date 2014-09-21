@@ -23,7 +23,7 @@
 with "ahven";
 with "alog_common";
 
-project Alog_Base_Tests is
+project Alog_Tests is
 
    type Build_Type is ("tests", "coverage", "profiling");
    Build : Build_Type := external ("ALOG_BUILD", "tests");
@@ -69,5 +69,5 @@ project Alog_Base_Tests is
       for Default_Switches ("ada") use Alog_Common.Binder_Switches;
    end Binder;
 
-end Alog_Base_Tests;
+end Alog_Tests;
 
