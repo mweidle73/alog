@@ -37,7 +37,7 @@ with Policy_Tests;
 
 procedure Test_Runner is
    S : constant Ahven.Framework.Test_Suite_Access :=
-     Ahven.Framework.Create_Suite (Suite_Name => "Alog base tests");
+     Ahven.Framework.Create_Suite (Suite_Name => "Alog tests");
 begin
    Ahven.Framework.Add_Test (Suite => S.all,
                              T     => new Helper_Tests.Testcase);
