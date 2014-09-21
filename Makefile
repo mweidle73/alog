@@ -22,7 +22,6 @@
 
 PREFIX ?= $(HOME)/libraries
 INSTALL = install
-TARGET ?= "base"
 
 MAJOR = 0
 MINOR = 4
@@ -34,11 +33,11 @@ A_LIBRARY = libalog.a
 LIBRARY_KIND = dynamic
 
 SOURCEDIR = src
-OBJECTDIR = obj/$(TARGET)
-LIBDIR = lib/$(TARGET)
-COVDIR = cov/$(TARGET)
-PROFDIR = prof/$(TARGET)
-ALI_FILES = lib/$(TARGET)/$(LIBRARY_KIND)/*.ali
+OBJECTDIR = obj
+LIBDIR = lib
+COVDIR = cov
+PROFDIR = prof
+ALI_FILES = lib/$(LIBRARY_KIND)/*.ali
 GPR_FILE = gnat/alog.gpr
 
 TMPDIR = /tmp

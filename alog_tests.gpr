@@ -37,11 +37,11 @@ project Alog_Tests is
    case Build is
       when "tests" =>
          for Main use ("test_runner.adb");
-         for Object_Dir use "obj/base";
+         for Object_Dir use "obj";
 
       when "coverage" =>
          for Main use ("test_runner.adb");
-         for Object_Dir use "obj/base/cov";
+         for Object_Dir use "obj/cov";
          Compiler_Switches := Compiler_Switches
            & ("-ftest-coverage", "-fprofile-arcs");
          Linker_Switches   := Linker_Switches
@@ -49,7 +49,7 @@ project Alog_Tests is
 
       when "profiling" =>
          for Main use ("profiler.adb");
-         for Object_Dir use "obj/base";
+         for Object_Dir use "obj";
 
    end case;
 
