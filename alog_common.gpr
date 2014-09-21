@@ -39,10 +39,6 @@ project Alog_Common is
                          "-fstack-check",
                          "-gnato");
 
-   Linker_Switches := ("-Wl,--as-needed",
-                       "-Lobj/lib",
-                       "-lglue");
-
    Builder_Switches := ("-g");
 
    Binder_Switches := ("-E");

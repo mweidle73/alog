@@ -51,8 +51,6 @@ GMAKE_OPTS = -p -R -j$(NUM_CPUS)
 
 CFLAGS ?= -W -Wall -Werror -O3
 
-LIBGLUE_OBJECT = $(OBJECTDIR)/lib/$(LIBRARY_KIND)/glue_syslog.o
-
 all: build_lib
 
 tests: build_tests
@@ -63,16 +61,12 @@ build_lib: prepare
 		-XLIBRARY_KIND="$(LIBRARY_KIND)" -XCFLAGS="$(CFLAGS)" \
 		-XLDFLAGS="$(LDFLAGS)"
 
-build_tests: prepare obj/lib/libglue.a
+build_tests: prepare
 	@gprbuild $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="tests"
 
 build_all: build_lib build_tests
 
-$(LIBGLUE_OBJECT): libglue/glue_syslog.c
-	@mkdir -p $(OBJECTDIR)/lib/$(LIBRARY_KIND)
-	$(CC) -c $(CFLAGS) $^ -o $@
-
-prepare: $(SOURCEDIR)/alog-version.ads $(LIBGLUE_OBJECT)
+prepare: $(SOURCEDIR)/alog-version.ads
 	@mkdir -p $(COVDIR) $(PROFDIR)
 
 $(SOURCEDIR)/alog-version.ads:
@@ -83,7 +77,6 @@ $(SOURCEDIR)/alog-version.ads:
 
 clean:
 	@rm -f alog.specs
-	@rm -f $(LIBGLUE_OBJECT)
 	@rm -rf $(OBJECTDIR)/*
 	@rm -rf $(LIBDIR)/*
 	@rm -rf $(COVDIR)/*
@@ -142,10 +135,6 @@ prof: prepare
 	@cd $(OBJECTDIR) && valgrind -q --tool=callgrind ./profiler
 	@cp $(OBJECTDIR)/callgrind.* $(PROFDIR)
 	@callgrind_annotate $(PROFDIR)/callgrind.* > $(PROFDIR)/profiler.txt
-
-obj/lib/libglue.a: $(LIBGLUE_OBJECT)
-	@mkdir -p obj/lib
-	$(AR) $(ARFLAGS) $@ $^
 
 doc:
 	$(MAKE) -C doc
