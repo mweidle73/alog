@@ -63,7 +63,7 @@ tests: build_tests
 	@$(OBJECTDIR)/test_runner
 
 build_lib: prepare
-	@gnatmake $(GMAKE_OPTS) -Palog_$(TARGET) -XALOG_VERSION="$(VERSION)" \
+	@gnatmake $(GMAKE_OPTS) -Palog -XALOG_VERSION="$(VERSION)" \
 		-XLIBRARY_KIND="$(LIBRARY_KIND)" -XLDFLAGS="$(LDFLAGS)"
 
 build_tests: prepare obj/lib/libglue.a

@@ -20,7 +20,7 @@
 --  MA  02110-1301  USA
 --
 
-with "../alog_base";
+with "../alog";
 with "../alog_common";
 
 project Alog_Examples is

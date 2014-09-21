@@ -22,7 +22,7 @@
 
 with "alog_common";
 
-project Alog_Base is
+project Alog is
 
    for Languages use Alog_Common.Languages;
    for Source_Dirs use ("src");
@@ -41,5 +41,5 @@ project Alog_Base is
       for Default_Switches ("ada") use Alog_Common.Builder_Switches;
    end Builder;
 
-end Alog_Base;
+end Alog;
 
