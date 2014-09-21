@@ -1,5 +1,5 @@
 --
---  Copyright (c) 2008-2011,
+--  Copyright (c) 2008-2014,
 --  Reto Buerki, Adrian-Ken Rueegsegger
 --
 --  This file is part of Alog.
