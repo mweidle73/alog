@@ -28,6 +28,8 @@ MINOR = 4
 REVISION = 1
 VERSION = $(MAJOR).$(MINOR).$(REVISION)
 ALOG = libalog-$(VERSION)
+TARBALL = $(ALOG).tar.bz2
+
 SO_LIBRARY = libalog.so.$(VERSION)
 A_LIBRARY = libalog.a
 LIBRARY_KIND = dynamic
@@ -39,9 +41,6 @@ COVDIR = cov
 ALI_FILES = lib/$(LIBRARY_KIND)/*.ali
 GPR_FILE = gnat/alog.gpr
 
-TMPDIR = /tmp
-DISTDIR = $(TMPDIR)/$(ALOG)
-TARBALL = $(ALOG).tar.bz2
 PWD = `pwd`
 
 NUM_CPUS ?= 1
@@ -87,13 +86,9 @@ distclean: clean
 	@rm -rf cov
 	@rm -f $(SOURCEDIR)/alog-version.ads
 
-dist: distclean $(SOURCEDIR)/alog-version.ads
-	@echo -n "Creating release tarball '$(ALOG)' ... "
-	@mkdir -p $(DISTDIR)
-	@cp -R * $(DISTDIR)
-	@tar -C $(TMPDIR) -cjf $(TARBALL) $(ALOG)
-	@rm -rf $(DISTDIR)
-	@echo "DONE"
+dist: $(SOURCEDIR)/alog-version.ads
+	@echo "Creating release tarball $(TARBALL) ... "
+	@git archive --format=tar HEAD --prefix $(ALOG)/ | bzip2 > $(TARBALL)
 
 install: install_lib install_$(LIBRARY_KIND)
 
