@@ -136,4 +136,4 @@ prof: prepare
 doc:
 	$(MAKE) -C doc
 
-.PHONY: cov dist doc prof tests build_all install_tests
+.PHONY: cov doc
