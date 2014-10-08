@@ -34,6 +34,7 @@ project Alog is
    for Library_Options use External_As_List ("LDFLAGS", " ");
 
    package Compiler is
+      for Default_Switches ("C") use External_As_List ("CFLAGS", " ");
       for Default_Switches ("ada") use Alog_Common.Compiler_Switches & "-gnatwe";
    end Compiler;
 

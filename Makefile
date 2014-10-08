@@ -49,10 +49,7 @@ NUM_CPUS ?= 1
 
 GMAKE_OPTS = -p -R -j$(NUM_CPUS)
 
-CFLAGS = -W -Wall -Werror -O3
-ifeq ($(LIBRARY_KIND),dynamic)
-	CFLAGS += -fPIC
-endif
+CFLAGS ?= -W -Wall -Werror -O3
 
 LIBGLUE_OBJECT = $(OBJECTDIR)/lib/$(LIBRARY_KIND)/glue_syslog.o
 
@@ -63,7 +60,8 @@ tests: build_tests
 
 build_lib: prepare
 	@gnatmake $(GMAKE_OPTS) -Palog -XALOG_VERSION="$(VERSION)" \
-		-XLIBRARY_KIND="$(LIBRARY_KIND)" -XLDFLAGS="$(LDFLAGS)"
+		-XLIBRARY_KIND="$(LIBRARY_KIND)" -XCFLAGS="$(CFLAGS)" \
+		-XLDFLAGS="$(LDFLAGS)"
 
 build_tests: prepare obj/lib/libglue.a
 	@gnatmake $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="tests"
