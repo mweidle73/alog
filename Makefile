@@ -58,7 +58,7 @@ tests: build_tests
 build_lib: prepare
 	@gprbuild $(GMAKE_OPTS) -Palog -XALOG_VERSION="$(VERSION)" \
 		-XLIBRARY_KIND="$(LIBRARY_KIND)" -XCFLAGS="$(CFLAGS)" \
-		-XLDFLAGS="$(LDFLAGS)"
+		-XLDFLAGS="$(LDFLAGS)" -cargs $(ADAFLAGS)
 
 build_tests: prepare
 	@gprbuild $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="tests"
