@@ -23,7 +23,7 @@
 all: build_examples
 
 build_examples:
-	@gnatmake -p -Palog_examples
+	@gprbuild -p -Palog_examples
 
 clean:
 	@rm -rf obj
