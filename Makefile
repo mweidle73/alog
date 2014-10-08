@@ -36,7 +36,6 @@ SOURCEDIR = src
 OBJECTDIR = obj
 LIBDIR = lib
 COVDIR = cov
-PROFDIR = prof
 ALI_FILES = lib/$(LIBRARY_KIND)/*.ali
 GPR_FILE = gnat/alog.gpr
 
@@ -67,7 +66,7 @@ build_tests: prepare
 build_all: build_lib build_tests
 
 prepare: $(SOURCEDIR)/alog-version.ads
-	@mkdir -p $(COVDIR) $(PROFDIR)
+	@mkdir -p $(COVDIR)
 
 $(SOURCEDIR)/alog-version.ads:
 	@echo "package Alog.Version is"                 > $@
@@ -80,14 +79,12 @@ clean:
 	@rm -rf $(OBJECTDIR)/*
 	@rm -rf $(LIBDIR)/*
 	@rm -rf $(COVDIR)/*
-	@rm -rf $(PROFDIR)/*
 	$(MAKE) -C doc clean
 
 distclean: clean
 	@rm -rf obj
 	@rm -rf lib
 	@rm -rf cov
-	@rm -rf prof
 	@rm -f $(SOURCEDIR)/alog-version.ads
 
 dist: distclean $(SOURCEDIR)/alog-version.ads
@@ -131,10 +128,10 @@ cov: prepare
 
 prof: prepare
 	@rm -f $(OBJECTDIR)/callgrind.*
-	@gprbuild $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="profiling"
-	@cd $(OBJECTDIR) && valgrind -q --tool=callgrind ./profiler
-	@cp $(OBJECTDIR)/callgrind.* $(PROFDIR)
-	@callgrind_annotate $(PROFDIR)/callgrind.* > $(PROFDIR)/profiler.txt
+	gprbuild $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="profiling"
+	valgrind -q --tool=callgrind \
+		--callgrind-out-file=$(OBJECTDIR)/callgrind.out.%p $(OBJECTDIR)/profiler
+	callgrind_annotate $(OBJECTDIR)/callgrind.* > $(OBJECTDIR)/profile.txt
 
 doc:
 	$(MAKE) -C doc
