@@ -85,6 +85,7 @@ distclean: clean
 	@rm -rf lib
 	@rm -rf cov
 	@rm -f $(SOURCEDIR)/alog-version.ads
+	$(MAKE) -C doc $@
 
 dist: $(SOURCEDIR)/alog-version.ads
 	@echo "Creating release tarball $(TARBALL) ... "

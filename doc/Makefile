@@ -14,7 +14,7 @@ DST_HTML = \
 	$(DESTDIR)/README.html \
 	$(DESTDIR)/CHANGELOG.html
 
-all: $(DESTDIR)/asciidoc.css $(DESTDIR)/alog-arch.png $(DST_HTML)
+all: $(DESTDIR) $(DESTDIR)/asciidoc.css $(DESTDIR)/alog-arch.png $(DST_HTML)
 
 $(DESTDIR)/alog-arch.png: arch/alog-arch.png
 	cp $< $@
@@ -31,7 +31,13 @@ $(DESTDIR)/README.html: ../README
 $(DESTDIR)/CHANGELOG.html: ../CHANGELOG
 	asciidoc $(ASCIIDOC_OPTS) $< > $@
 
+$(DESTDIR):
+	mkdir $@
+
 clean:
 	rm -f $(DESTDIR)/*.html
 	rm -f $(DESTDIR)/*.css
 	rm -f $(DESTDIR)/alog-arch.png
+
+distclean:
+	rm -rf $(DESTDIR)
