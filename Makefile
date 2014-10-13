@@ -74,7 +74,6 @@ $(SOURCEDIR)/alog-version.ads:
 	@echo "end Alog.Version;"                      >> $@
 
 clean:
-	@rm -f alog.specs
 	@rm -rf $(OBJECTDIR)/*
 	@rm -rf $(LIBDIR)/*
 	@rm -rf $(COVDIR)/*
