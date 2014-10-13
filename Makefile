@@ -65,7 +65,6 @@ build_tests: prepare
 build_all: build_lib build_tests
 
 prepare: $(SOURCEDIR)/alog-version.ads
-	@mkdir -p $(COVDIR)
 
 $(SOURCEDIR)/alog-version.ads:
 	@echo "package Alog.Version is"                 > $@
@@ -113,6 +112,7 @@ install_tests: build_tests
 	@cp -vr data $(PREFIX)/tests
 
 cov: prepare
+	@mkdir -p $(COVDIR)
 	@rm -f $(OBJECTDIR)/cov/*.gcda
 	@gprbuild $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="coverage"
 	@$(OBJECTDIR)/cov/test_runner || true
