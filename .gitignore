@@ -1,5 +1,4 @@
 cov
 lib
 obj
-src/alog-version.ads
 *.o

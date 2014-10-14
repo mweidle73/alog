@@ -54,23 +54,15 @@ all: build_lib
 tests: build_tests
 	@$(OBJECTDIR)/test_runner
 
-build_lib: prepare
+build_lib:
 	@gprbuild $(GMAKE_OPTS) -Palog -XALOG_VERSION="$(VERSION)" \
 		-XLIBRARY_KIND="$(LIBRARY_KIND)" -XCFLAGS="$(CFLAGS)" \
 		-XLDFLAGS="$(LDFLAGS)" -cargs $(ADAFLAGS)
 
-build_tests: prepare
+build_tests:
 	@gprbuild $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="tests"
 
 build_all: build_lib build_tests
-
-prepare: $(SOURCEDIR)/alog-version.ads
-
-$(SOURCEDIR)/alog-version.ads:
-	@echo "package Alog.Version is"                 > $@
-	@echo "   Version_Number : constant String :=" >> $@
-	@echo "      \"$(VERSION)\";"                  >> $@
-	@echo "end Alog.Version;"                      >> $@
 
 clean:
 	@rm -rf $(OBJECTDIR)/*
@@ -82,10 +74,9 @@ distclean: clean
 	@rm -rf obj
 	@rm -rf lib
 	@rm -rf cov
-	@rm -f $(SOURCEDIR)/alog-version.ads
 	$(MAKE) -C doc $@
 
-dist: $(SOURCEDIR)/alog-version.ads
+dist:
 	@echo "Creating release tarball $(TARBALL) ... "
 	@git archive --format=tar HEAD --prefix $(ALOG)/ | bzip2 > $(TARBALL)
 
@@ -111,7 +102,7 @@ install_tests: build_tests
 	$(INSTALL) -m 755 $(OBJECTDIR)/test_runner $(PREFIX)/tests/
 	@cp -vr data $(PREFIX)/tests
 
-cov: prepare
+cov:
 	@mkdir -p $(COVDIR)
 	@rm -f $(OBJECTDIR)/cov/*.gcda
 	@gprbuild $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="coverage"
@@ -121,7 +112,7 @@ cov: prepare
 		-o $(OBJECTDIR)/cov/alog.info
 	@genhtml --no-branch-coverage $(OBJECTDIR)/cov/alog.info -o $(COVDIR)
 
-prof: prepare
+prof:
 	@rm -f $(OBJECTDIR)/callgrind.*
 	gprbuild $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="profiling"
 	valgrind -q --tool=callgrind \
