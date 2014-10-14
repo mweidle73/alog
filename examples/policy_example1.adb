@@ -15,18 +15,28 @@ begin
 
    --  This message will be logged because it matches a source specific
    --  loglevel (Example.*).
-   Log.Log_Message (Source => "Example.Source1",
-                    Level  => Debug,
-                    Msg    => "This is a testmessage");
+   if Policy_DB.Accept_Src (Identifier => "Example.Source1",
+                            Level      => Debug)
+   then
+      Log.Log_Message (Source => "Example.Source1",
+                       Level  => Debug,
+                       Msg    => "This is a testmessage");
+   end if;
 
    --  This message will not be logged because of the configured default 'Info'
    --  loglevel. There's no configured source loglevel for 'Source2'.
-   Log.Log_Message (Source => "Source2",
-                    Level  => Debug,
-                    Msg    => "This will not be logged");
+   if Policy_DB.Accept_Src (Identifier => "Source2",
+                            Level      => Debug)
+   then
+      Log.Log_Message (Source => "Source2",
+                       Level  => Debug,
+                       Msg    => "This will not be logged");
+   end if;
 
    --  No source specified, will not be logged because of the default 'Info'
    --  loglevel.
-   Log.Log_Message (Level => Debug,
-                    Msg   => "This will not be logged");
+   if Policy_DB.Accept_Src (Level => Debug) then
+      Log.Log_Message (Level => Debug,
+                       Msg   => "This will not be logged");
+   end if;
 end Policy_Example1;
