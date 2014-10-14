@@ -65,16 +65,11 @@ build_tests:
 build_all: build_lib build_tests
 
 clean:
-	@rm -rf $(OBJECTDIR)/*
-	@rm -rf $(LIBDIR)/*
-	@rm -rf $(COVDIR)/*
+	@rm -f $(TARBALL)
+	@rm -rf $(OBJECTDIR)
+	@rm -rf $(LIBDIR)
+	@rm -rf $(COVDIR)
 	$(MAKE) -C doc clean
-
-distclean: clean
-	@rm -rf obj
-	@rm -rf lib
-	@rm -rf cov
-	$(MAKE) -C doc $@
 
 dist:
 	@echo "Creating release tarball $(TARBALL) ... "
