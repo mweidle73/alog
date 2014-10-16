@@ -81,7 +81,7 @@ install_lib: build_lib
 	@mkdir -p $(PREFIX)/include/alog
 	@mkdir -p $(PREFIX)/lib/alog
 	@mkdir -p $(PREFIX)/lib/gnat
-	$(INSTALL) -m 644 $(SOURCEDIR)/* $(PREFIX)/include/alog
+	$(INSTALL) -m 644 $(SOURCEDIR)/*.ad[bs] $(PREFIX)/include/alog
 	$(INSTALL) -m 444 $(ALI_FILES) $(PREFIX)/lib/alog
 	$(INSTALL) -m 644 $(GPR_FILE) $(PREFIX)/lib/gnat
 
