@@ -211,7 +211,6 @@ package body Alog.Logger is
       Source : String := "")
    is
       Out_Msg : String := Msg;
-      Prefix  : Unbounded_String;
 
       procedure Do_Log (Facility_Handle : Facilities.Handle);
       --  Log message for each facility.
@@ -222,7 +221,7 @@ package body Alog.Logger is
            Log_Request.Create
              (Source  => Source,
               Level   => Level,
-              Message => To_String (Prefix) & Out_Msg);
+              Message => Out_Msg);
       begin
          Facility_Handle.Process (Request => New_Request);
       end Do_Log;
