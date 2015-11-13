@@ -171,7 +171,7 @@ package body Alog.Active_Logger is
       Flush  :        Boolean := True)
    is
    begin
-      if Logger.Is_Terminated then
+      if Logger.Trigger.Is_Shutdown or else Logger.Is_Terminated then
          return;
       end if;
 
@@ -181,7 +181,9 @@ package body Alog.Active_Logger is
 
       Logger.Clear;
       Logger.Trigger.Shutdown;
-      Logger.Backend.Shutdown;
+      if Logger.Backend'Callable then
+         Logger.Backend.Shutdown;
+      end if;
    end Shutdown;
 
    -------------------------------------------------------------------------
@@ -208,6 +210,14 @@ package body Alog.Active_Logger is
    -------------------------------------------------------------------------
 
    protected body Trigger_Type is
+
+      ----------------------------------------------------------------------
+
+      function Is_Shutdown return Boolean
+      is
+      begin
+         return Shutdown_Requested;
+      end Is_Shutdown;
 
       ----------------------------------------------------------------------
 

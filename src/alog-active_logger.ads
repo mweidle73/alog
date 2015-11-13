@@ -146,6 +146,7 @@ private
    protected type Trigger_Type is
       procedure Shutdown;
       entry Stop;
+      function Is_Shutdown return Boolean;
    private
       Shutdown_Requested : Boolean := False;
    end Trigger_Type;
