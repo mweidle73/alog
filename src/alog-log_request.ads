@@ -1,5 +1,5 @@
 --
---  Copyright (c) 2009,
+--  Copyright (c) 2009-2015,
 --  Reto Buerki, Adrian-Ken Rueegsegger
 --
 --  This file is part of Alog.
@@ -33,6 +33,9 @@ package Alog.Log_Request is
    --  A log request contains all related information to log asynchronously
    --  (Caller identification, loglevel and message).
 
+   Termination_Request : constant Instance;
+   --  Special request to signal termination to the consumer.
+
    function Create
      (ID      : Task_Id   := Current_Task;
       Source  : String    := "";
@@ -61,5 +64,7 @@ private
       Level     : Log_Level := Info;
       Message   : Ada.Strings.Unbounded.Unbounded_String;
    end record;
+
+   Termination_Request : constant Instance := (others => <>);
 
 end Alog.Log_Request;
