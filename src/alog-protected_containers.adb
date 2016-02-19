@@ -40,7 +40,8 @@ package body Alog.Protected_Containers is
       procedure Clear is
       begin
          Requests.Clear;
-         Pending_Counter := 0;
+         Requests_Available := False;
+         Pending_Counter    := 0;
       end Clear;
 
       ----------------------------------------------------------------------
