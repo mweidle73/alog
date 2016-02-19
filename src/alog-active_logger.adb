@@ -222,8 +222,10 @@ package body Alog.Active_Logger is
             Parent.Message_Queue.Get
               (Element => Current_Request);
 
-            exit Log_Loop when Current_Request
-              = Log_Request.Termination_Request;
+            if Current_Request = Log_Request.Termination_Request then
+               Parent.Message_Queue.Done;
+               exit Log_Loop;
+            end if;
 
             Parent.Backend.Log_Message
               (Source => Current_Request.Get_Source,
