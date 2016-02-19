@@ -118,7 +118,7 @@ package Alog.Active_Logger is
    --  procedure will wait for all queued messages to be logged.
 
    function Is_Terminated (Logger : Instance) return Boolean;
-   --  Returns True if active logger shutdown sequence is complete.
+   --  Returns True if active logger is terminated.
 
    procedure All_Done (Logger : in out Instance);
    --  This procedure blocks until all queued logging requests have been
@@ -139,6 +139,21 @@ package Alog.Active_Logger is
 
 private
 
+   protected type Protected_Boolean (Initial_State : Boolean) is
+
+      function State return Boolean;
+      --  Return current state.
+
+      procedure Swap
+        (New_State :     Boolean;
+         Old_State : out Boolean);
+      --  Swap internal state with new state and return old state.
+
+   private
+      S : Boolean := Initial_State;
+   end Protected_Boolean;
+   --  Protected boolean used to guard shutdown procedure.
+
    task type Logging_Task (Parent : not null access Instance);
    --  This task takes logging requests from the parent's message queue and
    --  logs them using the parent's backend logger.
@@ -147,6 +162,7 @@ private
       Logger_Task   : Logging_Task (Parent => Instance'Access);
       Backend       : Tasked_Logger.Instance (Init);
       Message_Queue : Protected_Containers.Log_Request_List;
+      Terminated    : Protected_Boolean (Initial_State => False);
    end record;
 
    type Shutdown_Helper (Logger : not null access Instance) is

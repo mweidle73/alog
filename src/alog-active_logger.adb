@@ -123,8 +123,7 @@ package body Alog.Active_Logger is
 
    function Is_Terminated (Logger : Instance) return Boolean is
    begin
-      return Logger.Backend'Terminated
-        and then Logger.Logger_Task'Terminated;
+      return Logger.Terminated.State;
    end Is_Terminated;
 
    -------------------------------------------------------------------------
@@ -170,8 +169,13 @@ package body Alog.Active_Logger is
      (Logger : in out Instance;
       Flush  :        Boolean := True)
    is
+      Is_Terminated : Boolean;
    begin
-      if Logger.Is_Terminated then
+      Logger.Terminated.Swap
+        (New_State => True,
+         Old_State => Is_Terminated);
+
+      if Is_Terminated then
          return;
       end if;
 
@@ -208,6 +212,32 @@ package body Alog.Active_Logger is
       Logger.Backend.Update (Name    => Name,
                              Process => Process);
    end Update;
+
+   -------------------------------------------------------------------------
+
+   protected body Protected_Boolean
+   is
+
+      ----------------------------------------------------------------------
+
+      function State return Boolean
+      is
+      begin
+         return S;
+      end State;
+
+      ----------------------------------------------------------------------
+
+      procedure Swap
+        (New_State :     Boolean;
+         Old_State : out Boolean)
+      is
+      begin
+         Old_State := S;
+         S         := New_State;
+      end Swap;
+
+   end Protected_Boolean;
 
    -------------------------------------------------------------------------
 
