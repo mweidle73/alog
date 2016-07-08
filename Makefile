@@ -45,9 +45,13 @@ PWD = `pwd`
 
 NUM_CPUS ?= 1
 
-GMAKE_OPTS = -p -R -j$(NUM_CPUS)
-
-CFLAGS ?= -W -Wall -Werror -O3
+# GNAT_BUILDER_FLAGS, ADAFLAGS, CFLAGS and GNATFLAGS may be overridden in the
+# environment or on the command line.
+CFLAGS             ?= -W -Wall -Werror -O3
+GNAT_BUILDER_FLAGS ?= -R -j$(NUM_CPUS)
+GNATFLAGS          ?= ${GNAT_BUILDER_FLAGS} -cargs ${ADAFLAGS}
+# GMAKE_OPTS should not be overridden because -p is essential.
+GMAKE_OPTS = -p ${GNATFLAGS} -margs
 
 all: build_lib
 
