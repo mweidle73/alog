@@ -25,7 +25,7 @@ INSTALL = install
 
 MAJOR = 0
 MINOR = 5
-REVISION = 1
+REVISION = 2
 VERSION = $(MAJOR).$(MINOR).$(REVISION)
 ALOG = libalog-$(VERSION)
 TARBALL = $(ALOG).tar.bz2
