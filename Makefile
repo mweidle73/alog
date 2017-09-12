@@ -59,12 +59,14 @@ all: build_lib
 tests: build_tests
 	@$(OBJECTDIR)/test_runner
 
-build_lib:
-	@gprbuild $(GMAKE_OPTS) -Palog -XALOG_VERSION="$(VERSION)" \
-		-XLIBRARY_KIND="$(LIBRARY_KIND)"
+build_lib: build_lib_$(LIBRARY_KIND)
+build_lib_dynamic:
+	@gprbuild $(GMAKE_OPTS) -Palog -XALOG_VERSION="$(VERSION)"
+build_lib_static:
+	@gprbuild $(GMAKE_OPTS) -Palog -XALOG_VERSION=
 
 build_tests:
-	@gprbuild $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="tests"
+	@gprbuild $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="tests" -XALOG_VERSION=
 
 build_all: build_lib build_tests
 
@@ -104,7 +106,7 @@ install_tests: build_tests
 cov:
 	@mkdir -p $(COVDIR)
 	@rm -f $(OBJECTDIR)/cov/*.gcda
-	@gprbuild $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="coverage"
+	@gprbuild $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="coverage" -XALOG_VERSION=
 	@$(OBJECTDIR)/cov/test_runner || true
 	@lcov -c -d $(OBJECTDIR)/cov/ -o $(OBJECTDIR)/cov/alog_tmp.info
 	@lcov -e $(OBJECTDIR)/cov/alog_tmp.info "$(PWD)/src/*.adb" \
@@ -113,7 +115,7 @@ cov:
 
 prof:
 	@rm -f $(OBJECTDIR)/callgrind.*
-	gprbuild $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="profiling"
+	gprbuild $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="profiling" -XALOG_VERSION=
 	valgrind -q --tool=callgrind \
 		--callgrind-out-file=$(OBJECTDIR)/callgrind.out.%p $(OBJECTDIR)/profiler
 	callgrind_annotate $(OBJECTDIR)/callgrind.* > $(OBJECTDIR)/profile.txt

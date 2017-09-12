@@ -24,11 +24,6 @@ abstract project Alog_Common is
 
    for Source_Dirs use ();
 
-   Version := external ("ALOG_VERSION", "0.1");
-
-   type Lib_Type is ("static", "dynamic");
-   Libtype : Lib_Type := external ("LIBRARY_KIND", "static");
-
    Adaflags := External_As_List ("ADAFLAGS", " ");
    Cflags := External_As_List ("CFLAGS", " ");
    Cppflags := External_As_List ("CPPFLAGS", " ");

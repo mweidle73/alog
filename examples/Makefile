@@ -24,7 +24,7 @@ all: build_examples
 
 # C compilations may happen if the library is updated.
 build_examples:
-	@gprbuild -p -Palog_examples \
+	@gprbuild -p -Palog_examples -XALOG_VERSION= \
 	  $(foreach v,ADAFLAGS CFLAGS CPPFLAGS LDFLAGS,"-X$(v)=$($(v))")
 
 clean:
