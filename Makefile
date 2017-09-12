@@ -20,7 +20,9 @@
 #  MA  02110-1301  USA
 #
 
+# DESTDIR and PREFIX have their usual meanings.
 PREFIX ?= $(HOME)/libraries
+
 INSTALL = install
 
 MAJOR = 0
@@ -84,24 +86,24 @@ dist:
 install: install_lib install_$(LIBRARY_KIND)
 
 install_lib: build_lib
-	@mkdir -p $(PREFIX)/include/alog
-	@mkdir -p $(PREFIX)/lib/alog
-	@mkdir -p $(PREFIX)/lib/gnat
-	$(INSTALL) -m 644 $(SOURCEDIR)/*.ad[bs] $(PREFIX)/include/alog
-	$(INSTALL) -m 444 $(ALI_FILES) $(PREFIX)/lib/alog
-	$(INSTALL) -m 644 $(GPR_FILE) $(PREFIX)/lib/gnat
+	@mkdir -p $(DESTDIR)$(PREFIX)/include/alog
+	@mkdir -p $(DESTDIR)$(PREFIX)/lib/alog
+	@mkdir -p $(DESTDIR)$(PREFIX)/lib/gnat
+	$(INSTALL) -m 644 $(SOURCEDIR)/*.ad[bs] $(DESTDIR)$(PREFIX)/include/alog
+	$(INSTALL) -m 444 $(ALI_FILES) $(DESTDIR)$(PREFIX)/lib/alog
+	$(INSTALL) -m 644 $(GPR_FILE) $(DESTDIR)$(PREFIX)/lib/gnat
 
 install_static:
-	$(INSTALL) -m 444 $(LIBDIR)/$(LIBRARY_KIND)/$(A_LIBRARY) $(PREFIX)/lib
+	$(INSTALL) -m 444 $(LIBDIR)/$(LIBRARY_KIND)/$(A_LIBRARY) $(DESTDIR)$(PREFIX)/lib
 
 install_dynamic:
-	$(INSTALL) -m 444 $(LIBDIR)/$(LIBRARY_KIND)/$(SO_LIBRARY) $(PREFIX)/lib
-	@cd $(PREFIX)/lib && ln -sf $(SO_LIBRARY) libalog.so
+	$(INSTALL) -m 444 $(LIBDIR)/$(LIBRARY_KIND)/$(SO_LIBRARY) $(DESTDIR)$(PREFIX)/lib
+	@cd $(DESTDIR)$(PREFIX)/lib && ln -sf $(SO_LIBRARY) libalog.so
 
 install_tests: build_tests
-	$(INSTALL) -v -d $(PREFIX)/tests
-	$(INSTALL) -m 755 $(OBJECTDIR)/test_runner $(PREFIX)/tests/
-	@cp -vr data $(PREFIX)/tests
+	$(INSTALL) -v -d $(DESTDIR)$(PREFIX)/tests
+	$(INSTALL) -m 755 $(OBJECTDIR)/test_runner $(DESTDIR)$(PREFIX)/tests/
+	@cp -vr data $(DESTDIR)$(PREFIX)/tests
 
 cov:
 	@mkdir -p $(COVDIR)
