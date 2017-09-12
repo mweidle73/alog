@@ -51,7 +51,8 @@ CFLAGS             ?= -W -Wall -Werror -O3
 GNAT_BUILDER_FLAGS ?= -R -j$(NUM_CPUS)
 GNATFLAGS          ?= ${GNAT_BUILDER_FLAGS} -cargs ${ADAFLAGS}
 # GMAKE_OPTS should not be overridden because -p is essential.
-GMAKE_OPTS = -g -p ${GNATFLAGS} -margs
+GMAKE_OPTS = -g -p ${GNATFLAGS} -margs \
+  $(foreach v,LDFLAGS,"-X$(v)=$($(v))")
 
 all: build_lib
 
@@ -61,7 +62,7 @@ tests: build_tests
 build_lib:
 	@gprbuild $(GMAKE_OPTS) -Palog -XALOG_VERSION="$(VERSION)" \
 		-XLIBRARY_KIND="$(LIBRARY_KIND)" -XCFLAGS="$(CFLAGS)" \
-		-XLDFLAGS="$(LDFLAGS)" -cargs $(ADAFLAGS)
+		-cargs $(ADAFLAGS)
 
 build_tests:
 	@gprbuild $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="tests"

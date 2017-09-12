@@ -29,6 +29,8 @@ abstract project Alog_Common is
    type Lib_Type is ("static", "dynamic");
    Libtype : Lib_Type := external ("LIBRARY_KIND", "static");
 
+   Ldflags := External_As_List ("LDFLAGS", " ");
+
    Languages := ("Ada", "C");
 
    Compiler_Switches := ("-gnatygAdISuxo",
@@ -42,5 +44,11 @@ abstract project Alog_Common is
    package Binder is
       for Default_Switches ("Ada") use ("-E");
    end Binder;
+
+   package Linker is
+      --  Template for linking an executable.
+      --  Start with LDFLAGS as it may contain options like --as-needed.
+      for Leading_Switches ("Ada") use Ldflags;
+   end Linker;
 
 end Alog_Common;

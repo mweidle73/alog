@@ -23,7 +23,7 @@
 all: build_examples
 
 build_examples:
-	@gprbuild -p -Palog_examples
+	@gprbuild -p -Palog_examples $(foreach v,LDFLAGS,"-X$(v)=$($(v))")
 
 clean:
 	@rm -rf obj
