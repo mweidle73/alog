@@ -38,8 +38,4 @@ library project Alog is
       for Default_Switches ("ada") use Alog_Common.Compiler_Switches & "-gnatwe";
    end Compiler;
 
-   package Builder is
-      for Default_Switches ("ada") use Alog_Common.Builder_Switches;
-   end Builder;
-
 end Alog;

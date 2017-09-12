@@ -61,10 +61,6 @@ project Alog_Tests is
       for Default_Switches ("ada") use Linker_Switches;
    end Linker;
 
-   package Builder is
-      for Default_Switches ("ada") use Alog_Common.Builder_Switches;
-   end Builder;
-
    package Binder renames Alog_Common.Binder;
 
 end Alog_Tests;

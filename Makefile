@@ -51,7 +51,7 @@ CFLAGS             ?= -W -Wall -Werror -O3
 GNAT_BUILDER_FLAGS ?= -R -j$(NUM_CPUS)
 GNATFLAGS          ?= ${GNAT_BUILDER_FLAGS} -cargs ${ADAFLAGS}
 # GMAKE_OPTS should not be overridden because -p is essential.
-GMAKE_OPTS = -p ${GNATFLAGS} -margs
+GMAKE_OPTS = -g -p ${GNATFLAGS} -margs
 
 all: build_lib
 

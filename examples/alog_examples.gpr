@@ -33,10 +33,6 @@ project Alog_Examples is
       for Default_Switches ("ada") use Alog_Common.Compiler_Switches;
    end Compiler;
 
-   package Builder is
-      for Default_Switches ("ada") use ("-g");
-   end Builder;
-
    package Binder renames Alog_Common.Binder;
 
 end Alog_Examples;
