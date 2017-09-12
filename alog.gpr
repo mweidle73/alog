@@ -40,9 +40,9 @@ library project Alog is
          for Leading_Library_Options use Alog_Common.Ldflags;
    end case;
 
-   package Compiler is
-      for Default_Switches ("C") use External_As_List ("CFLAGS", " ");
-      for Default_Switches ("ada") use Alog_Common.Compiler_Switches & "-gnatwe";
+   package Compiler extends Alog_Common.Compiler is
+      for Default_Switches ("Ada") use
+        Alog_Common.Compiler'Default_Switches ("Ada") & "-gnatwe";
    end Compiler;
 
 end Alog;

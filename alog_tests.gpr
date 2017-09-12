@@ -31,7 +31,7 @@ project Alog_Tests is
    for Languages use Alog_Common.Languages;
    for Source_Dirs use ("src", "tests");
 
-   Compiler_Switches := Alog_Common.Compiler_Switches;
+   Compiler_Switches := ();
    Linker_Switches   := ();
 
    case Build is
@@ -53,8 +53,9 @@ project Alog_Tests is
 
    end case;
 
-   package Compiler is
-      for Default_Switches ("ada") use Compiler_Switches;
+   package Compiler extends Alog_Common.Compiler is
+      for Default_Switches ("Ada") use
+        Alog_Common.Compiler'Default_Switches ("Ada") & Compiler_Switches;
    end Compiler;
 
    package Linker extends Alog_Common.Linker is

@@ -29,17 +29,25 @@ abstract project Alog_Common is
    type Lib_Type is ("static", "dynamic");
    Libtype : Lib_Type := external ("LIBRARY_KIND", "static");
 
+   Adaflags := External_As_List ("ADAFLAGS", " ");
+   Cflags := External_As_List ("CFLAGS", " ");
+   Cppflags := External_As_List ("CPPFLAGS", " ");
    Ldflags := External_As_List ("LDFLAGS", " ");
 
    Languages := ("Ada", "C");
 
-   Compiler_Switches := ("-gnatygAdISuxo",
-                         "-gnatVa",
-                         "-gnat05",
-                         "-gnatwal",
-                         "-gnatf",
-                         "-fstack-check",
-                         "-gnato");
+   package Compiler is
+      for Default_Switches ("Ada") use
+        ("-gnatygAdISuxo",
+         "-gnatVa",
+         "-gnat05",
+         "-gnatwal",
+         "-gnatf",
+         "-fstack-check",
+         "-gnato")
+        & Adaflags;
+      for Default_Switches ("C") use Cflags & Cppflags;
+   end Compiler;
 
    package Binder is
       for Default_Switches ("Ada") use ("-E");

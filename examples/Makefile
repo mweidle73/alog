@@ -22,8 +22,10 @@
 
 all: build_examples
 
+# C compilations may happen if the library is updated.
 build_examples:
-	@gprbuild -p -Palog_examples $(foreach v,LDFLAGS,"-X$(v)=$($(v))")
+	@gprbuild -p -Palog_examples \
+	  $(foreach v,ADAFLAGS CFLAGS CPPFLAGS LDFLAGS,"-X$(v)=$($(v))")
 
 clean:
 	@rm -rf obj
