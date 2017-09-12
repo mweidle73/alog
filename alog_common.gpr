@@ -20,7 +20,7 @@
 --  MA  02110-1301  USA
 --
 
-project Alog_Common is
+abstract project Alog_Common is
 
    for Source_Dirs use ();
 
@@ -44,4 +44,3 @@ project Alog_Common is
    Binder_Switches := ("-E");
 
 end Alog_Common;
-

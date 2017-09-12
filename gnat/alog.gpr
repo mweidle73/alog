@@ -29,7 +29,7 @@
 --     for Main use ("example");
 --  end Example;
 
-project Alog is
+library project Alog is
    for Source_Dirs use ("../../include/alog");
    for Library_Name use "alog";
    for Library_Dir use "../../lib";

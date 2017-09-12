@@ -70,4 +70,3 @@ project Alog_Tests is
    end Binder;
 
 end Alog_Tests;
-

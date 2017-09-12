@@ -22,7 +22,7 @@
 
 with "alog_common";
 
-project Alog is
+library project Alog is
 
    for Languages use Alog_Common.Languages;
    for Source_Dirs use ("src");
@@ -43,4 +43,3 @@ project Alog is
    end Builder;
 
 end Alog;
-
