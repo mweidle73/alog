@@ -72,7 +72,7 @@ private
       --  Reference to actual log file. Default is Standard_Output.
 
       Log_File_Name : BS_Path.Bounded_String :=
-        To_Bounded_String ("none");
+        BS_Path.To_Bounded_String ("none");
       --  File name of log file.
    end record;
 

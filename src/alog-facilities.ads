@@ -126,7 +126,6 @@ package Alog.Facilities is
    --  object gets out of scope.
 
    package BS_Path is new Generic_Bounded_Length (Max_Path_Length);
-   use BS_Path;
    --  Bounded string with length Max_Path_Length. Used in methods which
    --  involve filesystem operations.
 

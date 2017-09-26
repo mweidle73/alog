@@ -82,7 +82,7 @@ package body Alog.Facilities.File_Descriptor is
 
       --  Set logfile name and pointer to newly created file.
 
-      Facility.Log_File_Name := To_Bounded_String (Path);
+      Facility.Log_File_Name := BS_Path.To_Bounded_String (Path);
 
       --  Unchecked_Access is needed here since we use a pointer which is
       --  defined externaly in the Text_IO library.
