@@ -327,8 +327,6 @@ package body Tasked_Logger_Tests is
    -------------------------------------------------------------------------
 
    procedure Iterate_Facilities_Exceptions is
-      use Ada.Exceptions;
-
       Log       : Tasked_Logger.Instance (Init => False);
       Facility1 : constant Facilities.Handle :=
         new Facilities.File_Descriptor.Instance;

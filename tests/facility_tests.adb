@@ -105,7 +105,6 @@ package body Facility_Tests is
    procedure Timestamp_Format_Setter
    is
       use Ada.Calendar;
-      use Ada.Calendar.Time_Zones;
 
       F : File_Descriptor.Instance;
 
