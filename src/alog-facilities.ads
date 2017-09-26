@@ -129,7 +129,7 @@ package Alog.Facilities is
 
 private
 
-   package BS_Path is new Generic_Bounded_Length (Max_Path_Length);
+   package BS_Path is new Generic_Bounded_Length (Max => Max_Path_Length);
    --  Bounded string with length Max_Path_Length. Used in methods which
    --  involve filesystem operations.
 
