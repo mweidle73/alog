@@ -125,13 +125,13 @@ package Alog.Facilities is
    --  called by Logger instances when detaching Facilities or when the logger
    --  object gets out of scope.
 
-   package BS_Path is new Generic_Bounded_Length (Max_Path_Length);
-   --  Bounded string with length Max_Path_Length. Used in methods which
-   --  involve filesystem operations.
-
    Invalid_Timestamp_Format : exception;
 
 private
+
+   package BS_Path is new Generic_Bounded_Length (Max_Path_Length);
+   --  Bounded string with length Max_Path_Length. Used in methods which
+   --  involve filesystem operations.
 
    type Instance is abstract tagged limited record
       Name             : Unbounded_String
