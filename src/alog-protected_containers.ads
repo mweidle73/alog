@@ -72,11 +72,10 @@ package Alog.Protected_Containers is
 
 private
 
-   use type Alog.Log_Request.Instance;
-
    package List_Of_Log_Requests_Package is
      new Ada.Containers.Doubly_Linked_Lists
-       (Element_Type => Log_Request.Instance);
+       (Element_Type => Log_Request.Instance,
+        "="          => Log_Request."=");
 
    package LOLRP renames List_Of_Log_Requests_Package;
 
