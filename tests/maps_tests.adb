@@ -177,6 +177,20 @@ package body Maps_Tests is
          Assert (Condition => Position = Maps.No_Element,
                  Message   => "No_Element expected");
       end;
+
+      declare
+         use type Maps.Cursor;
+
+         Position : Maps.Cursor;
+      begin
+         Map.Insert (Key  => "*",
+                     Item => Debug);
+         Position := Map.Lookup (Key => "Bar.Bar");
+         Assert (Condition => Position /= Maps.No_Element,
+                 Message   => "No loglevel for '*' found");
+         Assert (Condition => Maps.Element (Position => Position) = Debug,
+                 Message   => "Loglevel for '*' not debug");
+      end;
    end Wildcard_Lookup;
 
 end Maps_Tests;

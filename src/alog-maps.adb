@@ -126,7 +126,9 @@ package body Alog.Maps is
          end loop;
       end Find_Closest_Match;
 
-      return No_Element;
+      --  Try all-wildcard as last option.
+
+      return Map.Find (Key => (1 => Wildcard));
    end Lookup;
 
 end Alog.Maps;
