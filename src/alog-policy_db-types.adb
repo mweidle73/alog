@@ -29,7 +29,7 @@ package body Alog.Policy_DB.Types is
 
    protected body Protected_Policy_DB is
 
-      -------------------------------------------------------------------------
+      ----------------------------------------------------------------------
 
       function Accept_Dst
         (Identifier : String;
@@ -48,7 +48,7 @@ package body Alog.Policy_DB.Types is
          return True;
       end Accept_Dst;
 
-      -------------------------------------------------------------------------
+      ----------------------------------------------------------------------
 
       function Accept_Src
         (Identifier : String := "";
@@ -59,16 +59,18 @@ package body Alog.Policy_DB.Types is
          return Level >= Lookup (Identifier => Identifier);
       end Accept_Src;
 
-      -------------------------------------------------------------------------
+      ----------------------------------------------------------------------
 
-      function Get_Default_Loglevel return Log_Level is
+      function Get_Default_Loglevel return Log_Level
+      is
       begin
          return Current_Default_Loglevel;
       end Get_Default_Loglevel;
 
-      -------------------------------------------------------------------------
+      ----------------------------------------------------------------------
 
-      function Get_Loglevel (Identifier : String) return Log_Level is
+      function Get_Loglevel (Identifier : String) return Log_Level
+      is
       begin
          return Ident_Levels.Element (Key => Identifier);
 
@@ -78,9 +80,10 @@ package body Alog.Policy_DB.Types is
               "No loglevel for identifier '" & Identifier & "'";
       end Get_Loglevel;
 
-      -------------------------------------------------------------------------
+      ----------------------------------------------------------------------
 
-      function Lookup (Identifier : String) return Log_Level is
+      function Lookup (Identifier : String) return Log_Level
+      is
          use type Alog.Maps.Cursor;
          Position : Maps.Cursor;
       begin
@@ -93,22 +96,24 @@ package body Alog.Policy_DB.Types is
          return Current_Default_Loglevel;
       end Lookup;
 
-      -------------------------------------------------------------------------
+      ----------------------------------------------------------------------
 
-      procedure Reset is
+      procedure Reset
+      is
       begin
          Current_Default_Loglevel := Alog_Default_Level;
          Ident_Levels.Clear;
       end Reset;
 
-      -------------------------------------------------------------------------
+      ----------------------------------------------------------------------
 
-      procedure Set_Default_Loglevel (Level : Log_Level) is
+      procedure Set_Default_Loglevel (Level : Log_Level)
+      is
       begin
          Current_Default_Loglevel := Level;
       end Set_Default_Loglevel;
 
-      -------------------------------------------------------------------------
+      ----------------------------------------------------------------------
 
       procedure Set_Loglevel
         (Identifier : String;
@@ -119,9 +124,10 @@ package body Alog.Policy_DB.Types is
                             Item => Level);
       end Set_Loglevel;
 
-      -------------------------------------------------------------------------
+      ----------------------------------------------------------------------
 
-      procedure Set_Loglevel (Identifiers : Maps.Wildcard_Level_Map) is
+      procedure Set_Loglevel (Identifiers : Maps.Wildcard_Level_Map)
+      is
       begin
          Ident_Levels := Identifiers;
       end Set_Loglevel;
