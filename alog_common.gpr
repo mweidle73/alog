@@ -35,7 +35,6 @@ abstract project Alog_Common is
       for Default_Switches ("Ada") use
         ("-gnatygAdISuxo",
          "-gnatVa",
-         "-gnat05",
          "-gnatwal",
          "-gnatf",
          "-fstack-check",
