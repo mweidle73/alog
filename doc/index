@@ -5,7 +5,7 @@ Alog
 
 * link:CHANGELOG.html[CHANGELOG]
 
-* http://www.codelabs.ch/download/[Download]
+* https://www.codelabs.ch/download/[Download]
 
 Overview
 --------
@@ -116,7 +116,7 @@ include::../examples/policy_example2.adb[]
 Browse the source
 -----------------
 - You can browse the Alog source code with gitweb
-http://git.codelabs.ch/?p=alog.git[here].
+https://git.codelabs.ch/?p=alog.git[here].
 
 
 Licence

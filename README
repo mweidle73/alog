@@ -19,12 +19,12 @@ Download
 Release version
 ~~~~~~~~~~~~~~~
 The current release version of alog is available at
-http://www.codelabs.ch/download/.
+https://www.codelabs.ch/download/.
 
 Verify a Release
 ~~~~~~~~~~~~~~~~
 To verify the integrity and authenticity of the distribution tarball, import
-the key http://www.codelabs.ch/keys/0xBB793815pub.asc and type the following
+the key https://www.codelabs.ch/keys/0xBB793815pub.asc and type the following
 command:
 
   $ gpg --verify libalog-{version}.tar.bz2.sig
@@ -37,10 +37,10 @@ Development version
 ~~~~~~~~~~~~~~~~~~~
 The current development version of alog is available through its git repository:
 
-  $ git clone http://git.codelabs.ch/git/alog.git
+  $ git clone https://git.codelabs.ch/git/alog.git
 
 A browsable version of the repository is also available here:
-http://git.codelabs.ch/?p=alog.git
+https://git.codelabs.ch/?p=alog.git
 
 
 Installation
