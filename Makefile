@@ -93,17 +93,20 @@ install_lib: build_lib
 	$(INSTALL) -m 444 $(ALI_FILES) $(DESTDIR)$(PREFIX)/lib/alog
 	$(INSTALL) -m 644 $(GPR_FILE) $(DESTDIR)$(PREFIX)/lib/gnat
 
-install_static:
-	$(INSTALL) -m 444 $(LIBDIR)/$(LIBRARY_KIND)/$(A_LIBRARY) $(DESTDIR)$(PREFIX)/lib
+install_static: $(DESTDIR)$(PREFIX)/lib
+	$(INSTALL) -m 444 $(LIBDIR)/$(LIBRARY_KIND)/$(A_LIBRARY) $<
 
-install_dynamic:
-	$(INSTALL) -m 444 $(LIBDIR)/$(LIBRARY_KIND)/$(SO_LIBRARY) $(DESTDIR)$(PREFIX)/lib
+install_dynamic: $(DESTDIR)$(PREFIX)/lib
+	$(INSTALL) -m 444 $(LIBDIR)/$(LIBRARY_KIND)/$(SO_LIBRARY) $<
 	@cd $(DESTDIR)$(PREFIX)/lib && ln -sf $(SO_LIBRARY) libalog.so
 
 install_tests: build_tests
 	$(INSTALL) -v -d $(DESTDIR)$(PREFIX)/tests
 	$(INSTALL) -m 755 $(OBJECTDIR)/test_runner $(DESTDIR)$(PREFIX)/tests/
 	@cp -vr data $(DESTDIR)$(PREFIX)/tests
+
+$(DESTDIR)$(PREFIX)/lib:
+	@mkdir -p $@
 
 cov:
 	@mkdir -p $(COVDIR)
