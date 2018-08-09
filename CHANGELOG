@@ -1,6 +1,12 @@
 Alog Changelog
 ==============
 
+Version 0.5.3
+-------------
+.Additions and changes
+- Add support for '*' wildcard
+- Rework build logic
+
 Version 0.5.2
 -------------
 .Additions and changes
