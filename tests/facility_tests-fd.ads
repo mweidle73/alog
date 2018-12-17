@@ -35,6 +35,9 @@ package Facility_Tests.FD is
    procedure Set_Invalid_Logfile_Fd;
    --  Set illegal Fd test.
 
+   procedure Set_Stderr;
+   --  Set stderr Fd test.
+
    procedure Write_Message_Fd;
    --  Test message writing.
 

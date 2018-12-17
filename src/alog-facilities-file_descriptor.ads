@@ -35,6 +35,9 @@ package Alog.Facilities.File_Descriptor is
    procedure Teardown (Facility : in out Instance);
    --  Implementation of Teardown-procedure.
 
+   procedure Set_Log_Stderr (Facility : in out Instance);
+   --  Enable logging to stderr.
+
    procedure Set_Logfile
      (Facility : in out Instance;
       Path     :        String;

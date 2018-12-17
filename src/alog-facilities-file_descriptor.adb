@@ -33,7 +33,8 @@ package body Alog.Facilities.File_Descriptor is
    is
       use Ada.Text_IO;
    begin
-      if Facility.Log_File_Ptr /= Standard_Output
+      if (Facility.Log_File_Ptr /= Standard_Output
+          and Facility.Log_File_Ptr /= Standard_Error)
         and Is_Open (File => Facility.Log_File)
       then
          if Remove then
@@ -53,6 +54,14 @@ package body Alog.Facilities.File_Descriptor is
    begin
       return Facility.Log_File_Ptr;
    end Get_Logfile;
+
+   -------------------------------------------------------------------------
+
+   procedure Set_Log_Stderr (Facility : in out Instance)
+   is
+   begin
+      Facility.Log_File_Ptr := Ada.Text_IO.Standard_Error;
+   end Set_Log_Stderr;
 
    -------------------------------------------------------------------------
 

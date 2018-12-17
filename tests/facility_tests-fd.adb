@@ -85,6 +85,9 @@ package body Facility_Tests.FD is
         (Routine => Set_Invalid_Logfile_Fd'Access,
          Name    => "set invalid logfile");
       T.Add_Test_Routine
+        (Routine => Set_Stderr'Access,
+         Name    => "set standard error as logfile");
+      T.Add_Test_Routine
         (Routine => Write_Message_Fd'Access,
          Name    => "log a fd message");
       T.Add_Test_Routine
@@ -122,6 +125,20 @@ package body Facility_Tests.FD is
       when File_Descriptor.Open_File_Error =>
          null;
    end Set_Invalid_Logfile_Fd;
+
+   -------------------------------------------------------------------------
+
+   procedure Set_Stderr is
+      use type Ada.Text_IO.File_Access;
+
+      F : File_Descriptor.Instance;
+   begin
+      Assert (Condition => F.Get_Logfile /= Ada.Text_IO.Standard_Error,
+              Message   => "logfile already set to stderr");
+      F.Set_Log_Stderr;
+      Assert (Condition => F.Get_Logfile = Ada.Text_IO.Standard_Error,
+              Message   => "logfile not set to stderr");
+   end Set_Stderr;
 
    -------------------------------------------------------------------------
 
