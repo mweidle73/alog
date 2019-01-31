@@ -122,14 +122,9 @@ package body Alog.Facilities.File_Descriptor is
 
       use type Ada.Text_IO.File_Access;
    begin
-      if Facility.Log_File_Ptr = Ada.Text_IO.Standard_Output then
-         Ada.Text_IO.Put_Line (Item => Msg);
-         Ada.Text_IO.Flush;
-      else
-         Ada.Text_IO.Put_Line (File => Facility.Log_File_Ptr.all,
-                               Item => Msg);
-         Ada.Text_IO.Flush (File => Facility.Log_File_Ptr.all);
-      end if;
+      Ada.Text_IO.Put_Line (File => Facility.Log_File_Ptr.all,
+                            Item => Msg);
+      Ada.Text_IO.Flush (File => Facility.Log_File_Ptr.all);
    end Write;
 
 end Alog.Facilities.File_Descriptor;
