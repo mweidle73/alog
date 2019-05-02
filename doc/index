@@ -1,17 +1,21 @@
+:description: Ada Logging Framework
+:source-highlighter: pygments
+
 Alog
 ====
 
-* link:README.html[README]
+Alog is a stackable logging framework for the Ada programming language. It aims
+to be straight forward to use and is easily extendable. It provides support for
+various logger types, log facilities, loglevel policies and message
+transformations.
 
-* https://www.codelabs.ch/download/[Download]
+image::alog-arch.svg[Framework Architecture, align="center", width=90%]
 
-Overview
---------
-Alog is a stackable logging framework for Ada. It aims to be straight forward to
-use and easily extendable. It provides support for various logger types, log
-facilities, loglevel policies and message transformations.
+include::README[]
 
-image:alog-arch.png[Framework Architecture]
+
+Usage
+-----
 
 Logger
 ~~~~~~
@@ -57,7 +61,6 @@ Policy
 ~~~~~~
 Alog supports source and destination filtering by means of loglevel policies.
 Refer to the example section for information on how to setup such policies.
-
 
 Examples
 --------
@@ -109,22 +112,3 @@ depending on the destination (facility name).
 ---------------------------------------------------------------------
 include::../examples/policy_example2.adb[]
 ---------------------------------------------------------------------
-
-
-Browse the source
------------------
-- You can browse the Alog source code with gitweb
-https://git.codelabs.ch/?p=alog.git[here].
-
-
-Licence
--------
---------------------------------------------------------------------------------
-Copyright (C) 2008-2018 Reto Buerki
-Copyright (C) 2008-2018 Adrian-Ken Rueegsegger
-
-Alog is free software; you can redistribute it and/or modify it under the terms
-of the GNU Lesser General Public License as published by the Free Software
-Foundation; either version 2.1 of the License, or (at your option) any later
-version.
---------------------------------------------------------------------------------

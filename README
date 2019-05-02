@@ -1,39 +1,39 @@
-Alog README
-===========
+Alog
+====
 
-Alog is a stackable logging framework for Ada. It aims to be straight forward to
-use and is easily extendable. It provides support for various logger types, log
-facilities, loglevel policies and message transformations.
+Alog is a stackable logging framework for the Ada programming language. It aims
+to be straight forward to use and is easily extendable. It provides support for
+various logger types, log facilities, loglevel policies and message
+transformations.
 
 
 Prerequisites
 -------------
 Alog is written in Ada so you need to have an Ada Compiler such as GNAT
-installed to build Alog. The library includes facilities to log to files and
-syslog.
+installed to build Alog.
 
 
 Download
 --------
 
-Release version
+Release Version
 ~~~~~~~~~~~~~~~
 The current release version of alog is available at
 https://www.codelabs.ch/download/.
 
 Verify a Release
 ~~~~~~~~~~~~~~~~
-To verify the integrity and authenticity of the distribution tarball, import
-the key https://www.codelabs.ch/keys/0xBB793815pub.asc and type the following
-command:
+To verify the integrity and authenticity of the distribution tarball type the
+following commands:
 
+  $ wget -q https://www.codelabs.ch/keys/0xBB793815pub.asc -O - | gpg --import
   $ gpg --verify libalog-{version}.tar.bz2.sig
 
 The key fingerprint of the public key ('0xBB793815') is:
 
   Key fingerprint = A2FB FF56 83FB 67D8 017B  C50C F8C5 F8B5 BB79 3815
 
-Development version
+Development Version
 ~~~~~~~~~~~~~~~~~~~
 The current development version of alog is available through its git repository:
 
@@ -41,6 +41,19 @@ The current development version of alog is available through its git repository:
 
 A browsable version of the repository is also available here:
 https://git.codelabs.ch/?p=alog.git
+
+
+Licence
+-------
+--------------------------------------------------------------------------------
+Copyright (C) 2008-2018 Reto Buerki
+Copyright (C) 2008-2018 Adrian-Ken Rueegsegger
+
+Alog is free software; you can redistribute it and/or modify it under the terms
+of the GNU Lesser General Public License as published by the Free Software
+Foundation; either version 2.1 of the License, or (at your option) any later
+version.
+--------------------------------------------------------------------------------
 
 
 Installation

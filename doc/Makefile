@@ -1,39 +1,33 @@
-DESTDIR   ?= html
-STYLEPATH ?= .
+DESTDIR ?= html
 
 ASCIIDOC_OPTS = \
-	--backend=xhtml11 \
-	--conf-file=page.conf \
-	-a stylesdir=$(STYLEPATH) \
-	-a linkcss \
-	-a disable-javascript \
+	-a icons=font \
+	-a iconfont-remote! \
+	-a stylesdir=css \
+	-a stylesheet=styles.css \
+	-a sectanchors \
 	-o -
 
-DST_HTML = \
-	$(DESTDIR)/index.html \
-	$(DESTDIR)/README.html
+all: $(DESTDIR)/index.html
 
-all: $(DESTDIR) $(DESTDIR)/asciidoc.css $(DESTDIR)/alog-arch.png $(DST_HTML)
-
-$(DESTDIR)/alog-arch.png: arch/alog-arch.png
+$(DESTDIR)/alog-arch.svg: arch/alog-arch.svg
 	cp $< $@
 
-$(DESTDIR)/asciidoc.css: asciidoc.css
+README: ../README
+	tail -n +9 $< > $@
+
+$(DESTDIR)/index.html: $(DESTDIR)/fonts $(DESTDIR)/css/font-awesome.css
+$(DESTDIR)/index.html: $(DESTDIR)/alog-arch.svg
+$(DESTDIR)/index.html: index README css/styles.css
+	TZ=UTC asciidoctor $(ASCIIDOC_OPTS) $< > $@
+
+$(DESTDIR)/css/font-awesome.css: css/font-awesome.css
+	mkdir -p $(DESTDIR)/css
 	cp $< $@
 
-$(DESTDIR)/index.html: index page.conf
-	TZ=UTC asciidoc $(ASCIIDOC_OPTS) $< > $@
-
-$(DESTDIR)/README.html: ../README
-	TZ=UTC asciidoc $(ASCIIDOC_OPTS) $< > $@
-
-$(DESTDIR):
-	mkdir $@
+$(DESTDIR)/fonts: fonts
+	mkdir -p $(DESTDIR)
+	cp -R $< $@
 
 clean:
-	rm -f $(DESTDIR)/*.html
-	rm -f $(DESTDIR)/*.css
-	rm -f $(DESTDIR)/alog-arch.png
-
-distclean:
-	rm -rf $(DESTDIR)
+	rm -rf $(DESTDIR) README
