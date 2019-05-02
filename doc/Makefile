@@ -11,8 +11,7 @@ ASCIIDOC_OPTS = \
 
 DST_HTML = \
 	$(DESTDIR)/index.html \
-	$(DESTDIR)/README.html \
-	$(DESTDIR)/CHANGELOG.html
+	$(DESTDIR)/README.html
 
 all: $(DESTDIR) $(DESTDIR)/asciidoc.css $(DESTDIR)/alog-arch.png $(DST_HTML)
 
@@ -26,9 +25,6 @@ $(DESTDIR)/index.html: index page.conf
 	TZ=UTC asciidoc $(ASCIIDOC_OPTS) $< > $@
 
 $(DESTDIR)/README.html: ../README
-	TZ=UTC asciidoc $(ASCIIDOC_OPTS) $< > $@
-
-$(DESTDIR)/CHANGELOG.html: ../CHANGELOG
 	TZ=UTC asciidoc $(ASCIIDOC_OPTS) $< > $@
 
 $(DESTDIR):
