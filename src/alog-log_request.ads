@@ -39,7 +39,7 @@ package Alog.Log_Request is
    function Create
      (ID      : Task_Id   := Current_Task;
       Source  : String    := "";
-      Level   : Log_Level := Debug;
+      Level   : Log_Level;
       Message : String)
       return Instance;
    --  Create a log request object from the specified parameters.

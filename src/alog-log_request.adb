@@ -29,7 +29,7 @@ package body Alog.Log_Request is
    function Create
      (ID      : Task_Id   := Current_Task;
       Source  : String    := "";
-      Level   : Log_Level := Debug;
+      Level   : Log_Level;
       Message : String)
       return Instance
    is

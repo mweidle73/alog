@@ -181,7 +181,8 @@ package body Facility_Tests.FD is
       F.Set_Logfile (Path => Testfile);
       F.Process
         (Request => Create
-           (Message => "This is a message without loglevel"));
+           (Level   => Info,
+            Message => "This is a message without loglevel"));
 
       F.Close_Logfile;
 
@@ -243,7 +244,8 @@ package body Facility_Tests.FD is
       F.Set_Logfile (Path => Testfile);
       F.Process
         (Request => Create
-           (Message => "This is a message without timestamp"));
+           (Level   => Info,
+            Message => "This is a message without timestamp"));
 
       F.Close_Logfile;
 
@@ -296,14 +298,16 @@ package body Facility_Tests.FD is
          F1.Set_Logfile (Path => Testfile);
          F1.Process
            (Request => Create
-              (Message => "Facility1"));
+              (Level   => Info,
+               Message => "Facility1"));
          F1.Close_Logfile;
 
          F2.Toggle_Write_Timestamp (State => False);
          F2.Set_Logfile (Path => Testfile);
          F2.Process
            (Request => Create
-              (Message => "Facility2"));
+              (Level   => Info,
+               Message => "Facility2"));
          F2.Close_Logfile;
 
          Assert (Condition => Helpers.Assert_Files_Equal
@@ -325,7 +329,8 @@ package body Facility_Tests.FD is
          F1.Set_Logfile (Path => Testfile);
          F1.Process
            (Request => Create
-              (Message => "Facility1"));
+              (Level   => Info,
+               Message => "Facility1"));
          F1.Close_Logfile;
 
          F2.Toggle_Write_Timestamp (State => False);
@@ -333,7 +338,8 @@ package body Facility_Tests.FD is
                          Append => False);
          F2.Process
            (Request => Create
-              (Message => "Facility2"));
+              (Level   => Info,
+               Message => "Facility2"));
          F2.Close_Logfile;
 
          Assert (Condition => Helpers.Assert_Files_Equal
@@ -360,7 +366,8 @@ package body Facility_Tests.FD is
       F.Set_Logfile (Path => Testfile);
       F.Process
         (Request => Create
-           (Message => "This is a test log-message"));
+           (Level   => Info,
+            Message => "This is a test log-message"));
 
       F.Close_Logfile;
 
