@@ -388,7 +388,7 @@ package body Active_Logger_Tests is
       Testfile       : constant String  :=
         "./obj/Active_Tasked_FD_Facility";
       Reffile        : constant String  :=
-        "./data/Tasked_FD_Facility.ref";
+        "./data/Active_Tasked_FD_Facility.ref";
       Test_Message   : constant String  := "logger tasked test message";
       Nr_Of_Messages : constant Natural := 10;
 
