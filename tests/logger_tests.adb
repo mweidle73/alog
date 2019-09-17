@@ -314,7 +314,7 @@ package body Logger_Tests is
         new Facilities.File_Descriptor.Instance;
       Transform : constant Transforms.Handle :=
         new Transforms.Casing.Instance;
-      Testfile  : constant String := "./data/Log_FD_Facility_Lowercase";
+      Testfile  : constant String := "./obj/Log_FD_Facility_Lowercase";
       Reffile   : constant String := "./data/Log_FD_Facility_Lowercase.ref";
    begin
       Facility.Toggle_Write_Timestamp (State => False);
@@ -351,12 +351,12 @@ package body Logger_Tests is
 
       Facility1 : constant Facilities.Handle :=
         new Facilities.File_Descriptor.Instance;
-      Testfile1 : constant String := "./data/Log_Multiple_FD_Facilities1";
+      Testfile1 : constant String := "./obj/Log_Multiple_FD_Facilities1";
       Reffile   : constant String := "./data/Log_Multiple_FD_Facilities.ref";
 
       Facility2 : constant Facilities.Handle :=
         new Facilities.File_Descriptor.Instance;
-      Testfile2 : constant String := "./data/Log_Multiple_FD_Facilities2";
+      Testfile2 : constant String := "./obj/Log_Multiple_FD_Facilities2";
    begin
       --  Set facility parameters.
       Facility1.Set_Name (Name => "Facility1");
@@ -405,7 +405,7 @@ package body Logger_Tests is
       Log      : Logger.Instance (Init => False);
       Facility : constant Facilities.Handle :=
         new Facilities.File_Descriptor.Instance;
-      Testfile : constant String := "./data/Log_One_FD_Facility";
+      Testfile : constant String := "./obj/Log_One_FD_Facility";
       Reffile  : constant String := "./data/Log_One_FD_Facility.ref";
    begin
       Facility.Toggle_Write_Timestamp (State => False);
@@ -434,7 +434,7 @@ package body Logger_Tests is
       Log      : Logger.Instance (Init => False);
       Facility : constant Facilities.Handle :=
         new Facilities.File_Descriptor.Instance;
-      Testfile : constant String := "./data/Logger_Loglevel";
+      Testfile : constant String := "./obj/Logger_Loglevel";
       Reffile  : constant String := "./data/Logger_Loglevel.ref";
    begin
       Facility.Toggle_Write_Timestamp (State => False);
@@ -466,7 +466,7 @@ package body Logger_Tests is
       Log      : Logger.Instance (Init => False);
       Facility : constant Facilities.Handle :=
         new Facilities.File_Descriptor.Instance;
-      Testfile : constant String := "./data/Log_Source_Loglevel";
+      Testfile : constant String := "./obj/Log_Source_Loglevel";
       Reffile  : constant String := "./data/Log_Source_Loglevel.ref";
    begin
       Facility.Toggle_Write_Timestamp (State => False);

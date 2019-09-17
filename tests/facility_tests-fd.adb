@@ -40,7 +40,7 @@ package body Facility_Tests.FD is
 
    procedure Dst_Loglevel_Handling is
       F        : File_Descriptor.Instance;
-      Testfile : constant String := "./data/Dst_Loglevel_Fd";
+      Testfile : constant String := "./obj/Dst_Loglevel_Fd";
       Reffile  : constant String := "./data/Dst_Loglevel_Fd.ref";
    begin
       F.Toggle_Write_Timestamp (State => False);
@@ -146,7 +146,7 @@ package body Facility_Tests.FD is
       use Ada.Text_IO;
       F : File_Descriptor.Instance;
    begin
-      F.Set_Logfile (Path => "./data/Set_Valid_Logfile");
+      F.Set_Logfile (Path => "./obj/Set_Valid_Logfile");
       Assert (Condition => Is_Open (F.Get_Logfile.all),
               Message   => "could not set logfile!");
       F.Close_Logfile (Remove => True);
@@ -157,7 +157,7 @@ package body Facility_Tests.FD is
    procedure Teardown_Fd is
       use Ada.Text_IO;
       F        : File_Descriptor.Instance;
-      Testfile : constant String := "./data/Teardown_Fd";
+      Testfile : constant String := "./obj/Teardown_Fd";
    begin
       F.Set_Logfile (Path => Testfile);
       Assert (Condition => Is_Open (File => F.Get_Logfile.all),
@@ -173,7 +173,7 @@ package body Facility_Tests.FD is
 
    procedure Toggle_Write_Loglevel_Fd is
       F        : File_Descriptor.Instance;
-      Testfile : constant String := "./data/Toggle_Write_Loglevel_Fd";
+      Testfile : constant String := "./obj/Toggle_Write_Loglevel_Fd";
       Reffile  : constant String := "./data/Toggle_Write_Loglevel_Fd.ref";
    begin
       F.Toggle_Write_Timestamp (State => False);
@@ -197,7 +197,7 @@ package body Facility_Tests.FD is
 
    procedure Toggle_Write_Source_Fd is
       F        : File_Descriptor.Instance;
-      Testfile : constant String := "./data/Toggle_Write_Source_Fd";
+      Testfile : constant String := "./obj/Toggle_Write_Source_Fd";
       Reffile  : constant String := "./data/Toggle_Write_Source_Fd.ref";
    begin
       F.Toggle_Write_Timestamp (State => False);
@@ -236,7 +236,7 @@ package body Facility_Tests.FD is
 
    procedure Toggle_Write_Timestamp_Fd is
       F        : File_Descriptor.Instance;
-      Testfile : constant String := "./data/Toggle_Write_Timestamp_Fd";
+      Testfile : constant String := "./obj/Toggle_Write_Timestamp_Fd";
       Reffile  : constant String := "./data/Toggle_Write_Timestamp_Fd.ref";
    begin
       F.Toggle_Write_Timestamp (State => False);
@@ -259,7 +259,7 @@ package body Facility_Tests.FD is
 
    procedure Trim_Loglevels_Fd is
       F        : File_Descriptor.Instance;
-      Testfile : constant String := "./data/Trim_Loglevels_Fd";
+      Testfile : constant String := "./obj/Trim_Loglevels_Fd";
       Reffile  : constant String := "./data/Trim_Loglevels_Fd.ref";
    begin
       F.Toggle_Write_Timestamp (State => False);
@@ -289,7 +289,7 @@ package body Facility_Tests.FD is
       declare
          F1       : File_Descriptor.Instance;
          F2       : File_Descriptor.Instance;
-         Testfile : constant String := "./data/Log_Append_Fd";
+         Testfile : constant String := "./obj/Log_Append_Fd";
          Reffile  : constant String := "./data/Log_Append_Fd.ref";
       begin
          F1.Toggle_Write_Timestamp (State => False);
@@ -318,7 +318,7 @@ package body Facility_Tests.FD is
       declare
          F1       : File_Descriptor.Instance;
          F2       : File_Descriptor.Instance;
-         Testfile : constant String := "./data/Log_Overwrite_Fd";
+         Testfile : constant String := "./obj/Log_Overwrite_Fd";
          Reffile  : constant String := "./data/Log_Overwrite_Fd.ref";
       begin
          F1.Toggle_Write_Timestamp (State => False);
@@ -349,7 +349,7 @@ package body Facility_Tests.FD is
 
    procedure Write_Message_Fd is
       F        : File_Descriptor.Instance;
-      Testfile : constant String := "./data/Write_Message_Fd";
+      Testfile : constant String := "./obj/Write_Message_Fd";
       Reffile  : constant String := "./data/Write_Message_Fd.ref";
    begin
       --  We have to disable timestamps, since its changing all

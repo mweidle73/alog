@@ -386,7 +386,7 @@ package body Active_Logger_Tests is
         new Facilities.File_Descriptor.Instance;
 
       Testfile       : constant String  :=
-        "./data/Active_Tasked_FD_Facility";
+        "./obj/Active_Tasked_FD_Facility";
       Reffile        : constant String  :=
         "./data/Tasked_FD_Facility.ref";
       Test_Message   : constant String  := "logger tasked test message";
