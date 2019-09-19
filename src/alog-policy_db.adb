@@ -33,7 +33,7 @@ package body Alog.Policy_DB is
       Level      : Log_Level)
       return Boolean is
    begin
-      return Instance.Accept_Dst (Identifier => Identifier, Level => Level);
+      return Instance.Accept_ID (Identifier => Identifier, Level => Level);
    end Accept_Dst;
 
    -------------------------------------------------------------------------
@@ -43,7 +43,7 @@ package body Alog.Policy_DB is
       Level      : Log_Level)
       return Boolean is
    begin
-      return Instance.Accept_Src (Identifier => Identifier, Level => Level);
+      return Instance.Accept_ID (Identifier => Identifier, Level => Level);
    end Accept_Src;
 
    -------------------------------------------------------------------------

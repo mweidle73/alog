@@ -28,25 +28,14 @@ package body Alog.Policy_DB.Types is
 
       ----------------------------------------------------------------------
 
-      function Accept_Dst
-        (Identifier : String;
-         Level      : Log_Level)
-         return Boolean
-      is
-      begin
-         return Level >= Lookup (Identifier => Identifier);
-      end Accept_Dst;
-
-      ----------------------------------------------------------------------
-
-      function Accept_Src
+      function Accept_ID
         (Identifier : String := "";
          Level      : Log_Level)
          return Boolean
       is
       begin
          return Level >= Lookup (Identifier => Identifier);
-      end Accept_Src;
+      end Accept_ID;
 
       ----------------------------------------------------------------------
 
