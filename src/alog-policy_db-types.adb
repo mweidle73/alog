@@ -22,9 +22,6 @@
 
 package body Alog.Policy_DB.Types is
 
-   Current_Default_Loglevel : Log_Level := Alog_Default_Level;
-   --  Current default loglevel.
-
    -------------------------------------------------------------------------
 
    protected body Protected_Policy_DB is
