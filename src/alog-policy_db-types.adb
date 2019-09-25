@@ -65,10 +65,12 @@ package body Alog.Policy_DB.Types is
          use type Alog.Maps.Cursor;
          Position : Maps.Cursor;
       begin
-         Position := Ident_Levels.Lookup (Key => Identifier);
+         if Identifier'Length > 0 then
+            Position := Ident_Levels.Lookup (Key => Identifier);
 
-         if Position /= Maps.No_Element then
-            return Maps.Element (Position => Position);
+            if Position /= Maps.No_Element then
+               return Maps.Element (Position => Position);
+            end if;
          end if;
 
          return Current_Default_Loglevel;
