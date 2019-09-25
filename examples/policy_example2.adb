@@ -1,42 +1,46 @@
-with Alog.Dst_Filter;
+with Alog.Policy_DB;
 with Alog.Logger;
-with Alog.Facilities.File_Descriptor;
 
 use Alog;
 
---  Alog destination loglevel policy example.
+--  Alog source loglevel policy example.
 procedure Policy_Example2 is
-   Log : Logger.Instance (Init => True);
-
-   Facility_Name : constant String := "Application_Errors";
-   Errors        : constant Facilities.File_Descriptor.Handle
-     := new Facilities.File_Descriptor.Instance;
+   Src_Filter : Policy_DB.Protected_Policy_DB;
+   Log        : Logger.Instance (Init => True);
 begin
-   --  Write all error messages to '/tmp/errors.log'.
-   Errors.Set_Logfile (Path => "/tmp/errors.log");
-   Errors.Set_Name (Name => Facility_Name);
-   Errors.Toggle_Write_Loglevel (State => True);
+   --  Set default loglevel to 'Info'.
+   Src_Filter.Set_Default_Loglevel (Level => Info);
+   --  Set source specific loglevel for all 'Example' sources to 'Debug'.
+   Src_Filter.Set_Loglevel (Identifier => "Example.*",
+                            Level      => Debug);
 
-   --  Set loglevel policy to 'Error' for destination 'Application_Errors'.
-   Dst_Filter.Set_Loglevel (Name  => Facility_Name,
-                            Level => Error);
+   --  This message will be logged because it matches a source specific
+   --  loglevel (Example.*).
+   if Src_Filter.Accept_ID (Identifier => "Example.Source1",
+                            Level      => Debug)
+   then
+      Log.Log_Message (Source => "Example.Source1",
+                       Level  => Debug,
+                       Msg    => "This is a test message");
+   end if;
 
-   Log.Attach_Facility (Facility => Facilities.Handle (Errors));
+   --  This message will not be logged because of the configured default 'Info'
+   --  loglevel. There's no configured source loglevel for 'Source2'.
+   if Src_Filter.Accept_ID (Identifier => "Source2",
+                            Level      => Debug)
+   then
+      Log.Log_Message (Source => "Source2",
+                       Level  => Debug,
+                       Msg    => "This will not be logged");
+   end if;
 
-   --  This message will appear on stdout, but not in the error logfile.
-   Log.Log_Message (Level  => Info,
-                    Msg    => "This is not an error");
-   --  This message will also be written to the error logfile.
-   Log.Log_Message (Level  => Error,
-                    Msg    => "This is an error");
-
-   --  Set global loglevel to only log messages with level higher than Warning
-   --  if no facility-specific level is set.
-   Dst_Filter.Set_Default_Level (Level => Warning);
-   --  This message will be filtered out.
-   Log.Log_Message (Level  => Info,
-                    Msg    => "This message will be filtered");
-   --  This message will appear on stdout, but not in the error logfile.
-   Log.Log_Message (Level  => Warning,
-                    Msg    => "This is a warning message");
+   --  This message will be logged because of the configured default 'Info'
+   --  loglevel. There's no configured source loglevel for 'Source2'.
+   if Src_Filter.Accept_ID (Identifier => "Source2",
+                            Level      => Info)
+   then
+      Log.Log_Message (Source => "Source2",
+                       Level  => Info,
+                       Msg    => "This is another test message");
+   end if;
 end Policy_Example2;

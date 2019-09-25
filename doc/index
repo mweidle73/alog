@@ -59,8 +59,9 @@ Casing (toUpper / toLower)::
 
 Policy
 ~~~~~~
-Alog supports source and destination filtering by means of loglevel policies.
-Refer to the example section for information on how to setup such policies.
+Alog supports destination and if needed source filtering by means of loglevel
+policies. Refer to the example section for information on how to setup an use
+these policy mechanism.
 
 Examples
 --------
@@ -94,19 +95,21 @@ include::../examples/facility_example1.adb[]
 
 Policy
 ~~~~~~
-The first policy example uses the policy database of Alog to specify source
-specific loglevels. It shows how logging policies can be used to filter
-log messages depending on their source.
+The first policy example illustrates how destination filtering works. Only log
+messages with loglevel `Error` or higher are written to the application error
+logfile. It shows how logging policies can be used to filter log messages
+depending on the destination (facility name). Furthermore it illustrates how
+the default level can be used to filter out messages with lower loglevels.
 
 [source,ada]
 ---------------------------------------------------------------------
 include::../examples/policy_example1.adb[]
 ---------------------------------------------------------------------
 
-The second policy example demonstrates the usage of destination filtering. Only
-log messages with loglevel `Error` or higher are written to the application
-error logfile. It shows how logging policies can be used to filter log messages
-depending on the destination (facility name).
+The second policy example demonstrates how the protected policy database type
+of Alog can be used to implement source filtering in an application. It shows
+how logging policies can be constructed by specifying source specific loglevels
+and how this leads to log messages being filtered depending on their source.
 
 [source,ada]
 ---------------------------------------------------------------------
