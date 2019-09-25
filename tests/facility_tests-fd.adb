@@ -40,6 +40,7 @@ package body Facility_Tests.FD is
 
    procedure Dst_Loglevel_Handling is
       F        : File_Descriptor.Instance;
+      F_Name   : constant String := "Dst_Facility";
       Testfile : constant String := "./obj/Dst_Loglevel_Fd";
       Reffile  : constant String := "./data/Dst_Loglevel_Fd.ref";
    begin
@@ -47,9 +48,9 @@ package body Facility_Tests.FD is
       F.Toggle_Write_Loglevel (State => True);
       F.Set_Logfile (Path => Testfile);
 
-      F.Set_Name (Name => "Dst_Facility");
+      F.Set_Name (Name => F_Name);
 
-      Dst_Filter.Set_Loglevel (Name  => "Dst_Facility",
+      Dst_Filter.Set_Loglevel (Name  => F_Name,
                                Level => Warning);
 
       F.Process
@@ -286,6 +287,8 @@ package body Facility_Tests.FD is
    -------------------------------------------------------------------------
 
    procedure Verify_Append is
+      F1_Name : constant String := "Facility1";
+      F2_Name : constant String := "Facility2";
    begin
       Append :
       declare
@@ -299,7 +302,7 @@ package body Facility_Tests.FD is
          F1.Process
            (Request => Create
               (Level   => Info,
-               Message => "Facility1"));
+               Message => F1_Name));
          F1.Close_Logfile;
 
          F2.Toggle_Write_Timestamp (State => False);
@@ -307,7 +310,7 @@ package body Facility_Tests.FD is
          F2.Process
            (Request => Create
               (Level   => Info,
-               Message => "Facility2"));
+               Message => F2_Name));
          F2.Close_Logfile;
 
          Assert (Condition => Helpers.Assert_Files_Equal
@@ -330,7 +333,7 @@ package body Facility_Tests.FD is
          F1.Process
            (Request => Create
               (Level   => Info,
-               Message => "Facility1"));
+               Message => F1_Name));
          F1.Close_Logfile;
 
          F2.Toggle_Write_Timestamp (State => False);
@@ -339,7 +342,7 @@ package body Facility_Tests.FD is
          F2.Process
            (Request => Create
               (Level   => Info,
-               Message => "Facility2"));
+               Message => F2_Name));
          F2.Close_Logfile;
 
          Assert (Condition => Helpers.Assert_Files_Equal
