@@ -134,7 +134,7 @@ package body Policy_Tests is
 
       DB.Reset;
 
-      Assert (Condition => DB.Get_Default_Loglevel = DB.Alog_Default_Level,
+      Assert (Condition => DB.Get_Default_Loglevel = Log_Level'First,
               Message   => "Default loglevel mismatch");
 
       declare

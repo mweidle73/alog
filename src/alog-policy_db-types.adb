@@ -98,7 +98,7 @@ package body Alog.Policy_DB.Types is
       procedure Reset
       is
       begin
-         Current_Default_Loglevel := Alog_Default_Level;
+         Current_Default_Loglevel := Log_Level'First;
          Ident_Levels.Clear;
       end Reset;
 

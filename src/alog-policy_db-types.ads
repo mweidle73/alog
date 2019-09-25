@@ -90,7 +90,7 @@ package Alog.Policy_DB.Types is
       Ident_Levels : Maps.Wildcard_Level_Map;
       --  Identifier based loglevels.
 
-      Current_Default_Loglevel : Log_Level := Alog_Default_Level;
+      Current_Default_Loglevel : Log_Level := Log_Level'First;
       --  Current default loglevel.
    end Protected_Policy_DB;
 
