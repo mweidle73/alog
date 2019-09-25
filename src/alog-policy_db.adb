@@ -1,5 +1,5 @@
 --
---  Copyright (c) 2009,
+--  Copyright (c) 2019,
 --  Reto Buerki, Adrian-Ken Rueegsegger
 --
 --  This file is part of Alog.
@@ -20,81 +20,98 @@
 --  MA  02110-1301  USA
 --
 
-with Alog.Policy_DB.Types;
-
 package body Alog.Policy_DB is
 
-   Instance : Types.Protected_Policy_DB;
-
    -------------------------------------------------------------------------
 
-   function Accept_Dst
-     (Identifier : String;
-      Level      : Log_Level)
-      return Boolean is
-   begin
-      return Instance.Accept_ID (Identifier => Identifier, Level => Level);
-   end Accept_Dst;
+   protected body Protected_Policy_DB is
 
-   -------------------------------------------------------------------------
+      ----------------------------------------------------------------------
 
-   function Accept_Src
-     (Identifier : String := "";
-      Level      : Log_Level)
-      return Boolean is
-   begin
-      return Instance.Accept_ID (Identifier => Identifier, Level => Level);
-   end Accept_Src;
+      function Accept_ID
+        (Identifier : String := "";
+         Level      : Log_Level)
+         return Boolean
+      is
+      begin
+         return Level >= Lookup (Identifier => Identifier);
+      end Accept_ID;
 
-   -------------------------------------------------------------------------
+      ----------------------------------------------------------------------
 
-   function Get_Default_Loglevel return Log_Level is
-   begin
-      return Instance.Get_Default_Loglevel;
-   end Get_Default_Loglevel;
+      function Get_Default_Loglevel return Log_Level
+      is
+      begin
+         return Current_Default_Loglevel;
+      end Get_Default_Loglevel;
 
-   -------------------------------------------------------------------------
+      ----------------------------------------------------------------------
 
-   function Get_Loglevel (Identifier : String) return Log_Level is
-   begin
-      return Instance.Get_Loglevel (Identifier => Identifier);
-   end Get_Loglevel;
+      function Get_Loglevel (Identifier : String) return Log_Level
+      is
+      begin
+         return Ident_Levels.Element (Key => Identifier);
 
-   -------------------------------------------------------------------------
+      exception
+         when Constraint_Error =>
+            raise No_Ident_Loglevel with
+              "No loglevel for identifier '" & Identifier & "'";
+      end Get_Loglevel;
 
-   function Lookup (Identifier : String) return Log_Level is
-   begin
-      return Instance.Lookup (Identifier => Identifier);
-   end Lookup;
+      ----------------------------------------------------------------------
 
-   -------------------------------------------------------------------------
+      function Lookup (Identifier : String) return Log_Level
+      is
+         use type Alog.Maps.Cursor;
+         Position : Maps.Cursor;
+      begin
+         if Identifier'Length > 0 then
+            Position := Ident_Levels.Lookup (Key => Identifier);
 
-   procedure Reset is
-   begin
-      Instance.Reset;
-   end Reset;
+            if Position /= Maps.No_Element then
+               return Maps.Element (Position => Position);
+            end if;
+         end if;
 
-   -------------------------------------------------------------------------
+         return Current_Default_Loglevel;
+      end Lookup;
 
-   procedure Set_Default_Loglevel (Level : Log_Level) is
-   begin
-      Instance.Set_Default_Loglevel (Level => Level);
-   end Set_Default_Loglevel;
+      ----------------------------------------------------------------------
 
-   -------------------------------------------------------------------------
+      procedure Reset
+      is
+      begin
+         Current_Default_Loglevel := Log_Level'First;
+         Ident_Levels.Clear;
+      end Reset;
 
-   procedure Set_Loglevel
-     (Identifier : String;
-      Level      : Log_Level) is
-   begin
-      Instance.Set_Loglevel (Identifier => Identifier, Level => Level);
-   end Set_Loglevel;
+      ----------------------------------------------------------------------
 
-   -------------------------------------------------------------------------
+      procedure Set_Default_Loglevel (Level : Log_Level)
+      is
+      begin
+         Current_Default_Loglevel := Level;
+      end Set_Default_Loglevel;
 
-   procedure Set_Loglevel (Identifiers : Maps.Wildcard_Level_Map) is
-   begin
-      Instance.Set_Loglevel (Identifiers => Identifiers);
-   end Set_Loglevel;
+      ----------------------------------------------------------------------
+
+      procedure Set_Loglevel
+        (Identifier : String;
+         Level      : Log_Level)
+      is
+      begin
+         Ident_Levels.Insert (Key  => Identifier,
+                            Item => Level);
+      end Set_Loglevel;
+
+      ----------------------------------------------------------------------
+
+      procedure Set_Loglevel (Identifiers : Maps.Wildcard_Level_Map)
+      is
+      begin
+         Ident_Levels := Identifiers;
+      end Set_Loglevel;
+
+   end Protected_Policy_DB;
 
 end Alog.Policy_DB;

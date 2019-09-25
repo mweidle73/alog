@@ -20,11 +20,11 @@
 --  MA  02110-1301  USA
 --
 
-with Alog.Policy_DB.Types;
+with Alog.Policy_DB;
 
 package body Alog.Dst_Filter is
 
-   Instance : Policy_DB.Types.Protected_Policy_DB;
+   Instance : Policy_DB.Protected_Policy_DB;
 
    -------------------------------------------------------------------------
 
