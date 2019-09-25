@@ -22,6 +22,7 @@
 
 with Ahven;
 
+with Alog.Dst_Filter;
 with Alog.Maps;
 with Alog.Policy_DB;
 
@@ -30,19 +31,19 @@ package body Policy_Tests is
    use Ahven;
    use Alog;
 
-   package DB renames Alog.Policy_DB;
+   package DF renames Alog.Dst_Filter;
 
    -------------------------------------------------------------------------
 
    procedure Default_Loglevel_Handling is
-      Before    : constant Log_Level := DB.Get_Default_Loglevel;
+      Before    : constant Log_Level := DF.Get_Default_Level;
       New_Level : constant Log_Level := Critical;
    begin
-      DB.Set_Default_Loglevel (Level => New_Level);
-      Assert (Condition => DB.Get_Default_Loglevel = New_Level,
+      DF.Set_Default_Level (Level => New_Level);
+      Assert (Condition => DF.Get_Default_Level = New_Level,
               Message   => "Default level mismatch");
 
-      DB.Set_Default_Loglevel (Level => Before);
+      DF.Set_Default_Level (Level => Before);
    end Default_Loglevel_Handling;
 
    -------------------------------------------------------------------------
@@ -50,32 +51,32 @@ package body Policy_Tests is
    procedure Finalize (T : in out Testcase) is
       pragma Unreferenced (T);
    begin
-      DB.Reset;
+      DF.Reset;
    end Finalize;
 
    -------------------------------------------------------------------------
 
    procedure Ident_Loglevel_Handling is
    begin
-      DB.Set_Loglevel (Identifier => "Foo",
-                       Level      => Info);
-      Assert (Condition => DB.Get_Loglevel (Identifier => "Foo") = Info,
+      DF.Set_Loglevel (Name  => "Foo",
+                       Level => Info);
+      Assert (Condition => DF.Get_Loglevel (Identifier => "Foo") = Info,
               Message   => "Ident loglevel mismatch");
 
-      DB.Set_Loglevel (Identifier => "Foo",
-                       Level      => Error);
-      Assert (Condition => DB.Get_Loglevel (Identifier => "Foo") = Error,
+      DF.Set_Loglevel (Name  => "Foo",
+                       Level => Error);
+      Assert (Condition => DF.Get_Loglevel (Identifier => "Foo") = Error,
               Message   => "Unable to update identifier loglevel");
 
       declare
          Level : Log_Level;
          pragma Unreferenced (Level);
       begin
-         Level := DB.Get_Loglevel (Identifier => "Bar");
+         Level := DF.Get_Loglevel (Identifier => "Bar");
          Fail (Message => "Expected No_Ident_Loglevel");
 
       exception
-         when DB.No_Ident_Loglevel =>
+         when Policy_DB.No_Ident_Loglevel =>
             null;
       end;
    end Ident_Loglevel_Handling;
@@ -98,11 +99,8 @@ package body Policy_Tests is
         (Routine => Set_Identifier_Map'Access,
          Name    => "set identifier loglevel map");
       T.Add_Test_Routine
-        (Routine => Verify_Accept_Src'Access,
-         Name    => "accept source");
-      T.Add_Test_Routine
-        (Routine => Verify_Accept_Dst'Access,
-         Name    => "accept destination");
+        (Routine => Verify_Accept_ID'Access,
+         Name    => "accept identifier");
       T.Add_Test_Routine
         (Routine => Lookup_Ident'Access,
          Name    => "lookup identifier");
@@ -112,15 +110,13 @@ package body Policy_Tests is
 
    procedure Lookup_Ident is
    begin
-      DB.Set_Default_Loglevel (Level => Error);
-      DB.Set_Loglevel (Identifier => "Lookup.*",
-                       Level      => Warning);
+      DF.Set_Default_Level (Level => Error);
+      DF.Set_Loglevel (Name  => "Lookup.*",
+                       Level => Warning);
 
-      Assert (Condition => DB.Lookup
-              (Identifier => "Lookup") = Warning,
+      Assert (Condition => DF.Lookup (Name => "Lookup") = Warning,
               Message   => "Lookup mismatch");
-      Assert (Condition => DB.Lookup
-              (Identifier => "Nonexistent") = Error,
+      Assert (Condition => DF.Lookup (Name => "Nonexistent") = Error,
               Message   => "Nonexistent mismatch");
    end Lookup_Ident;
 
@@ -128,24 +124,24 @@ package body Policy_Tests is
 
    procedure Reset_Policy_DB is
    begin
-      DB.Set_Default_Loglevel (Level => Error);
-      DB.Set_Loglevel (Identifier => "Foo",
-                       Level      => Warning);
+      DF.Set_Default_Level (Level => Error);
+      DF.Set_Loglevel (Name  => "Foo",
+                       Level => Warning);
 
-      DB.Reset;
+      DF.Reset;
 
-      Assert (Condition => DB.Get_Default_Loglevel = Log_Level'First,
+      Assert (Condition => DF.Get_Default_Level = Log_Level'First,
               Message   => "Default loglevel mismatch");
 
       declare
-         Src_Level : Log_Level;
-         pragma Unreferenced (Src_Level);
+         Level : Log_Level;
+         pragma Unreferenced (Level);
       begin
-         Src_Level := DB.Get_Loglevel (Identifier => "Foo");
-         Fail (Message => "Src levels not reset");
+         Level := DF.Get_Loglevel (Identifier => "Foo");
+         Fail (Message => "Levels not reset");
 
       exception
-         when DB.No_Ident_Loglevel =>
+         when Policy_DB.No_Ident_Loglevel =>
             null;
       end;
    end Reset_Policy_DB;
@@ -160,75 +156,49 @@ package body Policy_Tests is
       Map.Insert (Key  => "Bar",
                   Item => Warning);
 
-      DB.Set_Loglevel (Identifiers => Map);
+      DF.Set_Loglevel (Names => Map);
 
-      Assert (Condition => DB.Get_Loglevel (Identifier => "Foo") = Notice,
+      Assert (Condition => DF.Get_Loglevel (Identifier => "Foo") = Notice,
               Message   => "Foo identifier loglevel mismatch");
-      Assert (Condition => DB.Get_Loglevel (Identifier => "Bar") = Warning,
+      Assert (Condition => DF.Get_Loglevel (Identifier => "Bar") = Warning,
               Message   => "Bar identifier loglevel mismatch");
    end Set_Identifier_Map;
 
    -------------------------------------------------------------------------
 
-   procedure Verify_Accept_Dst is
+   procedure Verify_Accept_ID is
    begin
-      DB.Reset;
-      Assert (Condition => DB.Accept_Dst
-              (Identifier => "Foobar",
-               Level      => Log_Level'First),
-              Message   => "Default not accepted");
+      DF.Reset;
+      Assert (Condition => DF.Accept_ID (Name => "", Level => Debug),
+              Message   => "Debug not accepted by default");
+      DF.Set_Default_Level (Level => Info);
 
-      DB.Set_Default_Loglevel (Level => Info);
-      DB.Set_Loglevel (Identifier => "Foo.*",
-                       Level      => Error);
-      Assert (Condition => not DB.Accept_Dst
-              (Identifier => "Foo",
-               Level      => Debug),
-              Message   => "Dst debug accepted");
-      Assert (Condition => DB.Accept_Src
-              (Identifier => "Foo",
-               Level      => Critical),
-              Message   => "Dst critical not accepted");
-      Assert (Condition => DB.Accept_Dst
-              (Identifier => "Bar",
-               Level      => Info),
-              Message   => "Dst bar not accepted");
-   end Verify_Accept_Dst;
-
-   -------------------------------------------------------------------------
-
-   procedure Verify_Accept_Src is
-   begin
-      DB.Reset;
-
-      DB.Set_Default_Loglevel (Level => Info);
-
-      Assert (Condition => not DB.Accept_Src (Level => Debug),
+      Assert (Condition => not DF.Accept_ID (Name  => "", Level => Debug),
               Message   => "Debug accepted");
-      Assert (Condition => DB.Accept_Src (Level => Warning),
+      Assert (Condition => DF.Accept_ID (Name  => "", Level => Warning),
               Message   => "Warning not accepted");
 
-      DB.Set_Loglevel (Identifier => "Foo.*",
-                       Level      => Error);
-      Assert (Condition => not DB.Accept_Src
-              (Identifier => "Foo",
-               Level      => Debug),
-              Message   => "Src debug accepted");
-      Assert (Condition => DB.Accept_Src
-              (Identifier => "Foo",
-               Level      => Critical),
-              Message   => "Src critical not accepted");
-      Assert (Condition => DB.Accept_Src
-              (Identifier => "Bar",
-               Level      => Info),
+      DF.Set_Loglevel (Name  => "Foo.*",
+                       Level => Error);
+      Assert (Condition => not DF.Accept_ID
+              (Name  => "Foo",
+               Level => Debug),
+              Message   => "ID debug accepted");
+      Assert (Condition => DF.Accept_ID
+              (Name  => "Foo",
+               Level => Critical),
+              Message   => "ID critical not accepted");
+      Assert (Condition => DF.Accept_ID
+              (Name  => "Bar",
+               Level => Info),
               Message   => "Src bar not accepted");
 
-      DB.Set_Loglevel (Identifier => "Foobar.*",
+      DF.Set_Loglevel (Name   => "Foobar.*",
                        Level      => Debug);
-      Assert (Condition => DB.Accept_Src
-              (Identifier => "Foobar",
-               Level      => Debug),
-              Message   => "Src foobar not accepted");
-   end Verify_Accept_Src;
+      Assert (Condition => DF.Accept_ID
+              (Name  => "Foobar",
+               Level => Debug),
+              Message   => "ID foobar not accepted");
+   end Verify_Accept_ID;
 
 end Policy_Tests;
