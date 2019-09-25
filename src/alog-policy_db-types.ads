@@ -62,9 +62,9 @@ package Alog.Policy_DB.Types is
       --  only, no wildcard lookup).
 
       function Lookup (Identifier : String) return Log_Level;
-      --  Return loglevel for given identifier string. Returns the closest
-      --  match, if no associated loglevel is found the default loglevel
-      --  is returned.
+      --  Return loglevel for given identifier string or the closest wildcard
+      --  match. If no associated loglevel is found the default loglevel is
+      --  returned.
 
       procedure Reset;
       --  Reset the logging policy database to the initial state.
