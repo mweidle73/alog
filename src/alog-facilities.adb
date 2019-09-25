@@ -24,7 +24,7 @@ with Ada.Calendar.Time_Zones;
 
 with GNAT.Calendar.Time_IO;
 
-with Alog.Policy_DB;
+with Alog.Dst_Filter;
 
 package body Alog.Facilities is
 
@@ -119,9 +119,9 @@ package body Alog.Facilities is
       Msg     : constant String    := Request.Get_Message;
       Source  : constant String    := Request.Get_Source;
    begin
-      if Policy_DB.Accept_Dst
-        (Identifier => Facility.Get_Name,
-         Level      => Level)
+      if Dst_Filter.Accept_ID
+        (Name  => Facility.Get_Name,
+         Level => Level)
       then
          if Facility.Is_Write_Timestamp then
             Append (Source   => Message,

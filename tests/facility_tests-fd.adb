@@ -27,7 +27,7 @@ with Ahven; use Ahven;
 
 with Alog.Helpers;
 with Alog.Log_Request;
-with Alog.Policy_DB;
+with Alog.Dst_Filter;
 with Alog.Facilities.File_Descriptor;
 
 package body Facility_Tests.FD is
@@ -49,8 +49,8 @@ package body Facility_Tests.FD is
 
       F.Set_Name (Name => "Dst_Facility");
 
-      Policy_DB.Set_Loglevel (Identifier => "Dst_Facility",
-                              Level      => Warning);
+      Dst_Filter.Set_Loglevel (Name  => "Dst_Facility",
+                               Level => Warning);
 
       F.Process
         (Request => Create
@@ -63,7 +63,7 @@ package body Facility_Tests.FD is
             Message => "Testmessage"));
 
       F.Close_Logfile;
-      Policy_DB.Reset;
+      Dst_Filter.Reset;
 
       Assert (Condition => Helpers.Assert_Files_Equal
               (Filename1 => Reffile,
