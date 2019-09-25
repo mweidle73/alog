@@ -82,8 +82,8 @@ package Alog.Policy_DB.Types is
          Level      : Log_Level)
          return Boolean;
       --  Returns True if the given loglevel is accepted for a destination
-      --  identifier. If no match for the given identifier is found True is
-      --  returned.
+      --  identifier. If no match for the given identifier is found, the
+      --  loglevel is compared against the default loglevel.
 
    private
 

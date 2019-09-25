@@ -33,16 +33,8 @@ package body Alog.Policy_DB.Types is
          Level      : Log_Level)
          return Boolean
       is
-         use type Alog.Maps.Cursor;
-         Position : Maps.Cursor;
       begin
-         Position := Ident_Levels.Lookup (Key => Identifier);
-
-         if Position /= Maps.No_Element then
-            return Level >= Maps.Element (Position => Position);
-         end if;
-
-         return True;
+         return Level >= Lookup (Identifier => Identifier);
       end Accept_Dst;
 
       ----------------------------------------------------------------------

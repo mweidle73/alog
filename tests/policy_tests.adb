@@ -173,15 +173,12 @@ package body Policy_Tests is
    procedure Verify_Accept_Dst is
    begin
       DB.Reset;
-
-      --  Default loglevel should be ignored
-
-      DB.Set_Default_Loglevel (Level => Info);
       Assert (Condition => DB.Accept_Dst
               (Identifier => "Foobar",
-               Level      => Debug),
-              Message   => "Debug not accepted");
+               Level      => Log_Level'First),
+              Message   => "Default not accepted");
 
+      DB.Set_Default_Loglevel (Level => Info);
       DB.Set_Loglevel (Identifier => "Foo.*",
                        Level      => Error);
       Assert (Condition => not DB.Accept_Dst
