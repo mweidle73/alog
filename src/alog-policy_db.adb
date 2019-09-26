@@ -29,7 +29,7 @@ package body Alog.Policy_DB is
       ----------------------------------------------------------------------
 
       function Accept_ID
-        (Identifier : String := "";
+        (Identifier : String;
          Level      : Log_Level)
          return Boolean
       is

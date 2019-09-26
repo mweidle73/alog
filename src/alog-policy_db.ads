@@ -74,7 +74,7 @@ package Alog.Policy_DB is
       --  Reset the logging policy database to the initial state.
 
       function Accept_ID
-        (Identifier : String := "";
+        (Identifier : String;
          Level      : Log_Level)
          return Boolean;
       --  Returns True if the given loglevel is accepted for a specified
