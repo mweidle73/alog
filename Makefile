@@ -26,8 +26,8 @@ PREFIX ?= $(HOME)/libraries
 INSTALL = install
 
 MAJOR = 0
-MINOR = 5
-REVISION = 3
+MINOR = 6
+REVISION = 0
 VERSION = $(MAJOR).$(MINOR).$(REVISION)
 ALOG = libalog-$(VERSION)
 TARBALL = $(ALOG).tar.bz2
