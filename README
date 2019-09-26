@@ -26,12 +26,12 @@ Verify a Release
 To verify the integrity and authenticity of the distribution tarball type the
 following commands:
 
-  $ wget -q https://www.codelabs.ch/keys/0xBB793815pub.asc -O - | gpg --import
+  $ wget -q https://www.codelabs.ch/keys/0xDBF6D7E1095FD0D9.asc -O - | gpg --import
   $ gpg --verify libalog-{version}.tar.bz2.sig
 
-The key fingerprint of the public key ('0xBB793815') is:
+The key fingerprint of the public key ('0xDBF6D7E1095FD0D9') is:
 
-  Key fingerprint = A2FB FF56 83FB 67D8 017B  C50C F8C5 F8B5 BB79 3815
+  Key fingerprint = 298F 4B32 C3C4 1D88 5949  86F3 DBF6 D7E1 095F D0D9
 
 Development Version
 ~~~~~~~~~~~~~~~~~~~
