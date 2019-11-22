@@ -1,5 +1,8 @@
 :description: Ada Logging Framework
+:sectanchors:
 :source-highlighter: pygments
+:stylesdir: css
+:stylesheet: styles.css
 
 Alog
 ====
