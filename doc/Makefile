@@ -16,14 +16,10 @@ $(DESTDIR)/alog-arch.svg: arch/alog-arch.svg
 README: ../README
 	tail -n +9 $< > $@
 
-$(DESTDIR)/index.html: $(DESTDIR)/fonts $(DESTDIR)/css/font-awesome.css
+$(DESTDIR)/index.html: $(DESTDIR)/fonts
 $(DESTDIR)/index.html: $(DESTDIR)/alog-arch.svg
 $(DESTDIR)/index.html: index README css/styles.css
 	TZ=UTC asciidoctor $(ASCIIDOC_OPTS) $< > $@
-
-$(DESTDIR)/css/font-awesome.css: css/font-awesome.css
-	mkdir -p $(DESTDIR)/css
-	cp $< $@
 
 $(DESTDIR)/fonts: fonts
 	mkdir -p $(DESTDIR)
