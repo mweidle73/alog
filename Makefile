@@ -49,7 +49,7 @@ NUM_CPUS ?= 1
 
 # GNAT_BUILDER_FLAGS, ADAFLAGS, CFLAGS and GNATFLAGS may be overridden in the
 # environment or on the command line.
-CFLAGS             ?= -W -Wall -Werror -O3
+CFLAGS             ?= -W -Wall -Werror -O3 -fPIC
 GNAT_BUILDER_FLAGS ?= -R -j$(NUM_CPUS)
 GNATFLAGS          ?= ${GNAT_BUILDER_FLAGS}
 # GMAKE_OPTS should not be overridden because -p is essential.
