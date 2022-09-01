@@ -77,7 +77,6 @@ clean:
 	@rm -rf $(OBJECTDIR)
 	@rm -rf $(LIBDIR)
 	@rm -rf $(COVDIR)
-	$(MAKE) -C doc clean
 
 dist:
 	@echo "Creating release tarball $(TARBALL) ... "
@@ -125,7 +124,6 @@ prof:
 		--callgrind-out-file=$(OBJECTDIR)/callgrind.out.%p $(OBJECTDIR)/profiler
 	callgrind_annotate $(OBJECTDIR)/callgrind.* > $(OBJECTDIR)/profile.txt
 
-doc:
-	$(MAKE) -C doc
+.PHONY: cov
 
-.PHONY: cov doc
+include doc/doc.mk
