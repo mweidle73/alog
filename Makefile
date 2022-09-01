@@ -23,25 +23,17 @@
 # DESTDIR and PREFIX have their usual meanings.
 PREFIX ?= $(HOME)/libraries
 
-INSTALL = install
-
 MAJOR = 0
 MINOR = 6
 REVISION = 1
 VERSION = $(MAJOR).$(MINOR).$(REVISION)
+# Set VERSION to '' for a static library.
 ALOG = libalog-$(VERSION)
 TARBALL = $(ALOG).tar.bz2
 
-SO_LIBRARY = libalog.so.$(VERSION)
-A_LIBRARY = libalog.a
-LIBRARY_KIND = dynamic
-
-SOURCEDIR = src
 OBJECTDIR = obj
 LIBDIR = lib
 COVDIR = cov
-ALI_FILES = lib/$(LIBRARY_KIND)/*.ali
-GPR_FILE = gnat/alog.gpr
 
 NUM_CPUS ?= 1
 
@@ -54,16 +46,24 @@ GNATFLAGS          ?= ${GNAT_BUILDER_FLAGS}
 GMAKE_OPTS = -g -p ${GNATFLAGS} \
   $(foreach v,ADAFLAGS CFLAGS CPPFLAGS LDFLAGS,"-X$(v)=$($(v))")
 
+# Parameters passed to gprinstall. Can be overriden in the environment or on
+# the command line.
+GPRINSTALLFLAGS ?= \
+  --prefix=$(DESTDIR)$(PREFIX) \
+  --no-manifest \
+  --exec-subdir=tests \
+  --ali-subdir=lib/alog \
+  --lib-subdir=lib \
+  --project-subdir=lib/gnat \
+  --sources-subdir=include/alog
+
 all: build_lib
 
 tests: build_tests
 	@$(OBJECTDIR)/test_runner
 
-build_lib: build_lib_$(LIBRARY_KIND)
-build_lib_dynamic:
+build_lib:
 	@gprbuild $(GMAKE_OPTS) -Palog -XALOG_VERSION="$(VERSION)"
-build_lib_static:
-	@gprbuild $(GMAKE_OPTS) -Palog -XALOG_VERSION=
 
 build_tests:
 	@gprbuild $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="tests" -XALOG_VERSION=
@@ -80,30 +80,12 @@ dist:
 	@echo "Creating release tarball $(TARBALL) ... "
 	@git archive --format=tar HEAD --prefix $(ALOG)/ | bzip2 > $(TARBALL)
 
-install: install_lib install_$(LIBRARY_KIND)
-
-install_lib: build_lib
-	@mkdir -p $(DESTDIR)$(PREFIX)/include/alog
-	@mkdir -p $(DESTDIR)$(PREFIX)/lib/alog
-	@mkdir -p $(DESTDIR)$(PREFIX)/lib/gnat
-	$(INSTALL) -m 644 $(SOURCEDIR)/*.ad[bs] $(DESTDIR)$(PREFIX)/include/alog
-	$(INSTALL) -m 444 $(ALI_FILES) $(DESTDIR)$(PREFIX)/lib/alog
-	$(INSTALL) -m 644 $(GPR_FILE) $(DESTDIR)$(PREFIX)/lib/gnat
-
-install_static: $(DESTDIR)$(PREFIX)/lib
-	$(INSTALL) -m 444 $(LIBDIR)/$(LIBRARY_KIND)/$(A_LIBRARY) $<
-
-install_dynamic: $(DESTDIR)$(PREFIX)/lib
-	$(INSTALL) -m 444 $(LIBDIR)/$(LIBRARY_KIND)/$(SO_LIBRARY) $<
-	@cd $(DESTDIR)$(PREFIX)/lib && ln -sf $(SO_LIBRARY) libalog.so
+install: build_lib
+	gprinstall -Palog -XALOG_VERSION=$(VERSION) -f -p $(GPRINSTALLFLAGS)
 
 install_tests: build_tests
-	$(INSTALL) -v -d $(DESTDIR)$(PREFIX)/tests
-	$(INSTALL) -m 755 $(OBJECTDIR)/test_runner $(DESTDIR)$(PREFIX)/tests/
+	gprinstall -Palog_tests -XALOG_BUILD=tests -ALOG_VERSION=
 	@cp -vr data $(DESTDIR)$(PREFIX)/tests
-
-$(DESTDIR)$(PREFIX)/lib:
-	@mkdir -p $@
 
 cov:
 	@mkdir -p $(COVDIR)
