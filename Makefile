@@ -43,8 +43,6 @@ COVDIR = cov
 ALI_FILES = lib/$(LIBRARY_KIND)/*.ali
 GPR_FILE = gnat/alog.gpr
 
-PWD = `pwd`
-
 NUM_CPUS ?= 1
 
 # GNAT_BUILDER_FLAGS, ADAFLAGS, CFLAGS and GNATFLAGS may be overridden in the
@@ -113,7 +111,7 @@ cov:
 	@gprbuild $(GMAKE_OPTS) -Palog_tests -XALOG_BUILD="coverage" -XALOG_VERSION=
 	@$(OBJECTDIR)/cov/test_runner || true
 	@lcov -c -d $(OBJECTDIR)/cov/ -o $(OBJECTDIR)/cov/alog_tmp.info
-	@lcov -e $(OBJECTDIR)/cov/alog_tmp.info "$(PWD)/src/*.adb" \
+	@lcov -e $(OBJECTDIR)/cov/alog_tmp.info "$(CURDIR)/src/*.adb" \
 		-o $(OBJECTDIR)/cov/alog.info
 	@genhtml --no-branch-coverage $(OBJECTDIR)/cov/alog.info -o $(COVDIR)
 
