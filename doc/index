@@ -4,18 +4,11 @@
 :stylesdir: css
 :stylesheet: styles.css
 
-Alog
-====
-
-Alog is a stackable logging framework for the Ada programming language. It aims
-to be straight forward to use and is easily extendable. It provides support for
-various logger types, log facilities, loglevel policies and message
-transformations.
+include::../README[lines=1..9]
 
 image::alog-arch.svg[Framework Architecture, align="center", width=90%]
 
-include::README[]
-
+include::../README[lines=10..-1]
 
 Usage
 -----
