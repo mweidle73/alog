@@ -3,7 +3,12 @@ DESTDIR ?= html
 all: $(DESTDIR)/index.html
 
 $(DESTDIR)/alog-arch.svg: arch/alog-arch.svg
-	cp $< $@
+	scour -i $< -o $@ \
+	  --enable-comment-stripping \
+	  --enable-id-stripping \
+	  --enable-viewboxing \
+	  --indent=none \
+	  --shorten-ids
 
 $(DESTDIR)/index.html: $(DESTDIR)/fonts
 $(DESTDIR)/index.html: $(DESTDIR)/alog-arch.svg
