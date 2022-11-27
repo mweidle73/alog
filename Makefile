@@ -25,7 +25,7 @@ PREFIX ?= $(HOME)/libraries
 
 MAJOR = 0
 MINOR = 6
-REVISION = 1
+REVISION = 2
 VERSION = $(MAJOR).$(MINOR).$(REVISION)
 # Set VERSION to '' for a static library.
 ALOG = libalog-$(VERSION)
