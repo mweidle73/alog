@@ -18,8 +18,6 @@ build-doc:
 	  --indent=none \
 	  --shorten-ids
 
-	cp -a --reflink=auto doc/fonts doc/html
-
 	asciidoctor doc/index -o doc/html/index.html
 
 clean: clean-doc
