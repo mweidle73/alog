@@ -1,0 +1,17 @@
+FROM debian:trixie
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    asciidoctor \
+    ca-certificates \
+    git \
+    gnat \
+    gprbuild \
+    libahven-dev \
+    make \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /work
+
+CMD ["/bin/sh"]
