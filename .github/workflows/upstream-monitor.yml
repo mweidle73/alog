@@ -1,0 +1,56 @@
+name: Upstream Monitor
+
+on:
+  schedule:
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compare-upstream:
+    name: Compare Codelabs master
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out the GitHub master mirror
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: master
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Compare with Codelabs
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags \
+            https://git.codelabs.ch/git/alog.git \
+            refs/heads/master:refs/remotes/codelabs/master
+
+          github_sha=$(git rev-parse HEAD)
+          codelabs_sha=$(git rev-parse refs/remotes/codelabs/master)
+          read -r github_only codelabs_only <<EOF
+          $(git rev-list --left-right --count \
+            HEAD...refs/remotes/codelabs/master)
+          EOF
+
+          {
+            echo "## Codelabs upstream status"
+            echo
+            echo "| Ref | Commit |"
+            echo "| --- | --- |"
+            echo "| GitHub \`master\` | \`$github_sha\` |"
+            echo "| Codelabs \`master\` | \`$codelabs_sha\` |"
+            echo
+            echo "GitHub-only commits: $github_only"
+            echo
+            echo "Codelabs-only commits: $codelabs_only"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          if test "$github_sha" != "$codelabs_sha"; then
+            echo "GitHub master differs from Codelabs master" >&2
+            exit 1
+          fi
