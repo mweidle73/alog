@@ -39,3 +39,7 @@ With no command, `run` opens an interactive shell in `/work`:
 
 Set `ALOG_CI_IMAGE` to override the local image name and `DOCKER_PLATFORM` to
 override the default `linux/amd64` platform.
+
+The weekly upstream monitor compares both `master` and every Codelabs `v*`
+release-tag ref with this GitHub mirror. Missing, additional or moved release
+tags fail the workflow for manual review; the workflow never updates tags.
