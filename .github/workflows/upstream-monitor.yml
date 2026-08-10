@@ -1,3 +1,4 @@
+# Safely fast-forward the GitHub mirror from its authoritative upstream.
 name: Upstream Monitor
 
 on:
@@ -6,11 +7,15 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: upstream-monitor
+  cancel-in-progress: true
 
 jobs:
-  compare-upstream:
-    name: Compare Codelabs master
+  sync-upstream:
+    name: Synchronize Codelabs master
     runs-on: ubuntu-24.04
     timeout-minutes: 10
 
@@ -20,22 +25,22 @@ jobs:
         with:
           ref: master
           fetch-depth: 0
-          persist-credentials: false
+          persist-credentials: true
 
-      - name: Compare with Codelabs
+      - name: Fast-forward branch and synchronize release tags
         shell: bash
         run: |
           set -euo pipefail
           upstream_url=https://git.codelabs.ch/git/alog.git
-          git fetch --no-tags \
-            "$upstream_url" \
-            refs/heads/master:refs/remotes/codelabs/master
+          upstream_branch=master
+          upstream_ref="refs/remotes/upstream/$upstream_branch"
 
-          github_sha=$(git rev-parse HEAD)
-          codelabs_sha=$(git rev-parse refs/remotes/codelabs/master)
-          read -r github_only codelabs_only <<EOF
-          $(git rev-list --left-right --count \
-            HEAD...refs/remotes/codelabs/master)
+          git fetch --no-tags "$upstream_url" "refs/heads/$upstream_branch:$upstream_ref"
+
+          mirror_sha=$(git rev-parse HEAD)
+          upstream_sha=$(git rev-parse "$upstream_ref")
+          read -r mirror_only upstream_only <<EOF
+          $(git rev-list --left-right --count "HEAD...$upstream_ref")
           EOF
 
           mirror_tags=$(mktemp)
@@ -52,36 +57,116 @@ jobs:
           }
           list_release_tags origin > "$mirror_tags"
           list_release_tags "$upstream_url" > "$upstream_tags"
-          tag_count=$(wc -l < "$mirror_tags" | tr -d ' ')
+
+          tag_refspecs=()
+          tag_conflict=
+          while IFS=$'\t' read -r tag upstream_tag_sha; do
+            test -n "$tag" || continue
+            mirror_tag_sha=$(awk -F '\t' -v wanted="$tag" '$1 == wanted { print $2 }' "$mirror_tags")
+            if test -z "$mirror_tag_sha"; then
+              if git fetch --no-tags "$upstream_url" "refs/tags/$tag:refs/tags/$tag"; then
+                tag_refspecs+=("refs/tags/$tag:refs/tags/$tag")
+              else
+                tag_conflict="could not fetch upstream tag $tag"
+                break
+              fi
+            elif test "$mirror_tag_sha" != "$upstream_tag_sha"; then
+              tag_conflict="tag $tag points at different objects"
+              break
+            fi
+          done < "$upstream_tags"
+
+          mirror_only_tag=
+          while IFS=$'\t' read -r tag mirror_tag_sha; do
+            test -n "$tag" || continue
+            upstream_tag_sha=$(awk -F '\t' -v wanted="$tag" '$1 == wanted { print $2 }' "$upstream_tags")
+            if test -z "$upstream_tag_sha"; then
+              mirror_only_tag=$tag
+              break
+            fi
+          done < "$mirror_tags"
+
+          tag_count_before=$(wc -l < "$mirror_tags" | tr -d ' ')
+          upstream_tag_count=$(wc -l < "$upstream_tags" | tr -d ' ')
+          tag_add_count=${#tag_refspecs[@]}
+          final_mirror_sha=$mirror_sha
+          tags_match='not checked'
+          sync_status=pending
+
+          write_summary() {
+            {
+              echo '## Automatic upstream synchronization'
+              echo
+              echo '| Ref | Commit |'
+              echo '| --- | --- |'
+              echo "| GitHub \`master\` before sync | \`$mirror_sha\` |"
+              echo "| Upstream \`$upstream_branch\` | \`$upstream_sha\` |"
+              echo "| GitHub \`master\` after sync | \`$final_mirror_sha\` |"
+              echo
+              echo "Mirror-only commits: $mirror_only"
+              echo
+              echo "Upstream-only commits: $upstream_only"
+              echo
+              echo "Release tags before sync: $tag_count_before"
+              echo
+              echo "Release tags upstream: $upstream_tag_count"
+              echo
+              echo "Release tags selected for addition: $tag_add_count"
+              echo
+              echo "Release-tag refs match after sync: $tags_match"
+              echo
+              echo "Result: $sync_status"
+            } >> "$GITHUB_STEP_SUMMARY"
+          }
+
+          if test "$mirror_only" -ne 0; then
+            sync_status='blocked: GitHub master contains mirror-only commits'
+            write_summary
+            echo "$sync_status" >&2
+            exit 1
+          fi
+          if test -n "$tag_conflict"; then
+            sync_status="blocked: $tag_conflict"
+            write_summary
+            echo "$sync_status" >&2
+            exit 1
+          fi
+          if test -n "$mirror_only_tag"; then
+            sync_status="blocked: release tag $mirror_only_tag exists only on GitHub"
+            write_summary
+            echo "$sync_status" >&2
+            exit 1
+          fi
+
+          push_refspecs=("$upstream_ref:refs/heads/master")
+          push_refspecs+=("${tag_refspecs[@]}")
+          if ! git push --atomic origin "${push_refspecs[@]}"; then
+            sync_status='failed: GitHub rejected the atomic fast-forward push'
+            write_summary
+            echo "$sync_status" >&2
+            exit 1
+          fi
+
+          final_mirror_sha=$(
+            git ls-remote origin refs/heads/master | cut -f1
+          )
+          list_release_tags origin > "$mirror_tags"
           tags_match=true
           if ! diff -u "$mirror_tags" "$upstream_tags"; then
             tags_match=false
           fi
 
-          {
-            echo "## Codelabs upstream status"
-            echo
-            echo "| Ref | Commit |"
-            echo "| --- | --- |"
-            echo "| GitHub \`master\` | \`$github_sha\` |"
-            echo "| Codelabs \`master\` | \`$codelabs_sha\` |"
-            echo
-            echo "GitHub-only commits: $github_only"
-            echo
-            echo "Codelabs-only commits: $codelabs_only"
-            echo
-            echo "Mirrored release tags: $tag_count"
-            echo
-            echo "Release-tag refs match: $tags_match"
-          } >> "$GITHUB_STEP_SUMMARY"
-
-          if test "$github_sha" != "$codelabs_sha"; then
-            echo "GitHub master differs from Codelabs master" >&2
-            master_matches=false
-          else
-            master_matches=true
-          fi
-          if test "$master_matches" != true || test "$tags_match" != true; then
-            echo "Upstream mirror review is required" >&2
+          if test "$final_mirror_sha" != "$upstream_sha" || test "$tags_match" != true; then
+            sync_status='failed: post-push verification differs from upstream'
+            write_summary
+            echo "$sync_status" >&2
             exit 1
           fi
+
+          if test "$upstream_only" -eq 0 && test "$tag_add_count" -eq 0; then
+            sync_status='already up to date'
+          else
+            sync_status="updated: $upstream_only commits and $tag_add_count release tags"
+          fi
+          write_summary
+          echo "$sync_status"
